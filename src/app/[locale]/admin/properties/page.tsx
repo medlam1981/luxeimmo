@@ -67,7 +67,7 @@ export default async function AdminPropertiesPage() {
                   </td>
                 </tr>
               ) : (
-                properties.map((property: Prisma.PropertyGetPayload<Record<string, never>>) => {
+                properties.map((property: any) => {
                   const displayTitle = parseLocalized(property.title, locale);
                   const badgeType = te(`propertyType.${property.propertyType}` as any);
                   const badgeCategory = te(`category.${property.category}` as any);
