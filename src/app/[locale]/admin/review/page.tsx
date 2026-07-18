@@ -59,7 +59,7 @@ export default async function AdminReviewPage() {
                   </td>
                 </tr>
               ) : (
-                pendingProperties.map((property) => {
+                pendingProperties.map((property: any) => {
                   let displayTitle = property.title;
                   try {
                     const parsed = JSON.parse(property.title);
