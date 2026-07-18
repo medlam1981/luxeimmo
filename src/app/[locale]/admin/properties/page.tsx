@@ -1,4 +1,5 @@
 import prisma from '@/lib/prisma';
+import { Prisma } from '@prisma/client';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { DeleteButton } from './DeleteButton';
 import { Link } from '@/i18n/routing';
@@ -66,7 +67,7 @@ export default async function AdminPropertiesPage() {
                   </td>
                 </tr>
               ) : (
-                properties.map((property) => {
+                properties.map((property: Prisma.PropertyGetPayload<Record<string, never>>) => {
                   const displayTitle = parseLocalized(property.title, locale);
                   const badgeType = te(`propertyType.${property.propertyType}` as any);
                   const badgeCategory = te(`category.${property.category}` as any);
