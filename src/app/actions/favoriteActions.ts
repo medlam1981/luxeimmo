@@ -17,7 +17,7 @@ export async function syncFavoritesAction(localFavoriteIds: string[]) {
 
   if (!user) return null;
 
-  const dbFavoriteIds = user.favoriteProperties.map(p => p.id);
+  const dbFavoriteIds = user.favoriteProperties.map((p: any) => p.id);
   const mergedIds = Array.from(new Set([...localFavoriteIds, ...dbFavoriteIds]));
 
   // Verify which properties actually exist in the DB to avoid connection errors
@@ -25,7 +25,7 @@ export async function syncFavoritesAction(localFavoriteIds: string[]) {
     where: { id: { in: mergedIds } },
     select: { id: true }
   });
-  const validPropertyIds = validProperties.map(p => p.id);
+  const validPropertyIds = validProperties.map((p: any) => p.id);
 
   // 1. First, check if the user actually exists in the DB
   const existingUser = await prisma.user.findUnique({
@@ -42,7 +42,7 @@ export async function syncFavoritesAction(localFavoriteIds: string[]) {
     where: { id: user.id },
     data: {
       favoriteProperties: {
-        set: validPropertyIds.map(id => ({ id }))
+        set: validPropertyIds.map((id: any) => ({ id }))
       }
     }
   });

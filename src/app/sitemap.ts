@@ -26,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // One entry per property × locale
   const propertyEntries: MetadataRoute.Sitemap = LOCALES.flatMap((locale) =>
-    properties.map((p) => ({
+    properties.map((p: any) => ({
       url: `${BASE_URL}/${locale}/properties/${p.slug}`,
       lastModified: p.updatedAt,
       changeFrequency: 'monthly' as const,

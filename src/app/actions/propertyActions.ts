@@ -15,7 +15,7 @@ export async function getPropertiesByIds(ids: string[]) {
       }
     });
 
-    return properties.map((prop) => ({
+    return properties.map((prop: any) => ({
       ...prop,
       price: prop.price ? Number(prop.price) : 0,
       latitude: prop.latitude ? Number(prop.latitude) : null,

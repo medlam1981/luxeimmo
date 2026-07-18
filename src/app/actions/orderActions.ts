@@ -17,7 +17,7 @@ export async function createOrder(
         address: customerDetails.address,
         totalAmount: totalAmount,
         orderItems: {
-          create: items.map(item => ({
+          create: items.map((item: any) => ({
             productId: item.id,
             productName: item.name,
             quantity: item.quantity,
