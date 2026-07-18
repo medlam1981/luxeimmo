@@ -10,10 +10,10 @@ export async function getSettings() {
       settings = await prisma.storeSettings.create({
         data: { 
           id: 'default', 
-          whatsappNumber: '212600000000',
+          whatsappNumber: '212667023870',
           adminPassword: 'admin123',
-          storeEmail: 'contact@luxestore.com',
-          storePhone: '+212 600 000 000',
+          storeEmail: 'medlam1981@gmail.com',
+          storePhone: '+212 667 023 870',
           storeLocation: 'Casablanca, Morocco'
         }
       });
@@ -22,9 +22,9 @@ export async function getSettings() {
   } catch (e) {
     console.log('Error fetching settings, using fallback');
     return { 
-      whatsappNumber: '212600000000',
-      storeEmail: 'contact@luxestore.com',
-      storePhone: '+212 600 000 000',
+      whatsappNumber: '212667023870',
+      storeEmail: 'medlam1981@gmail.com',
+      storePhone: '+212 667 023 870',
       storeLocation: 'Casablanca, Morocco'
     };
   }
