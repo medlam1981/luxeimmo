@@ -204,13 +204,14 @@
   },
   "Footer": {
     "brandName": "LuxeImmo",
-    "brandDesc": "Votre partenaire immobilier de confiance au Maroc. Découvrez des propriétés de luxe qui correspondent à votre style de vie.",
-    "aboutUs": "À propos de LuxeImmo",
-    "shop": "Nos annonces",
+    "brandDesc": "La première destination pour l'immobilier de luxe au Maroc.",
+    "aboutUs": "À propos",
+    "shop": "Propriétés",
     "categories": "Catégories",
     "contactUs": "Nous contacter",
     "rights": "Tous droits réservés.",
-    "location": "Casablanca, Maroc"
+    "location": "Casablanca, Maroc",
+    "address": "Casablanca, Maroc"
   },
   "PropertiesPage": {
     "title": "Propriétés immobilières",
