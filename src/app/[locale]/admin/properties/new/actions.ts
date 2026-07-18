@@ -52,22 +52,18 @@ export async function createProperty(formData: FormData) {
 
     if (imageFiles.length > 0) {
       const validFiles = imageFiles.filter(f => f.size > 0).slice(0, 8);
-      if (validFiles.length > 0) {
-        const uploadDir = path.join(process.cwd(), 'public/uploads');
-        try {
-          await mkdir(uploadDir, { recursive: true });
-        } catch (e) {}
-
-        for (const file of validFiles) {
-          const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif'];
-          if (!allowedMimeTypes.includes(file.type)) continue;
-          const bytes = await file.arrayBuffer();
-          const buffer = Buffer.from(bytes);
-          const filename = `${Date.now()}-${Math.random().toString(36).substring(2,7)}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
-          const filePath = path.join(uploadDir, filename);
-          await writeFile(filePath, buffer);
-          imageUrls.push(`/uploads/${filename}`);
-        }
+      for (const file of validFiles) {
+        const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif'];
+        if (!allowedMimeTypes.includes(file.type)) continue;
+        
+        const bytes = await file.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+        
+        // Vercel Serverless functions have a read-only filesystem.
+        // We convert the image to a Base64 Data URI and store it directly in the database.
+        const base64Data = buffer.toString('base64');
+        const dataUri = `data:${file.type};base64,${base64Data}`;
+        imageUrls.push(dataUri);
       }
     }
 
@@ -162,22 +158,16 @@ export async function updateProperty(formData: FormData) {
 
     if (imageFiles.length > 0) {
       const validFiles = imageFiles.filter(f => f.size > 0).slice(0, 8);
-      if (validFiles.length > 0) {
-        const uploadDir = path.join(process.cwd(), 'public/uploads');
-        try {
-          await mkdir(uploadDir, { recursive: true });
-        } catch (e) {}
-
-        for (const file of validFiles) {
-          const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif'];
-          if (!allowedMimeTypes.includes(file.type)) continue;
-          const bytes = await file.arrayBuffer();
-          const buffer = Buffer.from(bytes);
-          const filename = `${Date.now()}-${Math.random().toString(36).substring(2,7)}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
-          const filePath = path.join(uploadDir, filename);
-          await writeFile(filePath, buffer);
-          imageUrls.push(`/uploads/${filename}`);
-        }
+      for (const file of validFiles) {
+        const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif'];
+        if (!allowedMimeTypes.includes(file.type)) continue;
+        
+        const bytes = await file.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+        
+        const base64Data = buffer.toString('base64');
+        const dataUri = `data:${file.type};base64,${base64Data}`;
+        imageUrls.push(dataUri);
       }
     }
 
