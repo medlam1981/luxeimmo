@@ -9,6 +9,22 @@ import 'react-phone-number-input/style.css';
 import ar from 'react-phone-number-input/locale/ar';
 import { useTranslations } from 'next-intl';
 
+const CustomFlag = ({ country, countryName }: any) => {
+  const [error, setError] = useState(false);
+  if (error || !country) {
+    return <span className="text-xs font-bold text-gray-500 w-6 inline-block text-center">{country}</span>;
+  }
+  return (
+    <img
+      src={`https://flagcdn.com/w20/${country.toLowerCase()}.png`}
+      srcSet={`https://flagcdn.com/w40/${country.toLowerCase()}.png 2x`}
+      alt={countryName}
+      className="w-6 h-auto inline-block object-contain"
+      onError={() => setError(true)}
+    />
+  );
+};
+
 export default function OnboardingPage() {
   const [loading, setLoading] = useState(false);
   const [phone, setPhone] = useState<string | undefined>('');
@@ -65,6 +81,7 @@ export default function OnboardingPage() {
                   defaultCountry="MA"
                   value={phone}
                   onChange={setPhone}
+                  flagComponent={CustomFlag}
                   className="w-full bg-transparent focus:outline-none outline-none ring-0 border-none px-2"
                 />
                 <input type="hidden" name="phone" value={phone || ''} />
