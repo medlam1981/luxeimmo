@@ -1,5 +1,4 @@
 import prisma from '@/lib/prisma';
-import { Prisma } from '@prisma/client';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { DeleteButton } from './DeleteButton';
 import { Link } from '@/i18n/routing';
