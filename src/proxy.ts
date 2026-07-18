@@ -14,7 +14,15 @@ export default async function middleware(request: NextRequest) {
   const isLoginRoute = /^\/(en|ar|fr|es)\/login/.test(pathname) || pathname.startsWith('/login');
   const isOnboardingRoute = /^\/(en|ar|fr|es)\/onboarding/.test(pathname) || pathname.startsWith('/onboarding');
   
-  const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+  // Try both secure and insecure cookie names in case Vercel NEXTAUTH_URL is misconfigured
+  let token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET, cookieName: '__Secure-next-auth.session-token' });
+  if (!token) {
+    token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET, cookieName: 'next-auth.session-token' });
+  }
+  // Fallback to default NextAuth behavior
+  if (!token) {
+    token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+  }
   
   const localeMatch = pathname.match(/^\/(en|ar|fr|es)/);
   const localePrefix = localeMatch ? localeMatch[0] : `/${routing.defaultLocale}`;
