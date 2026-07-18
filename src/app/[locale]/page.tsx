@@ -7,7 +7,7 @@ import { Footer } from '@/components/storefront/Footer';
 import prisma from '@/lib/prisma';
 import { Property } from '@/types';
 
-export const revalidate = 0;
+export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;

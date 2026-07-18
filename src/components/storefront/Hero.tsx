@@ -6,6 +6,7 @@ import { Property } from '@/types';
 import { useState, useEffect } from 'react';
 import { Search, ChevronDown } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
 const backgroundImages = [
   "/images/hero/slide-1.jpg",
@@ -44,12 +45,12 @@ export function Hero({ heroProperty }: HeroProps) {
               index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
             }`}
           >
-            <img
+            <Image
               src={src}
               alt="Hero background"
-              className="w-full h-full object-cover"
-              fetchPriority={index === 0 ? "high" : "auto"}
-              loading={index === 0 ? "eager" : "lazy"}
+              fill
+              className="object-cover"
+              priority={index === 0}
             />
           </div>
         ))}
