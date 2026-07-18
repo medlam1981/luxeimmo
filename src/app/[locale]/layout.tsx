@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { AuthProvider } from '@/components/providers/AuthProvider';
+import { Analytics } from '@vercel/analytics/next';
 
 const cairo = Cairo({
   variable: "--font-cairo",
@@ -72,6 +73,7 @@ export default async function RootLayout({
             </ThemeProvider>
           </AuthProvider>
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );
