@@ -57,7 +57,7 @@ export function LanguageSwitcher({ dropup = false, align = 'end' }: { dropup?: b
             <button
               key={lang.code}
               onClick={() => switchLanguage(lang.code)}
-              className={`w-full text-left px-4 py-2 text-sm transition-colors ${
+              className={`w-full ${locale === 'ar' ? 'text-right' : 'text-left'} px-4 py-2 text-sm transition-colors ${
                 locale === lang.code
                   ? 'bg-gray-50 dark:bg-gray-800 text-black dark:text-white font-semibold'
                   : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
