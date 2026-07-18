@@ -1,0 +1,153 @@
+'use client';
+
+import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from '@/i18n/routing';
+import { Property } from '@/types';
+import { useState, useEffect } from 'react';
+import { Search, ChevronDown } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+
+const backgroundImages = [
+  "/images/hero/slide-1.jpg",
+  "/images/hero/slide-2.jpg",
+  "/images/hero/slide-3.jpg",
+  "/images/hero/slide-4.jpg"
+];
+
+interface HeroProps {
+  heroProperty: Property | null;
+}
+
+export function Hero({ heroProperty }: HeroProps) {
+  const [city, setCity] = useState('');
+  const [propertyType, setPropertyType] = useState('SALE');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const t = useTranslations('Hero');
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % backgroundImages.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
+      
+      {/* Background Slider with Fade Effect */}
+      <div className="absolute inset-0 z-0 bg-black">
+        {backgroundImages.map((src, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+            }`}
+          >
+            <img
+              src={src}
+              alt="Hero background"
+              className="w-full h-full object-cover"
+              fetchPriority={index === 0 ? "high" : "auto"}
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+          </div>
+        ))}
+      </div>
+      
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/30 z-10" />
+
+      {/* Content Wrapper */}
+      <div className="relative z-20 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full drop-shadow-2xl">
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6 font-sans drop-shadow-lg"
+        >
+          {t('title')}
+        </motion.h1>
+        
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-4 text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10 drop-shadow-md"
+        >
+          {t('subtitle')}
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="bg-white dark:bg-gray-900 p-3 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-3 w-full max-w-3xl mx-auto items-stretch border border-gray-200 dark:border-gray-700"
+        >
+          {/* City Search Input */}
+          <div className="flex-1 min-w-0">
+            <input 
+              type="text" 
+              placeholder={t('searchPlaceholder')} 
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              className="w-full h-full px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-black dark:focus:border-white transition-colors text-base"
+            />
+          </div>
+
+          {/* Property Type Dropdown */}
+          <div className="relative w-full md:w-44 shrink-0">
+            <button
+              type="button"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="w-full h-full px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition-colors flex items-center justify-between text-base"
+            >
+              <span>{propertyType === 'SALE' ? t('forSale') : t('forRent')}</span>
+              <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+            
+            <AnimatePresence>
+              {isDropdownOpen && (
+                <motion.ul
+                  initial={{ opacity: 0, y: -10, scaleY: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scaleY: 1 }}
+                  exit={{ opacity: 0, y: -10, scaleY: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-full left-0 w-full mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl z-50 overflow-hidden origin-top"
+                >
+                  <li>
+                    <button
+                      type="button"
+                      onClick={() => { setPropertyType('SALE'); setIsDropdownOpen(false); }}
+                      className={`w-full text-left px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${propertyType === 'SALE' ? 'bg-gray-100 dark:bg-gray-700 text-black dark:text-white font-semibold' : 'text-gray-700 dark:text-gray-300'}`}
+                    >
+                      {t('forSale')}
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      onClick={() => { setPropertyType('RENT'); setIsDropdownOpen(false); }}
+                      className={`w-full text-left px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${propertyType === 'RENT' ? 'bg-gray-100 dark:bg-gray-700 text-black dark:text-white font-semibold' : 'text-gray-700 dark:text-gray-300'}`}
+                    >
+                      {t('forRent')}
+                    </button>
+                  </li>
+                </motion.ul>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Search Button */}
+          <Link 
+            href={`/search?city=${city}&type=${propertyType}`}
+            className="shrink-0 w-full md:w-auto inline-flex items-center justify-center px-8 py-3 text-base font-semibold text-white bg-black hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl"
+          >
+            <Search className="w-5 h-5 mr-2" />
+            {t('search')}
+          </Link>
+        </motion.div>
+      </div>
+    </section>
+  );
+}

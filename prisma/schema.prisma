@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum PropertyType {
+  RENT
+  SALE
+}
+
+enum PropertyCategory {
+  APARTMENT
+  VILLA
+  COMMERCIAL
+  LAND
+}
+
+model Property {
+  id           String           @id @default(uuid())
+  slug         String           @unique
+  title        String
+  description  String
+  price        Decimal          @db.Decimal(10, 2)
+  propertyType PropertyType
+  rentalPeriod String?
+  ownerPhone   String           @default("+212600000000")
+  category     PropertyCategory
+  city         String
+  bedrooms     Int?
+  bathrooms    Int?
+  areaSqm      Int
+  latitude     Float?
+  longitude    Float?
+  images       String[]
+  isFeatured   Boolean          @default(false)
+  isPremium    Boolean          @default(false)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  ratings      Rating[]
+  favoritedBy  User[]           @relation("UserFavorites")
+  inquiries    ContactInquiry[]
+  status       String           @default("PENDING")
+  userId       String?
+  user         User?            @relation("UserProperties", fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ContactInquiry {
+  id            String   @id @default(cuid())
+  propertyId    String
+  property      Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  senderName    String
+  senderEmail   String
+  senderPhone   String?
+  message       String
+  emailSent     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+}
+
+model Rating {
+  id          String   @id @default(cuid())
+  ratingValue Int
+  propertyId  String
+  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+}
+
+
+model Order {
+  id            String      @id @default(uuid())
+  customerName  String
+  customerPhone String
+  city          String
+  address       String
+  totalAmount   Decimal     @db.Decimal(10, 2)
+  status        OrderStatus @default(PENDING)
+  paymentMethod String      @default("COD") // Cash on Delivery
+  orderItems    OrderItem[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model OrderItem {
+  id          String  @id @default(uuid())
+  orderId     String
+  order       Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId   String
+  productName String
+  quantity    Int
+  price       Decimal @db.Decimal(10, 2)
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  SHIPPED
+  DELIVERED
+}
+
+model StoreSettings {
+  id             String   @id @default("default")
+  whatsappNumber String   @default("212600000000")
+  adminPassword  String   @default("admin123")
+  storeEmail     String   @default("contact@luxestore.com")
+  storePhone     String   @default("+212 600 000 000")
+  storeLocation  String   @default("Casablanca, Morocco")
+  heroProductId  String?
+  updatedAt      DateTime @updatedAt
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum Role {
+  USER
+  SELLER
+  ADMIN
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  role          Role      @default(USER)
+  sellerName    String?
+  phone         String?
+  accounts      Account[]
+  sessions      Session[]
+  properties    Property[] @relation("UserProperties")
+  favoriteProperties Property[] @relation("UserFavorites")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
