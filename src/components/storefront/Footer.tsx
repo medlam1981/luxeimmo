@@ -26,6 +26,7 @@ export async function Footer() {
             <ul className="space-y-3">
               <li><Link href="/properties" className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">{t('shop')}</Link></li>
               <li><Link href="/categories" className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">{t('categories')}</Link></li>
+              <li><Link href="/privacy-policy" className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">{t('privacyPolicy')}</Link></li>
             </ul>
           </div>
 

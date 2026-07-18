@@ -211,7 +211,8 @@
     "contactUs": "Nous contacter",
     "rights": "Tous droits réservés.",
     "location": "Casablanca, Maroc",
-    "address": "Casablanca, Maroc"
+    "address": "Casablanca, Maroc",
+    "privacyPolicy": "politique de confidentialité"
   },
   "PropertiesPage": {
     "title": "Propriétés immobilières",
@@ -315,5 +316,22 @@
     "keyword3": "Propriétés Maroc",
     "keyword4": "Appartements Casablanca",
     "keyword5": "Riad à vendre"
+  },
+  "PrivacyPolicy": {
+    "title": "politique de confidentialité",
+    "intro": "Chez LuxeImmo, l'une de nos principales priorités est la confidentialité de nos visiteurs. Ce document de politique de confidentialité contient les types d'informations collectées et enregistrées par LuxeImmo et la manière dont nous les utilisons.",
+    "section1Title": "Fichiers journaux",
+    "section1Text": "LuxeImmo suit une procédure standard d'utilisation des fichiers journaux. Ces fichiers enregistrent les visiteurs lorsqu'ils visitent des sites Web. Toutes les sociétés d'hébergement le font ainsi qu'une partie des analyses des services d'hébergement. Les informations collectées par les fichiers journaux comprennent les adresses de protocole Internet (IP), le type de navigateur, le fournisseur d'accès Internet (FAI), la date et l'heure, les pages de référence/de sortie et éventuellement le nombre de clics. Ceux-ci ne sont liés à aucune information personnellement identifiable. Le but de ces informations est d'analyser les tendances, d'administrer le site, de suivre les mouvements des utilisateurs sur le site Web et de recueillir des informations démographiques.",
+    "section2Title": "Cookies et balises Web",
+    "section2Text": "Comme tout autre site Internet, LuxeImmo utilise des « cookies ». Ces cookies sont utilisés pour stocker des informations, notamment les préférences des visiteurs et les pages du site Web auxquelles le visiteur a accédé ou visité. Les informations sont utilisées pour optimiser l'expérience des utilisateurs en personnalisant le contenu de notre page Web en fonction du type de navigateur des visiteurs et/ou d'autres informations.",
+    "section3Title": "Cookie Google DoubleClick DART",
+    "section3Text": "Google est l'un des fournisseurs tiers de notre site. Il utilise également des cookies, appelés cookies DART, pour diffuser des publicités aux visiteurs de notre site en fonction de leur visite sur notre site et sur d'autres sites Internet. Cependant, les visiteurs peuvent choisir de refuser l'utilisation des cookies DART en consultant la politique de confidentialité du réseau publicitaire et de contenu de Google à l'URL suivante : https://policies.google.com/technologies/ads.",
+    "section4Title": "Partenaires publicitaires",
+    "section4Text": "Les serveurs publicitaires ou réseaux publicitaires tiers utilisent des technologies telles que les cookies, JavaScript ou les balises Web qui sont utilisées dans leurs publicités respectives et les liens qui apparaissent sur LuxeImmo, qui sont envoyés directement au navigateur des utilisateurs. Ils reçoivent automatiquement votre adresse IP lorsque cela se produit. Ces technologies sont utilisées pour mesurer l'efficacité de leurs campagnes publicitaires et/ou pour personnaliser le contenu publicitaire que vous voyez sur les sites Web que vous visitez.",
+    "section4Note": "Notez que LuxeImmo n'a aucun accès ni contrôle sur ces cookies qui sont utilisés par des annonceurs tiers.",
+    "section5Title": "Consentement",
+    "section5Text": "En utilisant notre site Web, vous consentez par la présente à notre politique de confidentialité et acceptez ses conditions.",
+    "section6Title": "Contactez-nous",
+    "section6Text": "Si vous avez besoin de plus d'informations ou si vous avez des questions sur notre politique de confidentialité, n'hésitez pas à nous contacter par e-mail à medlam1981@gmail.com."
   }
 }
