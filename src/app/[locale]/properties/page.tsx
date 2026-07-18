@@ -4,7 +4,6 @@ import { Footer } from '@/components/storefront/Footer';
 import { PropertyCard } from '@/components/storefront/PropertyCard';
 import prisma from '@/lib/prisma';
 import { Property } from '@/types';
-import { PropertyCategory, PropertyType } from '@prisma/client';
 import { getTranslations } from 'next-intl/server';
 
 export const revalidate = 0;
@@ -26,14 +25,14 @@ export default async function PropertiesPage({ searchParams }: { searchParams: P
   if (category) {
     // Upper case the category string to match enum
     const uppercaseCat = category.toUpperCase();
-    if (Object.keys(PropertyCategory).includes(uppercaseCat)) {
-        where.category = uppercaseCat as PropertyCategory;
+    if (['APARTMENT', 'VILLA', 'COMMERCIAL', 'LAND'].includes(uppercaseCat)) {
+        where.category = uppercaseCat;
     }
   }
   if (type) {
     const uppercaseType = type.toUpperCase();
-    if (Object.keys(PropertyType).includes(uppercaseType)) {
-        where.propertyType = uppercaseType as PropertyType;
+    if (['RENT', 'SALE'].includes(uppercaseType)) {
+        where.propertyType = uppercaseType;
     }
   }
   if (city) {
