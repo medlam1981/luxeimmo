@@ -4,11 +4,13 @@ import { useFavoritesStore } from '@/store/useFavoritesStore';
 import { useEffect, useState } from 'react';
 import { PropertyCard } from '@/components/storefront/PropertyCard';
 import { getPropertiesByIds } from '@/app/actions/propertyActions';
+import { useTranslations } from 'next-intl';
 
 export function FavoritesClient({ locale }: { locale: string }) {
   const { favoriteIds } = useFavoritesStore();
   const [properties, setProperties] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const t = useTranslations('Favorites');
 
   useEffect(() => {
     async function load() {
@@ -23,13 +25,13 @@ export function FavoritesClient({ locale }: { locale: string }) {
     load();
   }, [favoriteIds]);
 
-  if (loading) return <div className="text-center py-24 text-gray-500">Loading your favorites...</div>;
+  if (loading) return <div className="text-center py-24 text-gray-500">{t('loading')}</div>;
 
   if (properties.length === 0) {
     return (
       <div className="text-center py-24 bg-white dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">No Favorites Yet</h2>
-        <p className="text-gray-500">Save some properties to see them here.</p>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{t('emptyTitle')}</h2>
+        <p className="text-gray-500">{t('emptyDesc')}</p>
       </div>
     );
   }

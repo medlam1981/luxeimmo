@@ -290,5 +290,30 @@
       "SALE": "Sale",
       "RENT": "Rent"
     }
+  },
+  "Favorites": {
+    "title": "Saved Properties",
+    "loading": "Loading your favorites...",
+    "emptyTitle": "No Favorites Yet",
+    "emptyDesc": "Save some properties to see them here."
+  },
+  "Onboarding": {
+    "title": "Become a Seller",
+    "subtitle": "Provide your agency details to start listing properties.",
+    "agencyName": "Agency Name",
+    "phone": "Phone Number",
+    "submit": "Create Seller Account",
+    "submitting": "Creating Account...",
+    "error": "Error upgrading account"
+  },
+  "Metadata": {
+    "siteName": "LuxeImmo",
+    "defaultTitle": "LuxeImmo | Premium Real Estate & Luxury Villas in Morocco",
+    "description": "Discover the finest luxury real estate in Morocco. Browse our exclusive collection of premium villas in Marrakech, authentic riads, and oceanfront apartments in Casablanca.",
+    "keyword1": "Luxury Real Estate Morocco",
+    "keyword2": "Buy Villa Marrakech",
+    "keyword3": "Morocco Properties",
+    "keyword4": "Casablanca Apartments",
+    "keyword5": "Riad for sale"
   }
 }

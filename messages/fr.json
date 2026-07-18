@@ -289,5 +289,30 @@
       "SALE": "Vente",
       "RENT": "Location"
     }
+  },
+  "Favorites": {
+    "title": "Propriétés Sauvegardées",
+    "loading": "Chargement de vos favoris...",
+    "emptyTitle": "Aucun favori pour le moment",
+    "emptyDesc": "Sauvegardez des propriétés pour les voir ici."
+  },
+  "Onboarding": {
+    "title": "Devenir Vendeur",
+    "subtitle": "Fournissez les détails de votre agence pour commencer.",
+    "agencyName": "Nom de l'agence",
+    "phone": "Numéro de téléphone",
+    "submit": "Créer un compte vendeur",
+    "submitting": "Création en cours...",
+    "error": "Erreur lors de la mise à niveau"
+  },
+  "Metadata": {
+    "siteName": "LuxeImmo",
+    "defaultTitle": "LuxeImmo | Immobilier de Prestige & Villas de Luxe au Maroc",
+    "description": "Découvrez le meilleur de l'immobilier de luxe au Maroc. Parcourez notre collection exclusive de villas premium à Marrakech, riads authentiques, et appartements vue mer à Casablanca.",
+    "keyword1": "Immobilier de luxe Maroc",
+    "keyword2": "Acheter Villa Marrakech",
+    "keyword3": "Propriétés Maroc",
+    "keyword4": "Appartements Casablanca",
+    "keyword5": "Riad à vendre"
   }
 }

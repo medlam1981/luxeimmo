@@ -289,5 +289,30 @@
       "SALE": "Venta",
       "RENT": "Alquiler"
     }
+  },
+  "Favorites": {
+    "title": "Propiedades Guardadas",
+    "loading": "Cargando tus favoritos...",
+    "emptyTitle": "Aún no hay favoritos",
+    "emptyDesc": "Guarda algunas propiedades para verlas aquí."
+  },
+  "Onboarding": {
+    "title": "Conviértete en Vendedor",
+    "subtitle": "Proporcione los detalles de su agencia para comenzar.",
+    "agencyName": "Nombre de la agencia",
+    "phone": "Número de teléfono",
+    "submit": "Crear cuenta de vendedor",
+    "submitting": "Creando cuenta...",
+    "error": "Error al actualizar la cuenta"
+  },
+  "Metadata": {
+    "siteName": "LuxeImmo",
+    "defaultTitle": "LuxeImmo | Bienes Raíces Premium y Villas de Lujo en Marruecos",
+    "description": "Descubra los mejores bienes raíces de lujo en Marruecos. Explore nuestra exclusiva colección de villas premium en Marrakech, riads auténticos y apartamentos frente al mar en Casablanca.",
+    "keyword1": "Bienes raíces de lujo Marruecos",
+    "keyword2": "Comprar Villa Marrakech",
+    "keyword3": "Propiedades Marruecos",
+    "keyword4": "Apartamentos Casablanca",
+    "keyword5": "Riad en venta"
   }
 }
