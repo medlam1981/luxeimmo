@@ -47,7 +47,7 @@ export default async function PropertiesPage({ searchParams }: { searchParams: P
         orderBy: { createdAt: 'desc' }
       });
 
-      properties = dbProperties.map(p => ({
+      properties = dbProperties.map((p: any) => ({
         id: p.id,
         title: p.title,
         slug: p.slug,

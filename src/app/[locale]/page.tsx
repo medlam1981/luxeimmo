@@ -29,7 +29,7 @@ export default async function Home() {
       take: 8
     });
     
-    properties = dbProperties.map(p => ({
+    properties = dbProperties.map((p: any) => ({
       id: p.id,
       title: p.title,
       slug: p.slug,
