@@ -61,7 +61,7 @@ export function Hero({ heroProperty }: HeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="bg-white dark:bg-gray-900 p-3 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-3 w-full max-w-3xl mx-auto items-stretch border border-gray-200 dark:border-gray-700"
+          className="bg-white dark:bg-gray-900 p-2 sm:p-3 rounded-2xl shadow-2xl flex flex-row gap-2 sm:gap-3 w-full max-w-3xl mx-auto items-stretch border border-gray-200 dark:border-gray-700"
         >
           {/* City Search Input */}
           <div className="flex-1 min-w-0">
@@ -75,7 +75,7 @@ export function Hero({ heroProperty }: HeroProps) {
           </div>
 
           {/* Property Type Dropdown */}
-          <div className="relative w-full md:w-44 shrink-0">
+          <div className="relative w-28 sm:w-36 md:w-44 shrink-0">
             <button
               type="button"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -120,7 +120,7 @@ export function Hero({ heroProperty }: HeroProps) {
           {/* Search Button */}
           <Link 
             href={`/search?city=${city}&type=${propertyType}`}
-            className="shrink-0 w-full md:w-auto inline-flex items-center justify-center px-8 py-3 text-base font-semibold text-white bg-black hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl"
+            className="shrink-0 w-auto inline-flex items-center justify-center px-4 sm:px-8 py-3 text-base font-semibold text-white bg-black hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl"
           >
             <Search className="w-5 h-5 mr-2" />
             {t('search')}
