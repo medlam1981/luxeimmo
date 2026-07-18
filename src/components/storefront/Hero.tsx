@@ -8,13 +8,6 @@ import { Search, ChevronDown } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
-const backgroundImages = [
-  "/images/hero/slide-1.jpg",
-  "/images/hero/slide-2.jpg",
-  "/images/hero/slide-3.jpg",
-  "/images/hero/slide-4.jpg"
-];
-
 interface HeroProps {
   heroProperty: Property | null;
 }
@@ -22,38 +15,23 @@ interface HeroProps {
 export function Hero({ heroProperty }: HeroProps) {
   const [city, setCity] = useState('');
   const [propertyType, setPropertyType] = useState('SALE');
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const t = useTranslations('Hero');
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % backgroundImages.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
       
-      {/* Background Slider with Fade Effect */}
+      {/* Static Background Image */}
       <div className="absolute inset-0 z-0 bg-black">
-        {backgroundImages.map((src, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-            }`}
-          >
-            <Image
-              src={src}
-              alt="Hero background"
-              fill
-              className="object-cover"
-              priority={index === 0}
-            />
-          </div>
-        ))}
+        <Image
+          src="/images/hero/marrakech-riad.jpg"
+          alt="Luxury Riad in Marrakech"
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+          quality={85}
+        />
       </div>
       
       {/* Dark Overlay */}
