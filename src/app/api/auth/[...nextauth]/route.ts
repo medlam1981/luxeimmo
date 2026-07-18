@@ -7,6 +7,7 @@ import { rateLimit } from "@/app/api/rate-limit";
 import { NextRequest, NextResponse } from "next/server";
 
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   adapter: PrismaAdapter(prisma) as Adapter,
   providers: [
     GoogleProvider({
@@ -42,21 +43,6 @@ export const authOptions: NextAuthOptions = {
     },
   },
 
-  // Harden cookies: httpOnly, Secure, SameSite=lax
-  cookies: {
-    sessionToken: {
-      name:
-        process.env.NODE_ENV === "production"
-          ? "__Secure-next-auth.session-token"
-          : "next-auth.session-token",
-      options: {
-        httpOnly: true,
-        sameSite: "lax" as const,
-        path: "/",
-        secure: process.env.NODE_ENV === "production",
-      },
-    },
-  },
 };
 
 const handler = NextAuth(authOptions);
