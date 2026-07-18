@@ -172,8 +172,9 @@ export function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-white dark:bg-gray-950 border-t border-gray-100 dark:border-gray-800"
+            dir={locale === 'ar' ? 'rtl' : 'ltr'}
           >
-            <div className="px-4 pt-2 pb-4 space-y-1 shadow-lg dark:shadow-none bg-white dark:bg-gray-950">
+            <div className={`px-4 pt-2 pb-4 space-y-1 shadow-lg dark:shadow-none bg-white dark:bg-gray-950 ${locale === 'ar' ? 'text-right' : 'text-left'}`}>
               <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('home')}</Link>
               <Link href="/properties" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('properties')}</Link>
               <Link href="/categories" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('categories')}</Link>
