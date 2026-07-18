@@ -4,6 +4,8 @@ import prisma from '@/lib/prisma';
 const BASE_URL = process.env.NEXTAUTH_URL || 'https://luxeimmo.com';
 const LOCALES = ['en', 'fr', 'ar', 'es'];
 
+export const dynamic = 'force-dynamic';
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch all property slugs
   const properties = await prisma.property.findMany({
