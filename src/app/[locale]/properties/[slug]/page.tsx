@@ -132,7 +132,7 @@ async function PropertyPageContent({ params }: Props) {
     numberOfRooms: property.bedrooms,
     floorSize: {
       '@type': 'QuantitativeValue',
-      value: property.size,
+      value: property.areaSqm,
       unitCode: 'MTK' // Square meters
     },
     offers: {
