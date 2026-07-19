@@ -90,7 +90,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
 
         <header className="mb-12 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight mb-6">
+          <h1 dir="auto" className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight mb-6">
             {post.title}
           </h1>
           
@@ -123,6 +123,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         {/* Tiptap uses standard HTML tags, so we wrap in 'prose' for Tailwind Typography styling */}
         <div 
+          dir="auto"
           className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-indigo-600 dark:prose-a:text-indigo-400 prose-img:rounded-xl prose-indigo mx-auto"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />

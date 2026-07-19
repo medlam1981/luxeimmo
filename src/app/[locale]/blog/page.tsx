@@ -70,12 +70,13 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
                   <span>{new Date(post.createdAt).toLocaleDateString(locale)}</span>
                   {post.author?.name && <span>By {post.author.name}</span>}
                 </div>
-                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                <h2 dir="auto" className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                   <Link href={`/blog/${post.slug}`}>
                     {post.title}
                   </Link>
                 </h2>
                 <div 
+                  dir="auto"
                   className="text-gray-600 dark:text-gray-400 line-clamp-3 mb-6 text-sm"
                   dangerouslySetInnerHTML={{ __html: post.content.replace(/<[^>]*>?/gm, '') }}
                 />
