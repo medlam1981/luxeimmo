@@ -69,8 +69,8 @@ const nextConfig: NextConfig = {
     unoptimized: process.env.NODE_ENV === 'development',
   },
 
-  cacheComponents: true,
-
+  // PPR is highly unstable with next-intl and causes locale switching crashes. 
+  // Storefront is statically generated via SSG anyway since Navbar uses client-side session fetching.
   experimental: {
     serverActions: {
       bodySizeLimit: '10mb',
