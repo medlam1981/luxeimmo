@@ -1,6 +1,6 @@
 'use client';
 
-import { LayoutDashboard, Package, Menu, X, Tags } from 'lucide-react';
+import { LayoutDashboard, Package, Menu, X, Tags, FileText } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -19,6 +19,7 @@ export default function AdminLayoutClient({ children, translations, isAdmin }: {
 
   if (isAdmin) {
     navItems.push({ label: 'Review Properties', href: '/admin/review', icon: Tags });
+    navItems.push({ label: 'Blog Posts', href: '/admin/posts', icon: FileText });
   }
 
   return (

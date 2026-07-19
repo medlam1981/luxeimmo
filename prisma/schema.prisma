@@ -156,6 +156,7 @@ model User {
   sessions      Session[]
   properties    Property[] @relation("UserProperties")
   favoriteProperties Property[] @relation("UserFavorites")
+  posts         Post[]
 }
 
 model VerificationToken {
@@ -164,4 +165,17 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Post {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  title       String   // Stored as JSON string for multiple languages
+  content     String   @db.Text // Stored as JSON string for multiple languages
+  coverImage  String?
+  published   Boolean  @default(false)
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
