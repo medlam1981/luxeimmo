@@ -1,7 +1,7 @@
 'use server';
 
 import prisma from '@/lib/prisma';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 import translate from 'translate';
@@ -110,6 +110,7 @@ export async function createProperty(formData: FormData) {
       }
     });
 
+    revalidateTag('property');
     revalidatePath('/admin/properties');
     revalidatePath('/');
     return { success: true };
@@ -207,6 +208,7 @@ export async function updateProperty(formData: FormData) {
       data: dataToUpdate
     });
 
+    revalidateTag('property');
     revalidatePath(`/admin/properties`);
     revalidatePath(`/properties`);
     revalidatePath(`/`);

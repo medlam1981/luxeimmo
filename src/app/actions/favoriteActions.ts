@@ -48,9 +48,6 @@ export async function syncFavoritesAction(localFavoriteIds: string[]) {
     }
   });
 
-  revalidatePath('/favorites');
-  revalidatePath('/', 'layout');
-
   return validPropertyIds;
 }
 
@@ -72,8 +69,5 @@ export async function toggleFavoriteDB(propertyId: string, isAdding: boolean) {
     });
   }
   
-  revalidatePath('/favorites');
-  revalidatePath('/', 'layout');
-  
-  return true;
+  return { success: true, action: isAdding ? 'added' : 'removed' };
 }

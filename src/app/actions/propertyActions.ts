@@ -3,7 +3,7 @@
 import prisma from '@/lib/prisma';
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 export async function getPropertiesByIds(ids: string[]) {
   if (!ids || ids.length === 0) return [];
@@ -38,6 +38,7 @@ export async function approveProperty(propertyId: string) {
     data: { status: 'APPROVED' },
   });
 
+  revalidateTag('property');
   revalidatePath('/[locale]/admin/review', 'page');
   revalidatePath('/', 'page');
 }
@@ -51,6 +52,7 @@ export async function rejectProperty(propertyId: string) {
     data: { status: 'REJECTED' },
   });
 
+  revalidateTag('property');
   revalidatePath('/[locale]/admin/review', 'page');
 }
 
@@ -63,6 +65,7 @@ export async function togglePremium(propertyId: string, currentValue: boolean) {
     data: { isPremium: !currentValue },
   });
 
+  revalidateTag('property');
   revalidatePath('/[locale]/admin/review', 'page');
   revalidatePath('/', 'page');
 }
