@@ -7,7 +7,8 @@
     "signInFallback": "Se connecter / Créer un compte",
     "sellerDashboard": "Tableau de bord Vendeur",
     "upgradeAccount": "Ajouter une propriété (Mettre à niveau)",
-    "signOut": "Se déconnecter"
+    "signOut": "Se déconnecter",
+    "blog": "Blog"
   },
   "Hero": {
     "title": "Trouvez la propriété de vos rêves au Maroc",

@@ -7,7 +7,8 @@
     "signInFallback": "Iniciar sesión / Crear cuenta",
     "sellerDashboard": "Panel del vendedor",
     "upgradeAccount": "Añadir Propiedad (Mejorar)",
-    "signOut": "Cerrar sesión"
+    "signOut": "Cerrar sesión",
+    "blog": "Blog"
   },
   "Hero": {
     "title": "Encuentra la propiedad de tus sueños en Marruecos",

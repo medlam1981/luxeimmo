@@ -70,6 +70,7 @@ export function Navbar() {
             <Link href="/" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors">{t('home')}</Link>
             <Link href="/properties" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors">{t('properties')}</Link>
             <Link href="/categories" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors">{t('categories')}</Link>
+            <Link href="/blog" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors">{t('blog')}</Link>
           </nav>
 
           {/* Right-side icons — use fixed gap to avoid SSR/client class mismatch */}
@@ -186,6 +187,7 @@ export function Navbar() {
               <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('home')}</Link>
               <Link href="/properties" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('properties')}</Link>
               <Link href="/categories" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('categories')}</Link>
+              <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('blog')}</Link>
               {status === 'unauthenticated' && (
                 <button
                   onClick={() => signIn('google', { callbackUrl: '/' })}
