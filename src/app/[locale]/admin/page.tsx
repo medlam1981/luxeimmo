@@ -1,8 +1,6 @@
 import { Building, Key, Home } from 'lucide-react';
 import prisma from '@/lib/prisma';
 import { getTranslations } from 'next-intl/server';
-export const dynamic = 'force-dynamic';
-
 export default async function AdminDashboard() {
   const t = await getTranslations('Admin');
 

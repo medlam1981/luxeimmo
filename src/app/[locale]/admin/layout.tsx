@@ -3,7 +3,7 @@
 import { LayoutDashboard, Package, ShoppingCart, Menu, X, Tags, Settings } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { usePathname } from '@/i18n/routing';
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { LanguageSwitcher } from '@/components/theme/LanguageSwitcher';
 import { useTranslations } from 'next-intl';
@@ -103,7 +103,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </header>
 
         <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
-          {children}
+          <Suspense fallback={<div className="h-full w-full flex items-center justify-center"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+            {children}
+          </Suspense>
         </main>
       </div>
     </div>

@@ -14,8 +14,6 @@ const parseLocalized = (str: string, locale: string) => {
     return str;
   }
 };
-export const dynamic = 'force-dynamic';
-
 export default async function AdminPropertiesPage() {
   const session = await getServerSession(authOptions);
   

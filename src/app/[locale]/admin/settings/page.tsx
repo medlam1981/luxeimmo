@@ -1,8 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { SettingsForm } from './SettingsForm';
 import { getSettings } from '@/app/actions/settingsActions';
-export const dynamic = 'force-dynamic';
-
 export default async function AdminSettingsPage() {
   const t = await getTranslations('Admin');
   const settings = await getSettings();
