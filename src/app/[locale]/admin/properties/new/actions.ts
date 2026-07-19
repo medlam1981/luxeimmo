@@ -110,7 +110,7 @@ export async function createProperty(formData: FormData) {
       }
     });
 
-    revalidateTag('property');
+    revalidateTag('property', {});
     revalidatePath('/admin/properties');
     revalidatePath('/');
     return { success: true };
@@ -208,7 +208,7 @@ export async function updateProperty(formData: FormData) {
       data: dataToUpdate
     });
 
-    revalidateTag('property');
+    revalidateTag('property', {});
     revalidatePath(`/admin/properties`);
     revalidatePath(`/properties`);
     revalidatePath(`/`);

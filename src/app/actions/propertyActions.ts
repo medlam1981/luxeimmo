@@ -38,7 +38,7 @@ export async function approveProperty(propertyId: string) {
     data: { status: 'APPROVED' },
   });
 
-  revalidateTag('property');
+  revalidateTag('property', {});
   revalidatePath('/[locale]/admin/review', 'page');
   revalidatePath('/', 'page');
 }
@@ -52,7 +52,7 @@ export async function rejectProperty(propertyId: string) {
     data: { status: 'REJECTED' },
   });
 
-  revalidateTag('property');
+  revalidateTag('property', {});
   revalidatePath('/[locale]/admin/review', 'page');
 }
 
@@ -65,7 +65,7 @@ export async function togglePremium(propertyId: string, currentValue: boolean) {
     data: { isPremium: !currentValue },
   });
 
-  revalidateTag('property');
+  revalidateTag('property', {});
   revalidatePath('/[locale]/admin/review', 'page');
   revalidatePath('/', 'page');
 }
