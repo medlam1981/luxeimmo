@@ -2,25 +2,22 @@
 
 import { LayoutDashboard, Package, Menu, X, Tags } from 'lucide-react';
 import { Link } from '@/i18n/routing';
-import { usePathname } from '@/i18n/routing';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { LanguageSwitcher } from '@/components/theme/LanguageSwitcher';
 import { logoutAdmin } from '@/app/actions/authActions';
-import { useSession } from 'next-auth/react';
 
-export default function AdminLayoutClient({ children, translations }: { children: React.ReactNode, translations: any }) {
+export default function AdminLayoutClient({ children, translations, isAdmin }: { children: React.ReactNode, translations: any, isAdmin: boolean }) {
   const pathname = usePathname();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-
-  const { data: session } = useSession();
 
   const navItems = [
     { label: translations.overview, href: '/admin', icon: LayoutDashboard },
     { label: translations.manageProperties, href: '/admin/properties', icon: Package }
   ];
 
-  if (session?.user && (session.user as any).role === 'ADMIN') {
+  if (isAdmin) {
     navItems.push({ label: 'Review Properties', href: '/admin/review', icon: Tags });
   }
 
@@ -49,7 +46,8 @@ export default function AdminLayoutClient({ children, translations }: { children
           <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-1">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = pathname === item.href;
+              // Because pathname includes the locale (e.g. /en/admin), we check if it ends with or includes the href
+              const isActive = pathname === item.href || pathname?.startsWith(`/${pathname.split('/')[1]}${item.href}`);
               return (
                 <Link
                   key={item.href}
