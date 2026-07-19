@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import { Navbar } from '@/components/storefront/Navbar';
 import { Footer } from '@/components/storefront/Footer';
 import { SearchFilters } from '@/components/storefront/SearchFilters';
+import { Suspense } from 'react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -63,7 +64,9 @@ export default async function SearchPage({
         
         <div className="flex flex-col lg:flex-row gap-8">
           <aside className="w-full lg:w-1/4">
-            <SearchFilters initialFilters={{ city, type, category, minPrice, maxPrice, bedrooms, bathrooms }} />
+            <Suspense fallback={<div className="h-96 bg-gray-100 dark:bg-gray-800 rounded-2xl animate-pulse"></div>}>
+              <SearchFilters initialFilters={{ city, type, category, minPrice, maxPrice, bedrooms, bathrooms }} />
+            </Suspense>
           </aside>
           
           <div className="w-full lg:w-3/4">
