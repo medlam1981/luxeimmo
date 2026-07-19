@@ -20,7 +20,7 @@ export default async function PropertiesPage({ params, searchParams }: { params:
   const { locale } = await params;
   setRequestLocale(locale);
   const { category, type, city } = await searchParams;
-  const t = await getTranslations('PropertiesPage');
+  const t = await getTranslations({ locale, namespace: 'PropertiesPage' });
 
   const where: any = { status: 'APPROVED' };
   if (category) {
@@ -93,7 +93,7 @@ export default async function PropertiesPage({ params, searchParams }: { params:
           )}
         </div>
       </main>
-      <Footer />
+      <Footer locale={locale} />
     </div>
   );
 }

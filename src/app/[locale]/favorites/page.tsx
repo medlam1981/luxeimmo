@@ -6,7 +6,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 export default async function FavoritesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations('Favorites');
+  const t = await getTranslations({ locale, namespace: 'Favorites' });
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-950">
@@ -15,7 +15,7 @@ export default async function FavoritesPage({ params }: { params: Promise<{ loca
         <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-8">{t('title')}</h1>
         <FavoritesClient locale={locale} />
       </main>
-      <Footer />
+      <Footer locale={locale} />
     </div>
   );
 }

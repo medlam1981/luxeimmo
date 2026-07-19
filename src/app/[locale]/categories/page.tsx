@@ -7,7 +7,7 @@ import Image from 'next/image';
 export default async function CategoriesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations('CategoriesPage');
+  const t = await getTranslations({ locale, namespace: 'CategoriesPage' });
   
   const categories = [
     { slug: 'APARTMENT', name: t('apartment_name', { defaultMessage: 'Apartments' }), desc: t('apartment_desc', { defaultMessage: 'Modern apartments in the city center.' }), image: '/images/categories/apartments.jpg' },
@@ -60,7 +60,7 @@ export default async function CategoriesPage({ params }: { params: Promise<{ loc
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer locale={locale} />
     </div>
   );
 }

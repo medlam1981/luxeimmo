@@ -77,16 +77,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PropertyPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const property = await prisma.property.findUnique({ where: { slug } });
 
   if (!property) {
     notFound();
   }
-
-  const locale = await getLocale();
-  const t = await getTranslations('Property');
-  const te = await getTranslations('enums');
+  const t = await getTranslations({ locale, namespace: 'Property' });
+  const te = await getTranslations({ locale, namespace: 'enums' });
   
   const displayTitle = parseLocalized(property.title, locale);
   const displayDesc = parseLocalized(property.description, locale);
@@ -240,7 +238,7 @@ export default async function PropertyPage({ params }: Props) {
         </div>
       </div>
       
-      <Footer />
+      <Footer locale={locale} />
     </main>
   );
 }

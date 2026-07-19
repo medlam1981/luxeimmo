@@ -7,7 +7,9 @@ interface Props {
   params: Promise<{ id: string }>;
 }
 
-export default async function EditPropertyPage({ params }: Props) {
+import { Suspense } from 'react';
+
+async function EditPropertyContent({ params }: Props) {
   const { id } = await params;
   
   const property = await prisma.property.findUnique({
@@ -27,5 +29,13 @@ export default async function EditPropertyPage({ params }: Props) {
     updatedAt: property.updatedAt ? property.updatedAt.toISOString() : null,
   };
 
-  return <PropertyForm initialData={serializedProperty} actionFn={updateProperty} isEdit={true} />;
+  return <PropertyForm initialData={serializedProperty as any} actionFn={updateProperty} isEdit={true} />;
+}
+
+export default async function EditPropertyPage({ params }: Props) {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center h-64"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+      <EditPropertyContent params={params} />
+    </Suspense>
+  );
 }

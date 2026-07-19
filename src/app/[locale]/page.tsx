@@ -83,7 +83,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <Hero heroProperty={heroProperty} />
       <Features />
       <PropertyGrid properties={properties} />
-      <Footer />
+      <Footer locale={locale} />
     </main>
   );
 }

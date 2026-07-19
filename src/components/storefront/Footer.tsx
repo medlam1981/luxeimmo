@@ -3,8 +3,8 @@ import { getTranslations } from 'next-intl/server';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { getSettings } from '@/app/actions/settingsActions';
 
-export async function Footer() {
-  const t = await getTranslations('Footer');
+export async function Footer({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale, namespace: 'Footer' });
   const settings = await getSettings();
 
   return (

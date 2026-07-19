@@ -27,7 +27,7 @@ export default async function SearchPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const sp = await searchParams;
-  const t = await getTranslations('Search');
+  const t = await getTranslations({ locale, namespace: 'Search' });
   
   const city = sp.city || '';
   const type = sp.type || 'SALE';
@@ -83,7 +83,7 @@ export default async function SearchPage({
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer locale={locale} />
     </div>
   );
 }

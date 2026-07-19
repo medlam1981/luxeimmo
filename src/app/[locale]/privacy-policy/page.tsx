@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function PrivacyPolicyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations('PrivacyPolicy');
+  const t = await getTranslations({ locale, namespace: 'PrivacyPolicy' });
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 pt-32 pb-24">
