@@ -24,6 +24,23 @@ export function PostForm({ initialData }: { initialData?: any }) {
     return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
   };
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File must be less than 5MB');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const base64String = event.target?.result as string;
+      setFormData({ ...formData, coverImage: base64String });
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value;
     if (!initialData) {
@@ -105,14 +122,19 @@ export function PostForm({ initialData }: { initialData?: any }) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cover Image URL</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cover Image {initialData?.coverImage ? '(Upload new to replace)' : ''}</label>
             <input
-              type="url"
-              value={formData.coverImage}
-              onChange={(e) => setFormData({ ...formData, coverImage: e.target.value })}
+              type="file"
+              accept="image/jpeg, image/png, image/webp, image/avif"
+              onChange={handleImageUpload}
               className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
-              placeholder="https://example.com/image.jpg"
             />
+            {formData.coverImage && (
+              <div className="mt-4">
+                <p className="text-xs text-gray-500 mb-2">Image Preview:</p>
+                <img src={formData.coverImage} alt="Cover Preview" className="h-32 w-auto object-cover rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm" />
+              </div>
+            )}
           </div>
 
           <div>
