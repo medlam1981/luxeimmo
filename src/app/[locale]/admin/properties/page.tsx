@@ -6,8 +6,6 @@ import { formatCurrency } from '@/lib/currency';
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-export const revalidate = 0;
-
 const parseLocalized = (str: string, locale: string) => {
   try {
     const parsed = JSON.parse(str);

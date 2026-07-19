@@ -69,11 +69,12 @@ const nextConfig: NextConfig = {
     unoptimized: process.env.NODE_ENV === 'development',
   },
 
+  cacheComponents: true,
+
   experimental: {
     serverActions: {
       bodySizeLimit: '10mb',
     },
-    ppr: 'incremental',
   },
 
   // Apply security headers globally

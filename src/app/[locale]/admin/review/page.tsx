@@ -6,8 +6,6 @@ import { ApproveButton, RejectButton, PremiumToggle } from './ApproveButton';
 import { Link } from '@/i18n/routing';
 import { getTranslations } from 'next-intl/server';
 
-export const revalidate = 0;
-
 export default async function AdminReviewPage() {
   const session = await getServerSession(authOptions);
   
