@@ -4,6 +4,15 @@ import { Plus, Edit, Trash2, Globe } from 'lucide-react';
 import { setRequestLocale } from 'next-intl/server';
 import { DeletePostButton } from './DeletePostButton';
 
+const parseLocalized = (str: string, locale: string) => {
+  try {
+    const parsed = JSON.parse(str);
+    return parsed[locale] || parsed.en || str;
+  } catch {
+    return str;
+  }
+};
+
 export default async function AdminPostsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -47,11 +56,14 @@ export default async function AdminPostsPage({ params }: { params: Promise<{ loc
                   </td>
                 </tr>
               ) : (
-                posts.map((post: any) => (
+                posts.map((post: any) => {
+                  const displayTitle = parseLocalized(post.title, locale);
+                  const displaySlug = parseLocalized(post.slug, locale);
+                  return (
                   <tr key={post.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
                     <td className="px-6 py-4">
-                      <div className="font-medium text-gray-900 dark:text-white mb-1 line-clamp-1">{post.title}</div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400 font-mono">{post.slug}</div>
+                      <div className="font-medium text-gray-900 dark:text-white mb-1 line-clamp-1">{displayTitle}</div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400 font-mono">{displaySlug}</div>
                     </td>
                     <td className="px-6 py-4">
                       {post.published ? (
@@ -71,7 +83,7 @@ export default async function AdminPostsPage({ params }: { params: Promise<{ loc
                       <div className="flex items-center justify-end gap-2">
                         {post.published && (
                           <a
-                            href={`/${locale}/blog/${post.slug}`}
+                            href={`/${locale}/blog/${displaySlug}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="p-2 text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 bg-gray-50 hover:bg-indigo-50 dark:bg-gray-800 dark:hover:bg-indigo-900/50 rounded-lg transition-colors"
@@ -91,7 +103,7 @@ export default async function AdminPostsPage({ params }: { params: Promise<{ loc
                       </div>
                     </td>
                   </tr>
-                ))
+                );})
               )}
             </tbody>
           </table>

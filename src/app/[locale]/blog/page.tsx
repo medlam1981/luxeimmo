@@ -4,8 +4,32 @@ import { Footer } from '@/components/storefront/Footer';
 import { Link } from '@/i18n/routing';
 import { setRequestLocale } from 'next-intl/server';
 import { Metadata } from 'next';
+import { connection } from 'next/server';
+import { unstable_cache } from 'next/cache';
+
+const getCachedPosts = unstable_cache(
+  async () => {
+    return await prisma.post.findMany({
+      where: { published: true },
+      orderBy: { createdAt: 'desc' },
+      include: { author: true },
+    });
+  },
+  ['blog-posts-index'],
+  { tags: ['post'] }
+);
+
+const parseLocalized = (str: string, locale: string) => {
+  try {
+    const parsed = JSON.parse(str);
+    return parsed[locale] || parsed.en || str;
+  } catch {
+    return str;
+  }
+};
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  await connection();
   const { locale } = await params;
   setRequestLocale(locale);
   return {
@@ -25,14 +49,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 export default async function BlogIndexPage({ params }: { params: Promise<{ locale: string }> }) {
+  await connection();
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const posts = await prisma.post.findMany({
-    where: { published: true },
-    orderBy: { createdAt: 'desc' },
-    include: { author: true },
-  });
+  const posts = await getCachedPosts();
 
   return (
     <main className="min-h-screen flex flex-col bg-white dark:bg-gray-950 pt-20">
@@ -49,49 +70,55 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post: any) => (
-            <article key={post.id} className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md transition-shadow group flex flex-col">
-              {post.coverImage ? (
-                <div className="aspect-[16/9] overflow-hidden bg-gray-100 dark:bg-gray-800 relative">
-                  <img
-                    src={post.coverImage}
-                    alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-              ) : (
-                <div className="aspect-[16/9] bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center border-b border-gray-200 dark:border-gray-800">
-                  <span className="text-4xl text-indigo-200 dark:text-gray-700 font-serif">LuxeImmo</span>
-                </div>
-              )}
-              
-              <div className="p-6 flex flex-col flex-grow">
-                <div className="text-sm text-gray-500 dark:text-gray-400 mb-3 flex items-center justify-between">
-                  <span>{new Date(post.createdAt).toLocaleDateString(locale)}</span>
-                  {post.author?.name && <span>By {post.author.name}</span>}
-                </div>
-                <h2 dir="auto" className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                  <Link href={`/blog/${post.slug}`}>
-                    {post.title}
-                  </Link>
-                </h2>
-                <div 
-                  dir="auto"
-                  className="text-gray-600 dark:text-gray-400 line-clamp-3 mb-6 text-sm"
-                  dangerouslySetInnerHTML={{ __html: post.content.replace(/<[^>]*>?/gm, '') }}
-                />
+          {posts.map((post: any) => {
+            const displayTitle = parseLocalized(post.title, locale);
+            const displayContent = parseLocalized(post.content, locale);
+            const displaySlug = parseLocalized(post.slug, locale);
+
+            return (
+              <article key={post.id} className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md transition-shadow group flex flex-col">
+                {post.coverImage ? (
+                  <div className="aspect-[16/9] overflow-hidden bg-gray-100 dark:bg-gray-800 relative">
+                    <img
+                      src={post.coverImage}
+                      alt={displayTitle}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                ) : (
+                  <div className="aspect-[16/9] bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center border-b border-gray-200 dark:border-gray-800">
+                    <span className="text-4xl text-indigo-200 dark:text-gray-700 font-serif">LuxeImmo</span>
+                  </div>
+                )}
                 
-                <div className="mt-auto pt-4 border-t border-gray-100 dark:border-gray-800">
-                  <Link 
-                    href={`/blog/${post.slug}`}
-                    className="text-indigo-600 dark:text-indigo-400 font-semibold text-sm hover:underline"
-                  >
-                    Read full article &rarr;
-                  </Link>
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="text-sm text-gray-500 dark:text-gray-400 mb-3 flex items-center justify-between">
+                    <span>{new Date(post.createdAt).toLocaleDateString(locale)}</span>
+                    {post.author?.name && <span>By {post.author.name}</span>}
+                  </div>
+                  <h2 dir="auto" className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                    <Link href={`/blog/${displaySlug}`}>
+                      {displayTitle}
+                    </Link>
+                  </h2>
+                  <div 
+                    dir="auto"
+                    className="text-gray-600 dark:text-gray-400 line-clamp-3 mb-6 text-sm"
+                    dangerouslySetInnerHTML={{ __html: displayContent.replace(/<[^>]*>?/gm, '') }}
+                  />
+                  
+                  <div className="mt-auto pt-4 border-t border-gray-100 dark:border-gray-800">
+                    <Link 
+                      href={`/blog/${displaySlug}`}
+                      className="text-indigo-600 dark:text-indigo-400 font-semibold text-sm hover:underline"
+                    >
+                      Read full article &rarr;
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
 
         {posts.length === 0 && (
