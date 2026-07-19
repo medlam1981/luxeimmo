@@ -34,6 +34,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       default: t('defaultTitle'),
     },
     description: t('description'),
+    alternates: {
+      languages: {
+        en: `/en`,
+        fr: `/fr`,
+        es: `/es`,
+        ar: `/ar`,
+        'x-default': `/en`,
+      },
+    },
     keywords: [t('keyword1'), t('keyword2'), t('keyword3'), t('keyword4'), t('keyword5')],
     openGraph: {
       title: t('defaultTitle'),

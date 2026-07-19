@@ -15,6 +15,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     alternates: {
       canonical: `https://luxeimmo.com/${locale}`,
+      languages: {
+        en: `https://luxeimmo.com/en`,
+        fr: `https://luxeimmo.com/fr`,
+        es: `https://luxeimmo.com/es`,
+        ar: `https://luxeimmo.com/ar`,
+        'x-default': `https://luxeimmo.com/en`,
+      },
     },
   };
 }

@@ -62,6 +62,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: seoDescription,
     alternates: {
       canonical: canonicalUrl,
+      languages: {
+        en: `${BASE_URL}/en/properties/${slug}`,
+        fr: `${BASE_URL}/fr/properties/${slug}`,
+        es: `${BASE_URL}/es/properties/${slug}`,
+        ar: `${BASE_URL}/ar/properties/${slug}`,
+        'x-default': `${BASE_URL}/en/properties/${slug}`,
+      },
     },
     openGraph: {
       type: 'website',
@@ -114,17 +121,25 @@ async function PropertyPageContent({ params }: Props) {
   const badgeType = te(`propertyType.${property.propertyType}` as any);
   const badgeCategory = te(`category.${property.category}` as any);
 
+  const BASE_URL = process.env.NEXTAUTH_URL || 'https://luxeimmo.com';
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'RealEstateListing',
     name: displayTitle,
     description: displayDesc,
     image: property.images,
+    numberOfRooms: property.bedrooms,
+    floorSize: {
+      '@type': 'QuantitativeValue',
+      value: property.size,
+      unitCode: 'MTK' // Square meters
+    },
     offers: {
       '@type': 'Offer',
       price: property.price.toString(),
       priceCurrency: 'MAD',
-      url: `https://luxestore.com/properties/${property.slug}`,
+      url: `${BASE_URL}/${locale}/properties/${property.slug}`,
     },
     address: {
       '@type': 'PostalAddress',
