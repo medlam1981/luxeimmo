@@ -4,6 +4,8 @@ import { Heart } from 'lucide-react';
 import { useFavoritesStore } from '@/store/useFavoritesStore';
 import { useEffect, useState } from 'react';
 
+import { toggleFavoriteDB } from '@/app/actions/favoriteActions';
+
 export function FavoriteButton({ propertyId }: { propertyId: string }) {
   const [mounted, setMounted] = useState(false);
   const { isFavorite, toggleFavorite } = useFavoritesStore();
@@ -28,6 +30,7 @@ export function FavoriteButton({ propertyId }: { propertyId: string }) {
         e.preventDefault();
         e.stopPropagation();
         toggleFavorite(propertyId);
+        toggleFavoriteDB(propertyId, !favorite).catch(() => {});
       }}
       className="p-2 bg-white/95 backdrop-blur-md rounded-full shadow-md hover:scale-110 transition-all duration-300"
     >

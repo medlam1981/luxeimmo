@@ -49,3 +49,23 @@ export async function syncFavoritesAction(localFavoriteIds: string[]) {
 
   return validPropertyIds;
 }
+
+export async function toggleFavoriteDB(propertyId: string, isAdding: boolean) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) return null;
+  const userId = (session.user as any).id as string | undefined;
+  if (!userId) return null;
+
+  if (isAdding) {
+    await prisma.user.update({
+      where: { id: userId },
+      data: { favoriteProperties: { connect: { id: propertyId } } }
+    });
+  } else {
+    await prisma.user.update({
+      where: { id: userId },
+      data: { favoriteProperties: { disconnect: { id: propertyId } } }
+    });
+  }
+  return true;
+}
