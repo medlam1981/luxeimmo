@@ -2,8 +2,49 @@
 
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import { Bold, Italic, List, ListOrdered, Heading2, Heading3 } from 'lucide-react';
+import TextAlign from '@tiptap/extension-text-align';
+import { Extension } from '@tiptap/core';
+import { Bold, Italic, List, ListOrdered, Heading2, Heading3, AlignLeft, AlignCenter, AlignRight, AlignJustify } from 'lucide-react';
 import { useEffect } from 'react';
+
+const TextDirection = Extension.create({
+  name: 'textDirection',
+  addOptions() {
+    return {
+      types: ['heading', 'paragraph'],
+      directions: ['ltr', 'rtl', 'auto'],
+      defaultDirection: null,
+    };
+  },
+  addGlobalAttributes() {
+    return [
+      {
+        types: this.options.types,
+        attributes: {
+          dir: {
+            default: this.options.defaultDirection,
+            parseHTML: element => element.dir || null,
+            renderHTML: attributes => {
+              if (!attributes.dir) return {};
+              return { dir: attributes.dir };
+            },
+          },
+        },
+      },
+    ];
+  },
+  addCommands() {
+    return {
+      setTextDirection: (direction: string) => ({ commands }: any) => {
+        if (!this.options.directions.includes(direction)) return false;
+        return this.options.types.every((type: string) => commands.updateAttributes(type, { dir: direction }));
+      },
+      unsetTextDirection: () => ({ commands }: any) => {
+        return this.options.types.every((type: string) => commands.resetAttributes(type, 'dir'));
+      },
+    };
+  },
+});
 
 const MenuBar = ({ editor }: { editor: any }) => {
   if (!editor) {
@@ -56,13 +97,61 @@ const MenuBar = ({ editor }: { editor: any }) => {
       >
         <ListOrdered className="w-4 h-4" />
       </button>
+      <div className="w-px h-6 bg-gray-300 dark:bg-gray-700 my-auto mx-1" />
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().setTextAlign('left').run()}
+        className={`p-2 rounded-lg transition-colors ${editor.isActive({ textAlign: 'left' }) ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-400' : 'text-gray-600 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800'}`}
+      >
+        <AlignLeft className="w-4 h-4" />
+      </button>
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().setTextAlign('center').run()}
+        className={`p-2 rounded-lg transition-colors ${editor.isActive({ textAlign: 'center' }) ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-400' : 'text-gray-600 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800'}`}
+      >
+        <AlignCenter className="w-4 h-4" />
+      </button>
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().setTextAlign('right').run()}
+        className={`p-2 rounded-lg transition-colors ${editor.isActive({ textAlign: 'right' }) ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-400' : 'text-gray-600 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800'}`}
+      >
+        <AlignRight className="w-4 h-4" />
+      </button>
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().setTextAlign('justify').run()}
+        className={`p-2 rounded-lg transition-colors ${editor.isActive({ textAlign: 'justify' }) ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-400' : 'text-gray-600 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800'}`}
+      >
+        <AlignJustify className="w-4 h-4" />
+      </button>
+      <div className="w-px h-6 bg-gray-300 dark:bg-gray-700 my-auto mx-1" />
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().setTextDirection('ltr').run()}
+        className={`px-2 py-1 text-xs font-bold rounded-lg transition-colors ${editor.isActive({ dir: 'ltr' }) ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-400' : 'text-gray-600 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800'}`}
+      >
+        LTR
+      </button>
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().setTextDirection('rtl').run()}
+        className={`px-2 py-1 text-xs font-bold rounded-lg transition-colors ${editor.isActive({ dir: 'rtl' }) ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-400' : 'text-gray-600 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800'}`}
+      >
+        RTL
+      </button>
     </div>
   );
 };
 
 export function RichTextEditor({ content, onChange }: { content: string, onChange: (html: string) => void }) {
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit,
+      TextAlign.configure({ types: ['heading', 'paragraph'] }),
+      TextDirection,
+    ],
     content,
     editorProps: {
       attributes: {
