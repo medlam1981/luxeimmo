@@ -41,9 +41,13 @@ export default function OnboardingPage() {
       await update();
       router.push('/admin');
       router.refresh();
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      alert(t('error'));
+      if (err.message?.includes('Failed to find Server Action')) {
+        window.location.reload();
+      } else {
+        alert(t('error'));
+      }
     } finally {
       setLoading(false);
     }

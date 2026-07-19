@@ -15,8 +15,15 @@ export function FavoritesClient({ locale }: { locale: string }) {
   useEffect(() => {
     async function load() {
       if (favoriteIds.length > 0) {
-        const data = await getPropertiesByIds(favoriteIds);
-        setProperties(data);
+        try {
+          const data = await getPropertiesByIds(favoriteIds);
+          setProperties(data);
+        } catch (err: any) {
+          if (err.message?.includes('Failed to find Server Action')) {
+            window.location.reload();
+          }
+          setProperties([]);
+        }
       } else {
         setProperties([]);
       }

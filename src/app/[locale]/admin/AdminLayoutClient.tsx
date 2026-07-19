@@ -72,7 +72,15 @@ export default function AdminLayoutClient({ children, translations, isAdmin }: {
               <LanguageSwitcher dropup={true} />
             </div>
             <button
-              onClick={() => logoutAdmin()}
+              onClick={async () => {
+                try {
+                  await logoutAdmin();
+                } catch (err: any) {
+                  if (err.message?.includes('Failed to find Server Action')) {
+                    window.location.reload();
+                  }
+                }
+              }}
               className="w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 font-medium bg-red-50 dark:bg-red-900/20 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors"
             >
               {translations.logout}
