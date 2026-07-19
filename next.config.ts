@@ -73,6 +73,7 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: '10mb',
     },
+    ppr: 'incremental',
   },
 
   // Apply security headers globally
