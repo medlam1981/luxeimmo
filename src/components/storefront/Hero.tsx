@@ -70,7 +70,7 @@ export function Hero({ heroProperty }: HeroProps) {
               placeholder={t('searchPlaceholder')} 
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              className="w-full h-full px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-black dark:focus:border-white transition-colors text-base"
+              className="w-full h-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-black dark:focus:border-white transition-colors text-sm sm:text-base"
             />
           </div>
 
@@ -79,7 +79,7 @@ export function Hero({ heroProperty }: HeroProps) {
             <button
               type="button"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="w-full h-full px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition-colors flex items-center justify-between text-base"
+              className="w-full h-full px-2 sm:px-4 py-2 sm:py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition-colors flex items-center justify-between text-sm sm:text-base"
             >
               <span>{propertyType === 'SALE' ? t('forSale') : t('forRent')}</span>
               <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
@@ -120,7 +120,7 @@ export function Hero({ heroProperty }: HeroProps) {
           {/* Search Button */}
           <Link 
             href={`/search?city=${city}&type=${propertyType}`}
-            className="shrink-0 w-auto inline-flex items-center justify-center px-4 sm:px-8 py-3 text-base font-semibold text-white bg-black hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl"
+            className="shrink-0 w-auto inline-flex items-center justify-center px-4 sm:px-8 py-2 sm:py-3 text-sm sm:text-base font-semibold text-white bg-black hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl"
           >
             <Search className="w-5 h-5 mr-2" />
             {t('search')}
