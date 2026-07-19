@@ -6,18 +6,37 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { revalidatePath } from 'next/cache';
 import translate from 'translate';
 
-async function autoTranslate(text: string): Promise<Record<string, string>> {
+async function autoTranslate(text: string, isHtml = false): Promise<Record<string, string>> {
   translate.engine = 'google';
   try {
-    // We assume the input text is primarily English (or whatever base the user writes in)
-    const ar = await translate(text, { to: 'ar' });
-    const fr = await translate(text, { to: 'fr' });
-    const es = await translate(text, { to: 'es' });
-    return { en: text, ar, fr, es };
+    if (isHtml) {
+      const ar = await translateChunked(text, 'ar');
+      const fr = await translateChunked(text, 'fr');
+      const es = await translateChunked(text, 'es');
+      return { en: text, ar, fr, es };
+    } else {
+      const ar = await translate(text, { to: 'ar' });
+      const fr = await translate(text, { to: 'fr' });
+      const es = await translate(text, { to: 'es' });
+      return { en: text, ar, fr, es };
+    }
   } catch (e) {
     console.error('Translation error:', e);
     return { en: text, ar: text, fr: text, es: text };
   }
+}
+
+async function translateChunked(html: string, to: string) {
+  const chunks = html.split(/(<\/(?:p|h1|h2|h3|h4|h5|h6|ul|ol|li|div|blockquote)>)/gi);
+  let translated = '';
+  for (let i = 0; i < chunks.length; i++) {
+    if (chunks[i].trim() && !/^<\/(?:p|h1|h2|h3|h4|h5|h6|ul|ol|li|div|blockquote)>$/i.test(chunks[i])) {
+      translated += await translate(chunks[i], { to });
+    } else {
+      translated += chunks[i];
+    }
+  }
+  return translated;
 }
 
 function generateSlug(title: string) {
@@ -32,8 +51,8 @@ export async function createPost(data: any) {
 
   try {
     // Translate fields
-    const translatedTitles = await autoTranslate(data.title);
-    const translatedContents = await autoTranslate(data.content);
+    const translatedTitles = await autoTranslate(data.title, false);
+    const translatedContents = await autoTranslate(data.content, true);
     
     // Generate localized slugs from localized titles
     const translatedSlugs = {
@@ -87,8 +106,8 @@ export async function updatePost(id: string, data: any) {
     }
 
     if (needsTranslation) {
-      const titles = await autoTranslate(data.title);
-      const contents = await autoTranslate(data.content);
+      const titles = await autoTranslate(data.title, false);
+      const contents = await autoTranslate(data.content, true);
       translatedTitles = JSON.stringify(titles);
       translatedContents = JSON.stringify(contents);
       translatedSlugs = JSON.stringify({

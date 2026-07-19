@@ -20,9 +20,15 @@ const parseLocalized = (str: string, locale: string) => {
 
 const getCachedPost = unstable_cache(
   async (slug: string) => {
-    // Because slug is stored as a JSON string, we use contains to find the post
+    // Because slug is stored as a JSON string for new posts, we use contains.
+    // For older posts, the slug is just a raw string. We use OR to check both.
     return await prisma.post.findFirst({
-      where: { slug: { contains: `"${slug}"` } },
+      where: {
+        OR: [
+          { slug: slug },
+          { slug: { contains: `"${slug}"` } }
+        ]
+      },
       include: { author: true },
     });
   },
