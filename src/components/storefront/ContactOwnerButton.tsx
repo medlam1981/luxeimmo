@@ -82,32 +82,47 @@ export function ContactOwnerButton({
     e.preventDefault();
     setStep('submitting');
 
-    const result = await submitContactInquiry({
-      propertyId,
-      propertySlug,
-      propertyTitle,
-      propertyCity,
-      senderName,
-      senderEmail,
-      senderPhone,
-      message,
-    });
+    try {
+      const result = await submitContactInquiry({
+        propertyId,
+        propertySlug,
+        propertyTitle,
+        propertyCity,
+        senderName,
+        senderEmail,
+        senderPhone,
+        message,
+      });
 
-    if (result.success) {
-      setStep('success');
-      // After showing success, transition to rating after 1.5s
-      setTimeout(() => setStep('rating'), 1800);
-    } else {
-      setErrorMsg(result.error || 'Something went wrong. Please try again.');
-      setStep('error');
+      if (result.success) {
+        setStep('success');
+        // After showing success, transition to rating after 1.5s
+        setTimeout(() => setStep('rating'), 1800);
+      } else {
+        setErrorMsg(result.error || 'Something went wrong. Please try again.');
+        setStep('error');
+      }
+    } catch (err: any) {
+      if (err.message?.includes('Failed to find Server Action')) {
+        window.location.reload();
+      } else {
+        setErrorMsg('An unexpected error occurred. Please try again.');
+        setStep('error');
+      }
     }
   };
 
   const handleRatingSubmit = async () => {
     if (rating > 0) {
-      await submitRating(propertyId, rating);
-      setStep('ratingSuccess');
-      setTimeout(() => handleClose(), 2000);
+      try {
+        await submitRating(propertyId, rating);
+        setStep('ratingSuccess');
+        setTimeout(() => handleClose(), 2000);
+      } catch (err: any) {
+        if (err.message?.includes('Failed to find Server Action')) {
+          window.location.reload();
+        }
+      }
     }
   };
 

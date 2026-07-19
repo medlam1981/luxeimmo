@@ -36,9 +36,17 @@ export function Navbar() {
 
   useEffect(() => {
     if (session?.user && mounted) {
-      syncFavoritesAction(favoriteIds).then(syncedIds => {
-        if (syncedIds) setFavorites(syncedIds);
-      });
+      syncFavoritesAction(favoriteIds)
+        .then(syncedIds => {
+          if (syncedIds) setFavorites(syncedIds);
+        })
+        .catch(err => {
+          if (err.message?.includes('Failed to find Server Action')) {
+            window.location.reload();
+          } else {
+            console.error('Failed to sync favorites:', err);
+          }
+        });
     }
   }, [session, mounted]);
 

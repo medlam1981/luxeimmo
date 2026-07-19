@@ -30,7 +30,11 @@ export function FavoriteButton({ propertyId }: { propertyId: string }) {
         e.preventDefault();
         e.stopPropagation();
         toggleFavorite(propertyId);
-        toggleFavoriteDB(propertyId, !favorite).catch(() => {});
+        toggleFavoriteDB(propertyId, !favorite).catch((err) => {
+          if (err.message?.includes('Failed to find Server Action')) {
+            window.location.reload();
+          }
+        });
       }}
       className="p-2 bg-white/95 backdrop-blur-md rounded-full shadow-md hover:scale-110 transition-all duration-300"
     >
