@@ -20,7 +20,7 @@ export function FavoritesClient({ locale }: { locale: string }) {
           setProperties(data);
         } catch (err: any) {
           if (err.message?.includes('Failed to find Server Action')) {
-            window.location.reload();
+            console.warn('Stale Server Action during favorites load, ignoring to prevent reload loop.');
           }
           setProperties([]);
         }

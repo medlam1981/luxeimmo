@@ -42,7 +42,7 @@ export function Navbar() {
         })
         .catch(err => {
           if (err.message?.includes('Failed to find Server Action')) {
-            window.location.reload();
+            console.warn('Stale Server Action during background sync, ignoring to prevent reload loop.');
           } else {
             console.error('Failed to sync favorites:', err);
           }
