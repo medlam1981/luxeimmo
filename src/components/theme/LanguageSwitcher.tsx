@@ -22,7 +22,8 @@ export function LanguageSwitcher({ dropup = false, align = 'end' }: { dropup?: b
   const switchLanguage = (newLocale: string) => {
     if (!pathname) return;
     const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
-    router.replace(newPath);
+    // Use hard navigation to bypass stale Client Router Cache and guarantee fresh Server Action IDs
+    window.location.assign(newPath);
     setIsOpen(false);
   };
 
