@@ -4,12 +4,13 @@ import { Footer } from '@/components/storefront/Footer';
 import { PropertyCard } from '@/components/storefront/PropertyCard';
 import prisma from '@/lib/prisma';
 import { Property } from '@/types';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
+  setRequestLocale(locale);
   return {
     alternates: {
       canonical: `https://luxeimmo.com/${locale}/properties`,
@@ -17,7 +18,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function PropertiesPage({ searchParams }: { searchParams: Promise<{ category?: string, type?: string, city?: string }> }) {
+export default async function PropertiesPage({ params, searchParams }: { params: Promise<{ locale: string }>, searchParams: Promise<{ category?: string, type?: string, city?: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const { category, type, city } = await searchParams;
   const t = await getTranslations('PropertiesPage');
 

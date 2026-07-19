@@ -7,10 +7,13 @@ import { Footer } from '@/components/storefront/Footer';
 import prisma from '@/lib/prisma';
 import { Property } from '@/types';
 
+import { setRequestLocale } from 'next-intl/server';
+
 export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
+  setRequestLocale(locale);
   return {
     alternates: {
       canonical: `https://luxeimmo.com/${locale}`,
@@ -18,7 +21,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function Home() {
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   let properties: Property[] = [];
   let heroProperty: Property | null = null;
   

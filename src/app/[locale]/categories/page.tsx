@@ -1,12 +1,14 @@
 import { Navbar } from '@/components/storefront/Navbar';
 import { Footer } from '@/components/storefront/Footer';
 import { Link } from '@/i18n/routing';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
 
 export const revalidate = 60;
 
-export default async function CategoriesPage() {
+export default async function CategoriesPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations('CategoriesPage');
   
   const categories = [

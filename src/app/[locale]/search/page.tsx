@@ -4,12 +4,11 @@ import { Metadata } from 'next';
 import { Navbar } from '@/components/storefront/Navbar';
 import { Footer } from '@/components/storefront/Footer';
 import { SearchFilters } from '@/components/storefront/SearchFilters';
-import { getTranslations } from 'next-intl/server';
-
-export const dynamic = 'force-dynamic';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
+  setRequestLocale(locale);
   return {
     alternates: {
       canonical: `https://luxeimmo.com/${locale}/search`,
@@ -25,6 +24,7 @@ export default async function SearchPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const sp = await searchParams;
   const t = await getTranslations('Search');
   

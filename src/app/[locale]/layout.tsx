@@ -16,11 +16,17 @@ const cairo = Cairo({
   weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { routing } from '@/i18n/routing';
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations('Metadata');
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
 
   return {
     metadataBase: new URL('https://luxeimmo.com'),
@@ -64,7 +70,8 @@ export default async function RootLayout({
 }>) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
-  const messages = await getMessages();
+  setRequestLocale(locale);
+  const messages = await getMessages({ locale });
 
   return (
     <html
