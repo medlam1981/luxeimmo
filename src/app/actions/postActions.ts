@@ -7,7 +7,7 @@ import { revalidatePath } from 'next/cache';
 
 export async function createPost(data: any) {
   const session = await getServerSession(authOptions);
-  if (!session?.user?.id) {
+  if (!(session?.user as any)?.id) {
     return { success: false, error: 'Unauthorized' };
   }
 
@@ -19,7 +19,7 @@ export async function createPost(data: any) {
         content: data.content,
         coverImage: data.coverImage,
         published: data.published,
-        authorId: session.user.id,
+        authorId: (session?.user as any).id,
       },
     });
     revalidatePath('/admin/posts');
@@ -33,7 +33,7 @@ export async function createPost(data: any) {
 
 export async function updatePost(id: string, data: any) {
   const session = await getServerSession(authOptions);
-  if (!session?.user?.id) {
+  if (!(session?.user as any)?.id) {
     return { success: false, error: 'Unauthorized' };
   }
 
@@ -59,7 +59,7 @@ export async function updatePost(id: string, data: any) {
 
 export async function deletePost(id: string) {
   const session = await getServerSession(authOptions);
-  if (!session?.user?.id) {
+  if (!(session?.user as any)?.id) {
     return { success: false, error: 'Unauthorized' };
   }
 

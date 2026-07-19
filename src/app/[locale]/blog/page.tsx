@@ -49,7 +49,7 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post) => (
+          {posts.map((post: any) => (
             <article key={post.id} className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md transition-shadow group flex flex-col">
               {post.coverImage ? (
                 <div className="aspect-[16/9] overflow-hidden bg-gray-100 dark:bg-gray-800 relative">
