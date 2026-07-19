@@ -62,8 +62,8 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'ui-avatars.com' },
       // Development: allow next/image to optimize local uploads served from localhost
       { protocol: 'http', hostname: 'localhost' },
-      { protocol: 'http', hostname: '127.0.0.1' },
     ],
+    formats: ['image/avif', 'image/webp'],
     // Allow unoptimized local paths (e.g. /uploads/*) served directly as <img> tags
     // without going through the /_next/image optimizer
     unoptimized: process.env.NODE_ENV === 'development',

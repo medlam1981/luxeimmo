@@ -28,7 +28,7 @@ export function Hero({ heroProperty }: HeroProps) {
           alt="Luxury Riad in Marrakech"
           fill
           className="object-cover"
-          priority
+          priority={true}
           sizes="100vw"
           quality={85}
         />
