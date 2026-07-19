@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { getTranslations } from 'next-intl/server';
 import { SettingsForm } from './SettingsForm';
-import { getSettings } from '@/app/actions/settingsActions';
+import { getSettings } from '@/lib/settings';
 
 async function AdminSettingsPageContent() {
 

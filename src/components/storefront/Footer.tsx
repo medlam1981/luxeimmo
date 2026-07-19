@@ -1,7 +1,7 @@
 import { Link } from '@/i18n/routing';
 import { getTranslations } from 'next-intl/server';
 import { Mail, Phone, MapPin } from 'lucide-react';
-import { getSettings } from '@/app/actions/settingsActions';
+import { getSettings } from '@/lib/settings';
 
 export async function Footer({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: 'Footer' });

@@ -17,13 +17,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function SearchPage({
-  searchParams,
-  params
-}: {
-  searchParams: Promise<{ [key: string]: string | undefined }>;
-  params: Promise<{ locale: string }>;
-}) {
+async function SearchPageContent({ params, searchParams }: { searchParams: Promise<{ [key: string]: string | undefined }>;
+  params: Promise<{ locale: string }>; }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const sp = await searchParams;
@@ -85,5 +80,15 @@ export default async function SearchPage({
       </main>
       <Footer locale={locale} />
     </div>
+  );
+}
+
+
+export default async function SearchPage({ params, searchParams }: { searchParams: Promise<{ [key: string]: string | undefined }>;
+  params: Promise<{ locale: string }>; }) {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+      <SearchPageContent params={params} searchParams={searchParams} />
+    </Suspense>
   );
 }

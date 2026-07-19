@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Metadata } from 'next';
 import { Navbar } from '@/components/storefront/Navbar';
 import { Footer } from '@/components/storefront/Footer';
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function PropertiesPage({ params, searchParams }: { params: Promise<{ locale: string }>, searchParams: Promise<{ category?: string, type?: string, city?: string }> }) {
+async function PropertiesPageContent({ params, searchParams }: { params: Promise<{ locale: string }>, searchParams: Promise<{ category?: string, type?: string, city?: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const { category, type, city } = await searchParams;
@@ -95,5 +96,14 @@ export default async function PropertiesPage({ params, searchParams }: { params:
       </main>
       <Footer locale={locale} />
     </div>
+  );
+}
+
+
+export default async function PropertiesPage({ params, searchParams }: { params: Promise<{ locale: string }>, searchParams: Promise<{ category?: string, type?: string, city?: string }> }) {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+      <PropertiesPageContent params={params} searchParams={searchParams} />
+    </Suspense>
   );
 }
