@@ -100,7 +100,7 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
         )}
       </div>
 
-      <Footer />
+      <Footer locale={locale} />
     </main>
   );
 }

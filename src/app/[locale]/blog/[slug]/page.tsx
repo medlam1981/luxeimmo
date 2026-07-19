@@ -128,7 +128,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         />
       </article>
 
-      <Footer />
+      <Footer locale={locale} />
     </main>
   );
 }
