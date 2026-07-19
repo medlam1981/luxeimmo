@@ -1,7 +1,10 @@
+import { Suspense } from 'react';
 import { Building, Key, Home } from 'lucide-react';
 import prisma from '@/lib/prisma';
 import { getTranslations } from 'next-intl/server';
-export default async function AdminDashboard() {
+
+async function AdminDashboardContent() {
+
   const t = await getTranslations('Admin');
 
   const [totalProperties, propertiesForRent, propertiesForSale] = await Promise.all([
@@ -37,5 +40,14 @@ export default async function AdminDashboard() {
         })}
       </div>
     </div>
+  );
+}
+
+
+export default async function AdminDashboard() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center h-64"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+      <AdminDashboardContent />
+    </Suspense>
   );
 }

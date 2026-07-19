@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import prisma from '@/lib/prisma';
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
@@ -5,7 +6,9 @@ import { redirect } from 'next/navigation';
 import { ApproveButton, RejectButton, PremiumToggle } from './ApproveButton';
 import { Link } from '@/i18n/routing';
 import { getTranslations } from 'next-intl/server';
-export default async function AdminReviewPage() {
+
+async function AdminReviewPageContent() {
+
   const session = await getServerSession(authOptions);
   
   if (!session || !session.user || (session.user as any).role !== 'ADMIN') {
@@ -106,5 +109,14 @@ export default async function AdminReviewPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+
+export default async function AdminReviewPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center h-64"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+      <AdminReviewPageContent />
+    </Suspense>
   );
 }

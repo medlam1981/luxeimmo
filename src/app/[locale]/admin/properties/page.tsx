@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import prisma from '@/lib/prisma';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { DeleteButton } from './DeleteButton';
@@ -14,7 +15,9 @@ const parseLocalized = (str: string, locale: string) => {
     return str;
   }
 };
-export default async function AdminPropertiesPage() {
+
+async function AdminPropertiesPageContent() {
+
   const session = await getServerSession(authOptions);
   
   if (!session || !session.user || !(session.user as any).id) return null;
@@ -127,5 +130,14 @@ export default async function AdminPropertiesPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+
+export default async function AdminPropertiesPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center h-64"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+      <AdminPropertiesPageContent />
+    </Suspense>
   );
 }

@@ -1,7 +1,10 @@
+import { Suspense } from 'react';
 import { getTranslations } from 'next-intl/server';
 import { SettingsForm } from './SettingsForm';
 import { getSettings } from '@/app/actions/settingsActions';
-export default async function AdminSettingsPage() {
+
+async function AdminSettingsPageContent() {
+
   const t = await getTranslations('Admin');
   const settings = await getSettings();
 
@@ -21,5 +24,14 @@ export default async function AdminSettingsPage() {
         initialLocation={settings.storeLocation || ''}
       />
     </div>
+  );
+}
+
+
+export default async function AdminSettingsPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center h-64"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+      <AdminSettingsPageContent />
+    </Suspense>
   );
 }
