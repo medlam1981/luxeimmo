@@ -12,7 +12,7 @@ import { unstable_cache } from 'next/cache';
 const parseLocalized = (str: string, locale: string) => {
   try {
     const parsed = JSON.parse(str);
-    return parsed[locale] || parsed.en || str;
+    return parsed[locale] || parsed.en || Object.values(parsed)[0] || str;
   } catch {
     return str;
   }
@@ -83,8 +83,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: displayTitle,
       description: excerpt,
       type: 'article',
-      publishedTime: post.createdAt.toISOString(),
-      modifiedTime: post.updatedAt.toISOString(),
+      publishedTime: new Date(post.createdAt).toISOString(),
+      modifiedTime: new Date(post.updatedAt).toISOString(),
       url,
       images: post.coverImage ? [post.coverImage] : [],
     },
@@ -111,8 +111,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     '@type': 'Article',
     headline: displayTitle,
     image: post.coverImage ? [post.coverImage] : [],
-    datePublished: post.createdAt.toISOString(),
-    dateModified: post.updatedAt.toISOString(),
+    datePublished: new Date(post.createdAt).toISOString(),
+    dateModified: new Date(post.updatedAt).toISOString(),
     author: [{
       '@type': 'Person',
       name: post.author?.name || 'LuxeImmo Expert',

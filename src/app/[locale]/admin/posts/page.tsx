@@ -7,7 +7,7 @@ import { DeletePostButton } from './DeletePostButton';
 const parseLocalized = (str: string, locale: string) => {
   try {
     const parsed = JSON.parse(str);
-    return parsed[locale] || parsed.en || str;
+    return parsed[locale] || parsed.en || Object.values(parsed)[0] || str;
   } catch {
     return str;
   }
