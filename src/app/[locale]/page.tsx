@@ -19,10 +19,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+import { Suspense } from 'react';
 
+async function HomeContent({ locale }: { locale: string }) {
   let properties: Property[] = [];
   let heroProperty: Property | null = null;
   
@@ -78,11 +77,24 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   }
 
   return (
-    <main className="min-h-screen flex flex-col bg-white dark:bg-gray-950 transition-colors duration-300">
-      <Navbar />
+    <>
       <Hero heroProperty={heroProperty} />
       <Features />
       <PropertyGrid properties={properties} />
+    </>
+  );
+}
+
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  return (
+    <main className="min-h-screen flex flex-col bg-white dark:bg-gray-950 transition-colors duration-300">
+      <Navbar />
+      <Suspense fallback={<div className="h-screen flex items-center justify-center"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        <HomeContent locale={locale} />
+      </Suspense>
       <Footer locale={locale} />
     </main>
   );

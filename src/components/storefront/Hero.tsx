@@ -61,25 +61,25 @@ export function Hero({ heroProperty }: HeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="bg-white dark:bg-gray-900 p-2 sm:p-3 rounded-2xl shadow-2xl flex flex-row gap-2 sm:gap-3 w-full max-w-3xl mx-auto items-stretch border border-gray-200 dark:border-gray-700"
+          className="bg-white dark:bg-gray-900 p-3 sm:p-4 rounded-2xl shadow-2xl flex flex-col sm:flex-row gap-3 w-full max-w-3xl mx-auto items-stretch border border-gray-200 dark:border-gray-700"
         >
           {/* City Search Input */}
-          <div className="flex-1 min-w-0">
+          <div className="w-full sm:flex-1 sm:min-w-0">
             <input 
               type="text" 
               placeholder={t('searchPlaceholder')} 
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              className="w-full h-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-black dark:focus:border-white transition-colors text-sm sm:text-base"
+              className="w-full h-12 sm:h-14 px-4 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-black dark:focus:border-white transition-colors text-base"
             />
           </div>
 
           {/* Property Type Dropdown */}
-          <div className="relative w-28 sm:w-36 md:w-44 shrink-0">
+          <div className="relative w-full sm:w-44 shrink-0">
             <button
               type="button"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="w-full h-full px-2 sm:px-4 py-2 sm:py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition-colors flex items-center justify-between text-sm sm:text-base"
+              className="w-full h-12 sm:h-14 px-4 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition-colors flex items-center justify-between text-base"
             >
               <span>{propertyType === 'SALE' ? t('forSale') : t('forRent')}</span>
               <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
@@ -120,7 +120,7 @@ export function Hero({ heroProperty }: HeroProps) {
           {/* Search Button */}
           <Link 
             href={`/search?city=${city}&type=${propertyType}`}
-            className="shrink-0 w-auto inline-flex items-center justify-center px-4 sm:px-8 py-2 sm:py-3 text-sm sm:text-base font-semibold text-white bg-black hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl"
+            className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center h-12 sm:h-14 px-8 font-semibold text-white bg-black hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl text-base"
           >
             <Search className="w-5 h-5 mr-2" />
             {t('search')}

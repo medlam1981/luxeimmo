@@ -3,6 +3,7 @@
 import prisma from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { revalidatePath } from 'next/cache';
 
 export async function syncFavoritesAction(localFavoriteIds: string[]) {
   const session = await getServerSession(authOptions);
@@ -47,6 +48,9 @@ export async function syncFavoritesAction(localFavoriteIds: string[]) {
     }
   });
 
+  revalidatePath('/favorites');
+  revalidatePath('/', 'layout');
+
   return validPropertyIds;
 }
 
@@ -67,5 +71,9 @@ export async function toggleFavoriteDB(propertyId: string, isAdding: boolean) {
       data: { favoriteProperties: { disconnect: { id: propertyId } } }
     });
   }
+  
+  revalidatePath('/favorites');
+  revalidatePath('/', 'layout');
+  
   return true;
 }

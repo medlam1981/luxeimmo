@@ -3,7 +3,9 @@ import { getTranslations } from 'next-intl/server';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { getSettings } from '@/lib/settings';
 
-export async function Footer({ locale }: { locale: string }) {
+import { Suspense } from 'react';
+
+async function FooterContent({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: 'Footer' });
   const settings = await getSettings();
 
@@ -68,5 +70,13 @@ export async function Footer({ locale }: { locale: string }) {
         </div>
       </div>
     </footer>
+  );
+}
+
+export function Footer({ locale }: { locale: string }) {
+  return (
+    <Suspense fallback={<footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 pt-16 pb-8 transition-colors duration-300 min-h-[300px]" />}>
+      <FooterContent locale={locale} />
+    </Suspense>
   );
 }

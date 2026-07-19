@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Metadata } from 'next';
 import prisma from '@/lib/prisma';
 import { notFound } from 'next/navigation';
@@ -24,9 +25,21 @@ const parseLocalized = (str: string, locale: string) => {
   }
 };
 
+import { connection } from 'next/server';
+import { unstable_cache } from 'next/cache';
+
+const getCachedProperty = unstable_cache(
+  async (slug: string) => {
+    return await prisma.property.findUnique({ where: { slug } });
+  },
+  ['property-metadata'],
+  { tags: ['property'] }
+);
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  await connection();
   const { slug, locale } = await params;
-  const property = await prisma.property.findUnique({ where: { slug } });
+  const property = await getCachedProperty(slug);
 
   if (!property) {
     return {
@@ -54,7 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'website',
       url: canonicalUrl,
       siteName: 'LuxeImmo',
-      title: `${displayTitle} – ${property.city} | ${priceFormatted} MAD`,
+      title: `${displayTitle} | LuxeImmo`,
       description: seoDescription,
       images: [
         {
@@ -68,7 +81,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${displayTitle} – ${property.city} | ${priceFormatted} MAD`,
+      title: `${displayTitle} | LuxeImmo`,
       description: seoDescription,
       images: [ogImage],
       site: '@LuxeImmo',
@@ -76,7 +89,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function PropertyPage({ params }: Props) {
+async function PropertyPageContent({ params }: Props) {
   const { slug, locale } = await params;
   const property = await prisma.property.findUnique({ where: { slug } });
 
@@ -240,5 +253,16 @@ export default async function PropertyPage({ params }: Props) {
       
       <Footer locale={locale} />
     </main>
+  );
+}
+
+
+import { setRequestLocale } from 'next-intl/server';
+
+export default async function PropertyPage({ params }: Props) {
+  return (
+    <Suspense fallback={<div className="h-screen flex items-center justify-center"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+      <PropertyPageContent params={params} />
+    </Suspense>
   );
 }
