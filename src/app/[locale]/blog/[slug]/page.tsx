@@ -145,7 +145,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </h1>
           
           <div className="flex items-center justify-center text-gray-600 dark:text-gray-400 space-x-4 text-sm md:text-base">
-            <time dateTime={post.createdAt.toISOString()}>
+            <time dateTime={new Date(post.createdAt).toISOString()}>
               {new Date(post.createdAt).toLocaleDateString(locale, { 
                 year: 'numeric', 
                 month: 'long', 
