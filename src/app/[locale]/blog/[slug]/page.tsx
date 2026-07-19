@@ -119,6 +119,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     }]
   };
 
+  const sanitizedContent = displayContent
+    .replace(/dir=(["'])[a-z]+\1/gi, '')
+    .replace(/text-align:\s*left;?/gi, 'text-align: start;')
+    .replace(/text-align:\s*right;?/gi, 'text-align: end;');
+
   return (
     <main className="min-h-screen flex flex-col bg-white dark:bg-gray-950 pt-20">
       <Navbar />
@@ -128,7 +133,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <article className="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+      <article className="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full text-start">
         <div className="mb-8">
           <Link 
             href="/blog" 
@@ -175,7 +180,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <div 
           dir="auto"
           className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-indigo-600 dark:prose-a:text-indigo-400 prose-img:rounded-xl prose-indigo mx-auto"
-          dangerouslySetInnerHTML={{ __html: displayContent }}
+          dangerouslySetInnerHTML={{ __html: sanitizedContent }}
         />
       </article>
 
