@@ -96,13 +96,23 @@ export default async function BlogIndexPage({
       <Navbar />
       
       <div className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6">
-            {t('title')}
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            {t('subtitle')}
-          </p>
+        <div className="flex flex-col lg:flex-row justify-between items-start w-full gap-8 mb-12">
+          {/* Dynamic Title Area: Aligns Right in AR, Left in EN/FR/ES */}
+          <div className="flex flex-col items-start text-start w-full lg:w-1/2">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+              {t('title')}
+            </h1>
+            <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
+              {t('subtitle')}
+            </p>
+          </div>
+
+          {/* Advertisement Placeholder */}
+          <div className="w-full lg:w-1/2 min-h-[120px] bg-gray-100 dark:bg-gray-900/40 flex items-center justify-center rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700">
+            <span className="text-gray-500 dark:text-gray-400 font-medium tracking-widest uppercase text-center px-4">
+              Advertisement Space
+            </span>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
