@@ -170,7 +170,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </time>
                 <>
                   <span className="w-1.5 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full" />
-                  <span>By LuxeImmo</span>
+                  <span>{locale === 'ar' ? 'بواسطة لوكس إيمو' : 'By LuxeImmo'}</span>
                 </>
             </div>
           </div>

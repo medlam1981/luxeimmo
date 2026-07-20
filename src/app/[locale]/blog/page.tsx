@@ -139,7 +139,7 @@ export default async function BlogIndexPage({
                 <div className="p-6 flex flex-col flex-grow">
                   <div className="text-sm text-gray-500 dark:text-gray-400 mb-3 flex items-center justify-between">
                     <span>{new Date(post.createdAt).toLocaleDateString(locale)}</span>
-                    <span>By LuxeImmo</span>
+                    <span>{locale === 'ar' ? 'بواسطة لوكس إيمو' : 'By LuxeImmo'}</span>
                   </div>
                   <h2 dir="auto" className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                     <Link prefetch={true} href={`/blog/${post.slug}`}>
