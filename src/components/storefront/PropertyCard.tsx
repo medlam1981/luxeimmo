@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import { Link } from '@/i18n/routing';
 import { useLocale, useTranslations } from 'next-intl';
 import { FavoriteButton } from '@/components/storefront/FavoriteButton';
+import Image from 'next/image';
 
 interface PropertyCardProps {
   property: Property;
@@ -80,16 +81,22 @@ export function PropertyCard({ property }: PropertyCardProps) {
           <FavoriteButton propertyId={property.id} />
         </div>
         <AnimatePresence mode="wait">
-          <motion.img
+          <motion.div
             key={currentImageIndex}
-            src={property.images[currentImageIndex] || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80"}
-            alt={displayTitle}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="h-full w-full object-cover object-center absolute inset-0"
-          />
+            className="absolute inset-0 w-full h-full"
+          >
+            <Image
+              src={property.images[currentImageIndex] || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80"}
+              alt={displayTitle}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover object-center"
+            />
+          </motion.div>
         </AnimatePresence>
       </Link>
       <div className="p-5 flex flex-col flex-grow">

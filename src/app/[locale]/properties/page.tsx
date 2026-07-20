@@ -52,6 +52,7 @@ async function PropertiesPageContent({ params, searchParams }: { params: Promise
   try {
       const dbProperties = await prisma.property.findMany({
         where,
+        take: 8,
         orderBy: { createdAt: 'desc' }
       });
 
