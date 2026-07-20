@@ -30,13 +30,22 @@ export function PropertyForm({ initialData, actionFn, isEdit }: PropertyFormProp
       formData.append('id', initialData.id);
     }
     
-    const res = await actionFn(formData);
-    
-    if (res.success) {
-      router.push('/admin/properties');
-    } else {
-      setError(res.error || 'Failed to save property');
-      setLoading(false);
+    try {
+      const res = await actionFn(formData);
+      
+      if (res.success) {
+        router.push('/admin/properties');
+      } else {
+        setError(res.error || 'Failed to save property');
+        setLoading(false);
+      }
+    } catch (err: any) {
+      if (err.message?.includes('Failed to find Server Action') || err.message?.includes('fetch failed')) {
+        window.location.reload();
+      } else {
+        setError('An unexpected error occurred.');
+        setLoading(false);
+      }
     }
   };
 
