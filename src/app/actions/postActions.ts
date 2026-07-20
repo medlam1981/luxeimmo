@@ -27,13 +27,18 @@ async function autoTranslate(text: string, isHtml = false): Promise<Record<strin
 }
 
 async function translateChunked(html: string, to: string) {
-  const chunks = html.split(/(<\/(?:p|h1|h2|h3|h4|h5|h6|ul|ol|li|div|blockquote)>)/gi);
+  const chunks = html.split(/(<[^>]+>)/g);
   let translated = '';
   for (let i = 0; i < chunks.length; i++) {
-    if (chunks[i].trim() && !/^<\/(?:p|h1|h2|h3|h4|h5|h6|ul|ol|li|div|blockquote)>$/i.test(chunks[i])) {
-      translated += await translate(chunks[i], { to });
+    // Even indices are text nodes, odd are HTML tags
+    if (i % 2 === 0) {
+      if (chunks[i].trim()) {
+        translated += await translate(chunks[i], { to });
+      } else {
+        translated += chunks[i]; // preserve spaces/newlines
+      }
     } else {
-      translated += chunks[i];
+      translated += chunks[i]; // preserve HTML tags exactly
     }
   }
   return translated;
