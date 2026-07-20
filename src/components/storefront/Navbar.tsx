@@ -165,10 +165,11 @@ export function Navbar() {
             {/* Blog Icon - Mobile Only */}
             <Link
               href="/blog"
-              className="relative p-2 text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors md:hidden"
+              className="relative p-1.5 flex flex-col items-center justify-center text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors md:hidden"
               aria-label="Blog"
             >
-              <Newspaper className="w-5 h-5" />
+              <Newspaper className="w-5 h-5 mb-1" />
+              <span className="text-[10px] font-medium leading-none">{t('blog')}</span>
             </Link>
 
             {/* Hamburger — mobile only */}
