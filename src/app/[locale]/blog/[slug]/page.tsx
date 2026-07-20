@@ -2,7 +2,7 @@ import prisma from '@/lib/prisma';
 import { Navbar } from '@/components/storefront/Navbar';
 import { Footer } from '@/components/storefront/Footer';
 import { notFound } from 'next/navigation';
-import { setRequestLocale } from 'next-intl/server';
+import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
@@ -31,7 +31,6 @@ const getCachedPost = unstable_cache(
           { slug: { contains: `"${slug}"` } }
         ]
       },
-      include: { author: true },
     });
     return post ? JSON.parse(JSON.stringify(post)) : null;
   },
@@ -104,6 +103,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   await connection();
   const { slug, locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'Blog' });
 
   const post = await getCachedPost(slug);
 
@@ -193,7 +193,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           dangerouslySetInnerHTML={{ __html: sanitizedContent }}
         />
 
-        <ShareButtons title={displayTitle} />
+        <ShareButtons title={displayTitle} shareText={t('shareThisPost')} />
       </article>
 
       <Footer locale={locale} />
