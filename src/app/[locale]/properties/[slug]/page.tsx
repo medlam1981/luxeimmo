@@ -30,7 +30,8 @@ import { unstable_cache } from 'next/cache';
 
 const getCachedProperty = unstable_cache(
   async (slug: string) => {
-    return await prisma.property.findUnique({ where: { slug } });
+    const property = await prisma.property.findUnique({ where: { slug } });
+    return property ? JSON.parse(JSON.stringify(property)) : null;
   },
   ['property-metadata'],
   { tags: ['property'] }
