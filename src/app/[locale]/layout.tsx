@@ -8,6 +8,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { AuthProvider } from '@/components/providers/AuthProvider';
+import { DeploymentSkewHandler } from '@/components/storefront/DeploymentSkewHandler';
 
 const cairo = Cairo({
   variable: "--font-cairo",
@@ -92,6 +93,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages} locale={locale}>
           <AuthProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <DeploymentSkewHandler />
               {children}
             </ThemeProvider>
           </AuthProvider>
