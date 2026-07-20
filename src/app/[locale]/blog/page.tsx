@@ -8,7 +8,16 @@ import Image from 'next/image';
 import { connection } from 'next/server';
 import { unstable_cache } from 'next/cache';
 
-const getCachedPosts = (page: number, limit: number) => unstable_cache(
+const parseLocalized = (str: string, locale: string) => {
+  try {
+    const parsed = JSON.parse(str);
+    return parsed[locale] || parsed.en || Object.values(parsed)[0] || str;
+  } catch {
+    return str;
+  }
+};
+
+const getCachedPosts = (page: number, limit: number, locale: string) => unstable_cache(
   async () => {
     const posts = await prisma.post.findMany({
       where: { published: true },
@@ -26,45 +35,27 @@ const getCachedPosts = (page: number, limit: number) => unstable_cache(
     });
 
     const optimizedPosts = posts.map(post => {
-      try {
-        const contentObj = JSON.parse(post.content);
-        const excerptObj: Record<string, string> = {};
-        
-        for (const key in contentObj) {
-          if (contentObj[key]) {
-            const text = contentObj[key].replace(/<[^>]*>?/gm, '');
-            excerptObj[key] = text.substring(0, 160) + '...';
-          }
-        }
-        
-        return {
-          ...post,
-          content: JSON.stringify(excerptObj)
-        };
-      } catch (e) {
-        // If content is not a valid JSON string (legacy), just string and truncate
-        const text = post.content.replace(/<[^>]*>?/gm, '');
-        return {
-          ...post,
-          content: text.substring(0, 160) + '...'
-        };
-      }
+      const displayTitle = parseLocalized(post.title, locale);
+      const displaySlug = parseLocalized(post.slug, locale);
+      const displayContentRaw = parseLocalized(post.content, locale);
+      
+      const excerpt = displayContentRaw.replace(/<[^>]*>?/gm, '').substring(0, 160) + '...';
+
+      return {
+        id: post.id,
+        slug: displaySlug,
+        title: displayTitle,
+        content: excerpt,
+        coverImage: post.coverImage,
+        createdAt: post.createdAt,
+      };
     });
 
-    return JSON.parse(JSON.stringify(optimizedPosts));
+    return optimizedPosts;
   },
-  [`blog-posts-index-${page}-${limit}`],
+  [`blog-posts-index-${locale}-${page}-${limit}`],
   { tags: ['post'] }
 )();
-
-const parseLocalized = (str: string, locale: string) => {
-  try {
-    const parsed = JSON.parse(str);
-    return parsed[locale] || parsed.en || Object.values(parsed)[0] || str;
-  } catch {
-    return str;
-  }
-};
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   await connection();
@@ -102,7 +93,7 @@ export default async function BlogIndexPage({
   const page = typeof resolvedSearchParams.page === 'string' ? parseInt(resolvedSearchParams.page, 10) : 1;
   const validPage = isNaN(page) || page < 1 ? 1 : page;
 
-  const posts = await getCachedPosts(validPage, 12);
+  const posts = await getCachedPosts(validPage, 12, locale);
 
   return (
     <main className="min-h-screen flex flex-col bg-white dark:bg-gray-950 pt-20">
@@ -120,17 +111,13 @@ export default async function BlogIndexPage({
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post: any, index: number) => {
-            const displayTitle = parseLocalized(post.title, locale);
-            const displayContent = parseLocalized(post.content, locale);
-            const displaySlug = parseLocalized(post.slug, locale);
-
             return (
               <article key={post.id} className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md transition-shadow group flex flex-col">
                 {post.coverImage ? (
                   <div className="aspect-[16/9] overflow-hidden bg-gray-100 dark:bg-gray-800 relative">
                     <Image
                       src={post.coverImage}
-                      alt={displayTitle}
+                      alt={post.title}
                       fill
                       priority={index < 4}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -149,19 +136,19 @@ export default async function BlogIndexPage({
                     <span>By LuxeImmo</span>
                   </div>
                   <h2 dir="auto" className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                    <Link prefetch={true} href={`/blog/${displaySlug}`}>
-                      {displayTitle}
+                    <Link prefetch={true} href={`/blog/${post.slug}`}>
+                      {post.title}
                     </Link>
                   </h2>
                   <div 
                     dir="auto"
                     className="text-gray-600 dark:text-gray-400 line-clamp-3 mb-6 text-sm"
-                    dangerouslySetInnerHTML={{ __html: displayContent.replace(/<[^>]*>?/gm, '') }}
+                    dangerouslySetInnerHTML={{ __html: post.content }}
                   />
                   
                   <div className="mt-auto pt-4 border-t border-gray-100 dark:border-gray-800">
                     <Link 
-                      href={`/blog/${displaySlug}`}
+                      href={`/blog/${post.slug}`}
                       prefetch={true}
                       className="text-indigo-600 dark:text-indigo-400 font-semibold text-sm hover:underline"
                       dangerouslySetInnerHTML={{ __html: t('readMore') }}
