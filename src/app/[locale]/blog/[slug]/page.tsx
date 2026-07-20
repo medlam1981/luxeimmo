@@ -50,7 +50,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const displayContent = parseLocalized(post.content, locale);
   const excerpt = displayContent.replace(/<[^>]*>?/gm, '').substring(0, 160) + '...';
   
-  const BASE_URL = process.env.NEXTAUTH_URL || 'https://luxeimmo.com';
+  const BASE_URL_ENV = process.env.NEXTAUTH_URL || 'https://luxeimmo.com';
+  const BASE_URL = BASE_URL_ENV.replace(/\/$/, '');
   const url = `${BASE_URL}/${locale}/blog/${slug}`;
 
   // Generate alternate language links using the translated slugs
