@@ -23,7 +23,7 @@ const getCachedPost = unstable_cache(
   async (slug: string) => {
     // Because slug is stored as a JSON string for new posts, we use contains.
     // For older posts, the slug is just a raw string. We use OR to check both.
-    return await prisma.post.findFirst({
+    const post = await prisma.post.findFirst({
       where: {
         OR: [
           { slug: slug },
@@ -32,6 +32,7 @@ const getCachedPost = unstable_cache(
       },
       include: { author: true },
     });
+    return post ? JSON.parse(JSON.stringify(post)) : null;
   },
   ['blog-post-metadata'],
   { tags: ['post'] }

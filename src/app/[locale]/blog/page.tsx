@@ -10,11 +10,12 @@ import { unstable_cache } from 'next/cache';
 
 const getCachedPosts = unstable_cache(
   async () => {
-    return await prisma.post.findMany({
+    const posts = await prisma.post.findMany({
       where: { published: true },
       orderBy: { createdAt: 'desc' },
       include: { author: true },
     });
+    return JSON.parse(JSON.stringify(posts));
   },
   ['blog-posts-index'],
   { tags: ['post'] }
