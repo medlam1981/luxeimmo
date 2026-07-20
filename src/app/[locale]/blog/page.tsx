@@ -28,7 +28,6 @@ const getCachedPosts = (page: number, limit: number, locale: string) => unstable
         id: true,
         slug: true,
         title: true,
-        content: true,
         coverImage: true,
         createdAt: true,
       }
@@ -37,15 +36,12 @@ const getCachedPosts = (page: number, limit: number, locale: string) => unstable
     const optimizedPosts = posts.map(post => {
       const displayTitle = parseLocalized(post.title, locale);
       const displaySlug = parseLocalized(post.slug, locale);
-      const displayContentRaw = parseLocalized(post.content, locale);
-      
-      const excerpt = displayContentRaw.replace(/<[^>]*>?/gm, '').substring(0, 160) + '...';
 
       return {
         id: post.id,
         slug: displaySlug,
         title: displayTitle,
-        content: excerpt,
+        content: "", // Content is completely dropped from DB fetch as requested
         coverImage: post.coverImage,
         createdAt: post.createdAt,
       };
