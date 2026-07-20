@@ -88,7 +88,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       publishedTime: new Date(post.createdAt).toISOString(),
       modifiedTime: new Date(post.updatedAt).toISOString(),
       url,
-      images: post.coverImage ? [post.coverImage] : [],
+      images: post.coverImage ? [post.coverImage.startsWith('http') ? post.coverImage : `${BASE_URL}${post.coverImage}`] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: displayTitle,
+      description: excerpt,
+      images: post.coverImage ? [post.coverImage.startsWith('http') ? post.coverImage : `${BASE_URL}${post.coverImage}`] : [],
     },
   };
 }

@@ -53,7 +53,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const displayDesc = parseLocalized(property.description, locale);
   const BASE_URL = process.env.NEXTAUTH_URL || 'https://luxeimmo.com';
   const canonicalUrl = `${BASE_URL}/${locale}/properties/${slug}`;
-  const ogImage = property.images.length > 0 ? property.images[0] : `${BASE_URL}/images/hero/slide-1.jpg`;
+  const ogImageRaw = property.images.length > 0 ? property.images[0] : `/images/hero/slide-1.jpg`;
+  const ogImage = ogImageRaw.startsWith('http') ? ogImageRaw : `${BASE_URL}${ogImageRaw}`;
   
   const priceFormatted = formatCurrency(Number(property.price));
   const seoDescription = `${property.propertyType === 'RENT' ? 'For Rent' : 'For Sale'}: ${displayTitle} in ${property.city}. Price: ${priceFormatted} MAD. ${displayDesc.slice(0, 100)}...`;
