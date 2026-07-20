@@ -4,6 +4,7 @@ import { Footer } from '@/components/storefront/Footer';
 import { Link } from '@/i18n/routing';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Metadata } from 'next';
+import Image from 'next/image';
 import { connection } from 'next/server';
 import { unstable_cache } from 'next/cache';
 
@@ -71,7 +72,7 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post: any) => {
+          {posts.map((post: any, index: number) => {
             const displayTitle = parseLocalized(post.title, locale);
             const displayContent = parseLocalized(post.content, locale);
             const displaySlug = parseLocalized(post.slug, locale);
@@ -80,10 +81,13 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
               <article key={post.id} className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md transition-shadow group flex flex-col">
                 {post.coverImage ? (
                   <div className="aspect-[16/9] overflow-hidden bg-gray-100 dark:bg-gray-800 relative">
-                    <img
+                    <Image
                       src={post.coverImage}
                       alt={displayTitle}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      priority={index < 4}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                 ) : (
@@ -98,7 +102,7 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
                     <span>By LuxeImmo</span>
                   </div>
                   <h2 dir="auto" className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                    <Link href={`/blog/${displaySlug}`}>
+                    <Link prefetch={true} href={`/blog/${displaySlug}`}>
                       {displayTitle}
                     </Link>
                   </h2>
@@ -111,6 +115,7 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
                   <div className="mt-auto pt-4 border-t border-gray-100 dark:border-gray-800">
                     <Link 
                       href={`/blog/${displaySlug}`}
+                      prefetch={true}
                       className="text-indigo-600 dark:text-indigo-400 font-semibold text-sm hover:underline"
                       dangerouslySetInnerHTML={{ __html: t('readMore') }}
                     />

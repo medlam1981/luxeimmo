@@ -4,6 +4,7 @@ import { Footer } from '@/components/storefront/Footer';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { Metadata } from 'next';
+import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 import { ArrowLeft } from 'lucide-react';
 import { connection } from 'next/server';
@@ -165,11 +166,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </header>
 
         {post.coverImage && (
-          <div className="mb-12 rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-800">
-            <img
+          <div className="mb-12 rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-800 relative w-full" style={{ height: 'auto', maxHeight: '600px', aspectRatio: '16/9' }}>
+            <Image
               src={post.coverImage}
               alt={displayTitle}
-              className="w-full h-auto object-cover max-h-[600px]"
+              fill
+              priority={true}
+              sizes="100vw"
+              className="object-cover"
             />
           </div>
         )}
