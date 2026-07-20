@@ -1,6 +1,6 @@
 'use client';
 
-import { Heart, Menu, X, LogIn } from 'lucide-react';
+import { Heart, Menu, X, LogIn, Newspaper } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { useFavoritesStore } from '@/store/useFavoritesStore';
 import { useState, useEffect } from 'react';
@@ -144,10 +144,10 @@ export function Navbar() {
               </>
             ) : null}
 
-            {/* Favorites */}
+            {/* Favorites - Desktop Only */}
             <Link
               href="/favorites"
-              className="relative p-2 text-gray-700 dark:text-gray-300 hover:text-red-500 transition-colors"
+              className="relative p-2 text-gray-700 dark:text-gray-300 hover:text-red-500 transition-colors hidden md:inline-flex"
               aria-label="Saved Properties"
             >
               <Heart className="w-5 h-5" />
@@ -160,6 +160,15 @@ export function Navbar() {
                   {totalItems}
                 </motion.span>
               )}
+            </Link>
+
+            {/* Blog Icon - Mobile Only */}
+            <Link
+              href="/blog"
+              className="relative p-2 text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors md:hidden"
+              aria-label="Blog"
+            >
+              <Newspaper className="w-5 h-5" />
             </Link>
 
             {/* Hamburger — mobile only */}

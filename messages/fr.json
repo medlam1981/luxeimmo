@@ -334,5 +334,11 @@
     "section5Text": "En utilisant notre site Web, vous consentez par la présente à notre politique de confidentialité et acceptez ses conditions.",
     "section6Title": "Contactez-nous",
     "section6Text": "Si vous avez besoin de plus d'informations ou si vous avez des questions sur notre politique de confidentialité, n'hésitez pas à nous contacter par e-mail à medlam1981@gmail.com."
+  },
+  "BlogIndex": {
+    "title": "Perspectives LuxeImmo",
+    "subtitle": "Conseils d'experts, tendances du marché et guides juridiques pour le marché immobilier marocain.",
+    "readMore": "Lire l'article complet &rarr;",
+    "empty": "Aucun article publié pour le moment. Revenez bientôt !"
   }
 }

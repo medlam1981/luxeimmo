@@ -334,5 +334,11 @@
     "section5Text": "By using our website, you hereby consent to our Privacy Policy and agree to its terms.",
     "section6Title": "Contact Us",
     "section6Text": "If you require any more information or have any questions about our Privacy Policy, please feel free to contact us by email at medlam1981@gmail.com."
+  },
+  "BlogIndex": {
+    "title": "LuxeImmo Insights",
+    "subtitle": "Expert advice, market trends, and legal guides for the Moroccan real estate market.",
+    "readMore": "Read full article &rarr;",
+    "empty": "No articles published yet. Check back soon!"
   }
 }

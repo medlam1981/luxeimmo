@@ -2,7 +2,7 @@ import prisma from '@/lib/prisma';
 import { Navbar } from '@/components/storefront/Navbar';
 import { Footer } from '@/components/storefront/Footer';
 import { Link } from '@/i18n/routing';
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Metadata } from 'next';
 import { connection } from 'next/server';
 import { unstable_cache } from 'next/cache';
@@ -52,6 +52,7 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
   await connection();
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'BlogIndex' });
 
   const posts = await getCachedPosts();
 
@@ -62,10 +63,10 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
       <div className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6">
-            LuxeImmo Insights
+            {t('title')}
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Expert advice, market trends, and legal guides for the Moroccan real estate market.
+            {t('subtitle')}
           </p>
         </div>
 
@@ -111,9 +112,8 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
                     <Link 
                       href={`/blog/${displaySlug}`}
                       className="text-indigo-600 dark:text-indigo-400 font-semibold text-sm hover:underline"
-                    >
-                      Read full article &rarr;
-                    </Link>
+                      dangerouslySetInnerHTML={{ __html: t('readMore') }}
+                    />
                   </div>
                 </div>
               </article>
@@ -123,7 +123,7 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
 
         {posts.length === 0 && (
           <div className="text-center py-24 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-200 dark:border-gray-800">
-            <p className="text-gray-500 dark:text-gray-400 text-lg">No articles published yet. Check back soon!</p>
+            <p className="text-gray-500 dark:text-gray-400 text-lg">{t('empty')}</p>
           </div>
         )}
       </div>
