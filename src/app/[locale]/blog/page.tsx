@@ -99,7 +99,7 @@ export default async function BlogIndexPage({
         <div className="flex flex-col lg:flex-row justify-between items-start w-full gap-8 mb-12">
           {/* Dynamic Title Area: Aligns Right in AR, Left in EN/FR/ES */}
           <div className="flex flex-col items-start text-start w-full lg:w-1/2">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white tracking-tight text-balance">
               {t('title')}
             </h1>
             <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
