@@ -3,7 +3,7 @@
 import prisma from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import translate from 'translate';
 
 async function autoTranslate(text: string, isHtml = false): Promise<Record<string, string>> {
@@ -72,6 +72,7 @@ export async function createPost(data: any) {
         authorId: (session?.user as any).id,
       },
     });
+    revalidateTag('post');
     revalidatePath('/admin/posts');
     revalidatePath('/blog');
     revalidatePath('/', 'layout'); // Revalidate everything just to be safe
@@ -129,6 +130,7 @@ export async function updatePost(id: string, data: any) {
       },
     });
     
+    revalidateTag('post');
     revalidatePath('/admin/posts');
     revalidatePath('/blog');
     revalidatePath('/', 'layout');
@@ -147,6 +149,7 @@ export async function deletePost(id: string) {
 
   try {
     await prisma.post.delete({ where: { id } });
+    revalidateTag('post');
     revalidatePath('/admin/posts');
     revalidatePath('/blog');
     revalidatePath('/', 'layout');
