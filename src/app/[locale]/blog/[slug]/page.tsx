@@ -143,7 +143,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <article className="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full text-start">
+      <article className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full text-start">
         <div className="mb-8">
           <Link 
             href="/blog" 
@@ -154,23 +154,32 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </Link>
         </div>
 
-        <header className="mb-12 text-center">
-          <h1 dir="auto" className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight mb-6">
-            {displayTitle}
-          </h1>
-          
-          <div className="flex items-center justify-center text-gray-600 dark:text-gray-400 space-x-4 text-sm md:text-base">
-            <time dateTime={new Date(post.createdAt).toISOString()}>
-              {new Date(post.createdAt).toLocaleDateString(locale, { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-              })}
-            </time>
-              <>
-                <span className="w-1.5 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full" />
-                <span>By LuxeImmo</span>
-              </>
+        <header className="flex flex-col lg:flex-row justify-between items-start w-full gap-8 mb-12">
+          <div className="flex flex-col items-start text-start w-full lg:w-[60%]">
+            <h1 dir="auto" className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight mb-6">
+              {displayTitle}
+            </h1>
+            
+            <div className="flex items-center justify-start text-gray-600 dark:text-gray-400 space-x-4 text-sm md:text-base">
+              <time dateTime={new Date(post.createdAt).toISOString()}>
+                {new Date(post.createdAt).toLocaleDateString(locale, { 
+                  year: 'numeric', 
+                  month: 'long', 
+                  day: 'numeric' 
+                })}
+              </time>
+                <>
+                  <span className="w-1.5 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full" />
+                  <span>By LuxeImmo</span>
+                </>
+            </div>
+          </div>
+
+          {/* Header Advertisement */}
+          <div className="w-full lg:w-[40%] min-h-[120px] bg-gray-100 dark:bg-gray-900/40 flex items-center justify-center rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700">
+            <span className="text-gray-500 dark:text-gray-400 font-medium tracking-widest uppercase text-center px-4">
+              Advertisement Space
+            </span>
           </div>
         </header>
 
@@ -187,14 +196,33 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
         )}
 
-        {/* Tiptap uses standard HTML tags, so we wrap in 'prose' for Tailwind Typography styling */}
-        <div 
-          dir="auto"
-          className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-indigo-600 dark:prose-a:text-indigo-400 prose-img:rounded-xl prose-indigo mx-auto"
-          dangerouslySetInnerHTML={{ __html: sanitizedContent }}
-        />
+        <div className="flex flex-col lg:flex-row gap-12 w-full">
+          <div className="w-full lg:w-[70%]">
+            {/* Tiptap uses standard HTML tags, so we wrap in 'prose' for Tailwind Typography styling */}
+            <div 
+              dir="auto"
+              className="prose prose-lg dark:prose-invert max-w-3xl prose-headings:font-bold prose-a:text-indigo-600 dark:prose-a:text-indigo-400 prose-img:rounded-xl prose-indigo mx-auto lg:mx-0"
+              dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+            />
+            
+            {/* Mobile Horizontal Ad (Hidden on Desktop) */}
+            <div className="w-full h-[90px] my-8 bg-gray-100 dark:bg-gray-900/40 flex lg:hidden items-center justify-center rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700">
+              <span className="text-gray-500 dark:text-gray-400 font-medium tracking-widest uppercase text-center px-4">
+                Advertisement Space
+              </span>
+            </div>
 
-        <ShareButtons title={displayTitle} shareText={t('shareThisPost')} />
+            <ShareButtons title={displayTitle} shareText={t('shareThisPost')} />
+          </div>
+
+          <aside className="hidden lg:block lg:w-[30%]">
+            <div className="sticky top-24 w-full min-h-[600px] bg-gray-100 dark:bg-gray-900/40 flex items-center justify-center rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700">
+              <span className="text-gray-500 dark:text-gray-400 font-medium tracking-widest uppercase text-center px-4">
+                Advertisement Space
+              </span>
+            </div>
+          </aside>
+        </div>
       </article>
 
       <Footer locale={locale} />
