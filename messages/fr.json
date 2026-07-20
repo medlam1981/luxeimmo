@@ -340,5 +340,8 @@
     "subtitle": "Conseils d'experts, tendances du marché et guides juridiques pour le marché immobilier marocain.",
     "readMore": "Lire l'article complet &rarr;",
     "empty": "Aucun article publié pour le moment. Revenez bientôt !"
+  },
+  "Blog": {
+    "shareThisPost": "Partager cet article :"
   }
 }

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-export function ShareButtons({ title }: { title: string }) {
+export function ShareButtons({ title, shareText }: { title: string, shareText: string }) {
   const [url, setUrl] = useState('');
   const [copied, setCopied] = useState(false);
 
@@ -27,8 +27,8 @@ export function ShareButtons({ title }: { title: string }) {
 
   return (
     <div className="flex flex-col sm:flex-row items-center justify-between py-6 mt-12 border-t border-gray-100 dark:border-gray-800">
-      <span className="text-gray-700 dark:text-gray-300 font-medium mb-4 sm:mb-0">Share this post:</span>
-      <div className="flex items-center space-x-3">
+      <span className="text-gray-700 dark:text-gray-300 font-medium mb-4 sm:mb-0">{shareText}</span>
+      <div className="flex items-center gap-3">
         {/* WhatsApp */}
         <a
           href={`https://wa.me/?text=${encodedTitle}%20${encodedUrl}`}

@@ -340,5 +340,8 @@
     "subtitle": "Expert advice, market trends, and legal guides for the Moroccan real estate market.",
     "readMore": "Read full article &rarr;",
     "empty": "No articles published yet. Check back soon!"
+  },
+  "Blog": {
+    "shareThisPost": "Share this post:"
   }
 }
