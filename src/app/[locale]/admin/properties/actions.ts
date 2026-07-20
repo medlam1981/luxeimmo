@@ -1,7 +1,7 @@
 'use server';
 
 import prisma from '@/lib/prisma';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
@@ -22,8 +22,8 @@ export async function deletePropertyAction(propertyId: string) {
     }
 
     await prisma.property.delete({ where: { id: propertyId } });
-    revalidatePath('/admin/properties');
-    revalidatePath('/');
+    revalidateTag('property', {});
+    revalidatePath('/', 'layout');
     return { success: true };
   } catch (e) {
     console.error('Error deleting property', e);

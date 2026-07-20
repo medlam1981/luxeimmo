@@ -39,8 +39,7 @@ export async function approveProperty(propertyId: string) {
   });
 
   revalidateTag('property', {});
-  revalidatePath('/[locale]/admin/review', 'page');
-  revalidatePath('/', 'page');
+  revalidatePath('/', 'layout');
 }
 
 export async function rejectProperty(propertyId: string) {
@@ -53,7 +52,7 @@ export async function rejectProperty(propertyId: string) {
   });
 
   revalidateTag('property', {});
-  revalidatePath('/[locale]/admin/review', 'page');
+  revalidatePath('/', 'layout');
 }
 
 export async function togglePremium(propertyId: string, currentValue: boolean) {
@@ -66,6 +65,5 @@ export async function togglePremium(propertyId: string, currentValue: boolean) {
   });
 
   revalidateTag('property', {});
-  revalidatePath('/[locale]/admin/review', 'page');
-  revalidatePath('/', 'page');
+  revalidatePath('/', 'layout');
 }

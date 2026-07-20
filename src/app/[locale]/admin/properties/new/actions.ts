@@ -111,8 +111,7 @@ export async function createProperty(formData: FormData) {
     });
 
     revalidateTag('property', {});
-    revalidatePath('/admin/properties');
-    revalidatePath('/');
+    revalidatePath('/', 'layout');
     return { success: true };
   } catch (globalError: any) {
     console.error('Action Error:', globalError.message);
@@ -209,9 +208,7 @@ export async function updateProperty(formData: FormData) {
     });
 
     revalidateTag('property', {});
-    revalidatePath(`/admin/properties`);
-    revalidatePath(`/properties`);
-    revalidatePath(`/`);
+    revalidatePath('/', 'layout');
     return { success: true };
   } catch (globalError: any) {
     console.error('Update Action Error:', globalError.message);

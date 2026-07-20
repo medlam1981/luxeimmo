@@ -80,8 +80,8 @@ export async function submitContactInquiry(
     console.error('[contactActions] Email notification failed (inquiry saved):', emailError);
   }
 
-  // 4. Revalidate the property page to reflect any counters
-  revalidatePath(`/properties/${data.propertySlug}`);
+  // 4. Globally Revalidate to reflect any counters across all locales
+  revalidatePath('/', 'layout');
 
   return { success: true };
 }
