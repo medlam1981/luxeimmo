@@ -114,8 +114,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     datePublished: new Date(post.createdAt).toISOString(),
     dateModified: new Date(post.updatedAt).toISOString(),
     author: [{
-      '@type': 'Person',
-      name: post.author?.name || 'LuxeImmo Expert',
+      '@type': 'Organization',
+      name: 'LuxeImmo',
     }]
   };
 
@@ -157,12 +157,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 day: 'numeric' 
               })}
             </time>
-            {post.author?.name && (
               <>
                 <span className="w-1.5 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full" />
-                <span>By {post.author.name}</span>
+                <span>By LuxeImmo</span>
               </>
-            )}
           </div>
         </header>
 
