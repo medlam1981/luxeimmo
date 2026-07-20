@@ -13,14 +13,7 @@ const getCachedPosts = unstable_cache(
     const posts = await prisma.post.findMany({
       where: { published: true },
       orderBy: { createdAt: 'desc' },
-      select: {
-        id: true,
-        slug: true,
-        title: true,
-        content: true,
-        coverImage: true,
-        createdAt: true,
-      }
+      include: { author: true },
     });
     return JSON.parse(JSON.stringify(posts));
   },

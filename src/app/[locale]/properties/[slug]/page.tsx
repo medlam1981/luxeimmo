@@ -51,8 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const displayTitle = parseLocalized(property.title, locale);
   const displayDesc = parseLocalized(property.description, locale);
-  const BASE_URL_ENV = process.env.NEXTAUTH_URL || 'https://luxeimmo.com';
-  const BASE_URL = BASE_URL_ENV.replace(/\/$/, '');
+  const BASE_URL = process.env.NEXTAUTH_URL || 'https://luxeimmo.com';
   const canonicalUrl = `${BASE_URL}/${locale}/properties/${slug}`;
   const ogImageRaw = property.images.length > 0 ? property.images[0] : `/images/hero/slide-1.jpg`;
   const ogImage = ogImageRaw.startsWith('http') ? ogImageRaw : `${BASE_URL}${ogImageRaw}`;

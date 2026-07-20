@@ -2,7 +2,7 @@ import prisma from '@/lib/prisma';
 import { Navbar } from '@/components/storefront/Navbar';
 import { Footer } from '@/components/storefront/Footer';
 import { notFound } from 'next/navigation';
-import { setRequestLocale, getTranslations } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
@@ -31,6 +31,7 @@ const getCachedPost = unstable_cache(
           { slug: { contains: `"${slug}"` } }
         ]
       },
+      include: { author: true },
     });
     return post ? JSON.parse(JSON.stringify(post)) : null;
   },
@@ -50,8 +51,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const displayContent = parseLocalized(post.content, locale);
   const excerpt = displayContent.replace(/<[^>]*>?/gm, '').substring(0, 160) + '...';
   
-  const BASE_URL_ENV = process.env.NEXTAUTH_URL || 'https://luxeimmo.com';
-  const BASE_URL = BASE_URL_ENV.replace(/\/$/, '');
+  const BASE_URL = process.env.NEXTAUTH_URL || 'https://luxeimmo.com';
   const url = `${BASE_URL}/${locale}/blog/${slug}`;
 
   // Generate alternate language links using the translated slugs
@@ -104,7 +104,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   await connection();
   const { slug, locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: 'Blog' });
 
   const post = await getCachedPost(slug);
 
@@ -194,7 +193,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           dangerouslySetInnerHTML={{ __html: sanitizedContent }}
         />
 
-        <ShareButtons title={displayTitle} shareText={t('shareThisPost')} />
+        <ShareButtons title={displayTitle} />
       </article>
 
       <Footer locale={locale} />
