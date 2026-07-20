@@ -35,8 +35,19 @@ export function DeploymentSkewHandler() {
 
           if (hasActionHeader) {
             console.warn('Deployment skew detected (Server Action 404). Hard reloading...');
-            window.location.reload();
+            const count = parseInt(sessionStorage.getItem('skew-reload') || '0', 10);
+            if (count < 2) {
+              sessionStorage.setItem('skew-reload', (count + 1).toString());
+              window.location.reload();
+            } else {
+              console.error('Infinite skew reload loop detected. Stopping.');
+            }
           }
+        }
+        
+        // If we got a 200 OK, reset the skew counter
+        if (response.status === 200) {
+          sessionStorage.removeItem('skew-reload');
         }
         
         return response;
