@@ -156,7 +156,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         <header className="flex flex-col lg:flex-row justify-between items-start w-full gap-8 mb-12">
           <div className="flex flex-col items-start text-start w-full lg:w-[60%]">
-            <h1 dir="auto" className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white leading-tight text-balance text-start mb-6">
+            <h1 dir="auto" className="text-xl md:text-2xl lg:text-4xl font-bold text-gray-900 dark:text-white leading-snug lg:leading-tight text-balance text-start mb-6">
               {displayTitle}
             </h1>
             
