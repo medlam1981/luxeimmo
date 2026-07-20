@@ -9,6 +9,7 @@ import { Link } from '@/i18n/routing';
 import { ArrowLeft } from 'lucide-react';
 import { connection } from 'next/server';
 import { unstable_cache } from 'next/cache';
+import { ShareButtons } from '@/components/blog/ShareButtons';
 
 const parseLocalized = (str: string, locale: string) => {
   try {
@@ -191,6 +192,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-indigo-600 dark:prose-a:text-indigo-400 prose-img:rounded-xl prose-indigo mx-auto"
           dangerouslySetInnerHTML={{ __html: sanitizedContent }}
         />
+
+        <ShareButtons title={displayTitle} />
       </article>
 
       <Footer locale={locale} />
