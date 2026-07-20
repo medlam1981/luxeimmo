@@ -8,11 +8,13 @@ import Image from 'next/image';
 import { connection } from 'next/server';
 import { unstable_cache } from 'next/cache';
 
-const getCachedPosts = unstable_cache(
+const getCachedPosts = (page: number, limit: number) => unstable_cache(
   async () => {
     const posts = await prisma.post.findMany({
       where: { published: true },
       orderBy: { createdAt: 'desc' },
+      skip: (page - 1) * limit,
+      take: limit,
       select: {
         id: true,
         slug: true,
@@ -22,11 +24,38 @@ const getCachedPosts = unstable_cache(
         createdAt: true,
       }
     });
-    return JSON.parse(JSON.stringify(posts));
+
+    const optimizedPosts = posts.map(post => {
+      try {
+        const contentObj = JSON.parse(post.content);
+        const excerptObj: Record<string, string> = {};
+        
+        for (const key in contentObj) {
+          if (contentObj[key]) {
+            const text = contentObj[key].replace(/<[^>]*>?/gm, '');
+            excerptObj[key] = text.substring(0, 160) + '...';
+          }
+        }
+        
+        return {
+          ...post,
+          content: JSON.stringify(excerptObj)
+        };
+      } catch (e) {
+        // If content is not a valid JSON string (legacy), just string and truncate
+        const text = post.content.replace(/<[^>]*>?/gm, '');
+        return {
+          ...post,
+          content: text.substring(0, 160) + '...'
+        };
+      }
+    });
+
+    return JSON.parse(JSON.stringify(optimizedPosts));
   },
-  ['blog-posts-index'],
+  [`blog-posts-index-${page}-${limit}`],
   { tags: ['post'] }
-);
+)();
 
 const parseLocalized = (str: string, locale: string) => {
   try {
@@ -57,13 +86,23 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function BlogIndexPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function BlogIndexPage({ 
+  params,
+  searchParams
+}: { 
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   await connection();
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'BlogIndex' });
 
-  const posts = await getCachedPosts();
+  const resolvedSearchParams = await searchParams;
+  const page = typeof resolvedSearchParams.page === 'string' ? parseInt(resolvedSearchParams.page, 10) : 1;
+  const validPage = isNaN(page) || page < 1 ? 1 : page;
+
+  const posts = await getCachedPosts(validPage, 12);
 
   return (
     <main className="min-h-screen flex flex-col bg-white dark:bg-gray-950 pt-20">
