@@ -72,7 +72,7 @@ export async function createPost(data: any) {
         authorId: (session?.user as any).id,
       },
     });
-    revalidateTag('post');
+    revalidateTag('post', {});
     revalidatePath('/admin/posts');
     revalidatePath('/blog');
     revalidatePath('/', 'layout'); // Revalidate everything just to be safe
@@ -129,8 +129,7 @@ export async function updatePost(id: string, data: any) {
         published: data.published,
       },
     });
-    
-    revalidateTag('post');
+    revalidateTag('post', {});
     revalidatePath('/admin/posts');
     revalidatePath('/blog');
     revalidatePath('/', 'layout');
@@ -149,7 +148,7 @@ export async function deletePost(id: string) {
 
   try {
     await prisma.post.delete({ where: { id } });
-    revalidateTag('post');
+    revalidateTag('post', {});
     revalidatePath('/admin/posts');
     revalidatePath('/blog');
     revalidatePath('/', 'layout');
