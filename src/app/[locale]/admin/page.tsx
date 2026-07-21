@@ -1,11 +1,24 @@
 import { Suspense } from 'react';
-import { Building, PlusCircle, PenTool, Clock, FileText } from 'lucide-react';
+import { Building, PlusCircle, PenTool, Clock, FileText, Package, Tags, ChevronRight } from 'lucide-react';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import prisma from '@/lib/prisma';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
 
 async function AdminDashboardContent() {
   const t = await getTranslations('Admin');
+  const session = await getServerSession(authOptions);
+  const isAdmin = session?.user && (session.user as any).role === 'ADMIN';
+
+  const navItems = [
+    { label: t('manageProperties'), href: '/admin/properties', icon: Package }
+  ];
+
+  if (isAdmin) {
+    navItems.push({ label: 'Review Properties', href: '/admin/review', icon: Tags });
+    navItems.push({ label: 'Blog Posts', href: '/admin/posts', icon: FileText });
+  }
 
   const [totalActiveProperties, totalPublishedPosts, pendingReviews] = await Promise.all([
     prisma.property.count({ where: { status: 'APPROVED' } }),
@@ -52,6 +65,26 @@ async function AdminDashboardContent() {
                   <p className="text-3xl font-bold text-gray-900 dark:text-white">{metric.value}</p>
                 </div>
               </div>
+            );
+          })}
+        </div>
+      </section>
+      {/* Platform Management */}
+      <section className="mt-2">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('platform_management')}</h2>
+        <div className="flex flex-col gap-3">
+          {navItems.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <Link key={index} href={item.href as any} className="flex items-center justify-between p-4 bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 hover:border-blue-500 dark:hover:border-blue-500 transition-colors group">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-xl group-hover:bg-blue-50 dark:group-hover:bg-blue-900/30 transition-colors">
+                    <Icon className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
+                  </div>
+                  <span className="font-semibold text-gray-900 dark:text-white text-lg">{item.label}</span>
+                </div>
+                <ChevronRight className="w-5 h-5 text-gray-400 rtl:rotate-180 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
+              </Link>
             );
           })}
         </div>

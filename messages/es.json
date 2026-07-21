@@ -183,7 +183,8 @@
     "content_summary": "Resumen de Contenido",
     "total_active_properties": "Total de Propiedades Activas",
     "total_published_posts": "Total de Publicaciones",
-    "pending_reviews": "Revisiones Pendientes"
+    "pending_reviews": "Revisiones Pendientes",
+    "platform_management": "Gestión de la Plataforma"
   },
   "Landing": {
     "buyNow": "Comprar Ahora",

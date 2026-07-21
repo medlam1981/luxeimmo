@@ -183,7 +183,8 @@
     "content_summary": "ملخص المحتوى",
     "total_active_properties": "عقارات نشطة",
     "total_published_posts": "مقالات منشورة",
-    "pending_reviews": "مراجعات معلقة"
+    "pending_reviews": "مراجعات معلقة",
+    "platform_management": "إدارة المنصة"
   },
   "Landing": {
     "buyNow": "اشترِ الآن",

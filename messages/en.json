@@ -183,7 +183,8 @@
     "content_summary": "Content Summary",
     "total_active_properties": "Total Active Properties",
     "total_published_posts": "Total Published Posts",
-    "pending_reviews": "Pending Reviews"
+    "pending_reviews": "Pending Reviews",
+    "platform_management": "Platform Management"
   },
   "Landing": {
     "buyNow": "Buy Now",
