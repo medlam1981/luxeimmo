@@ -61,8 +61,8 @@ async function SearchPageContent({ params, searchParams }: { searchParams: Promi
       <Navbar />
       <main className="flex-1 pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         <div className="mb-4 md:mb-8">
-          <h1 className="text-xl md:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">{t('searchResults')}</h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-1 md:mt-2 text-xs md:text-lg">{t('foundProperties', { count: properties.length })}</p>
+          <h1 className="text-xl md:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">{t('searchResults')}</h1>
+          <p className="text-gray-500 dark:text-gray-400 mt-1 md:mt-2 text-sm md:text-base">{t('foundProperties', { count: properties.length })}</p>
         </div>
         
         <div className="flex flex-col lg:flex-row gap-8">
