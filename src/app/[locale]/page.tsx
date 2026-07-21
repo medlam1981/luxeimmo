@@ -78,7 +78,7 @@ async function HomeCategories({ locale }: { locale: string }) {
   ];
 
   return (
-    <div id="categories" className="w-full bg-gray-50 dark:bg-gray-900 py-8 md:py-16">
+    <div id="categories" className="w-full bg-gray-50 dark:bg-gray-900 pt-24 pb-8 md:pt-32 md:pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 md:mb-16">
           <h2 className="text-xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-2 md:mb-4 tracking-tight font-sans">
@@ -127,9 +127,9 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   return (
     <main className="min-h-screen flex flex-col bg-white dark:bg-gray-950 transition-colors duration-300">
       <Navbar />
+      <HomeCategories locale={locale} />
       <Hero />
       <Features />
-      <HomeCategories locale={locale} />
       <Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
         <HomeProperties />
       </Suspense>
