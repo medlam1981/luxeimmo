@@ -108,7 +108,3 @@ export default function OnboardingPage() {
   );
 }
 
-export async function generateStaticParams() {
-  const { routing } = await import('@/i18n/routing');
-  return routing.locales.map((locale) => ({ locale }));
-}
