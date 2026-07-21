@@ -80,11 +80,16 @@ async function HomeCategories({ locale }: { locale: string }) {
   return (
     <div id="categories" className="w-full bg-gray-50 dark:bg-gray-900 pt-20 pb-4 md:pt-0 md:pb-0 md:min-h-[calc(100vh-80px)] md:flex md:flex-col md:justify-center md:items-center md:mt-[80px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        {/* Advertisement Container */}
+        <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-xl mb-4 md:mb-12 h-16 md:h-24 flex items-center justify-center border border-gray-300 dark:border-gray-700">
+          <p className="text-[10px] md:text-sm text-gray-500 dark:text-gray-400 font-medium uppercase tracking-widest">Advertisement Space</p>
+        </div>
+
         <div className="text-center mb-4 md:mb-16">
-          <h2 className="text-xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-2 md:mb-4 tracking-tight font-sans">
+          <h2 className="text-lg md:text-5xl font-extrabold text-gray-900 dark:text-white mb-1 md:mb-4 tracking-tight font-sans">
             {t('title', { defaultMessage: 'Browse by Category' })}
           </h2>
-          <p className="text-sm md:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xs md:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
             {t('subtitle', { defaultMessage: 'Explore our curated real estate categories.' })}
           </p>
         </div>
