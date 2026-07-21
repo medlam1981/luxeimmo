@@ -83,8 +83,8 @@ async function HomeCategories({ locale }: { locale: string }) {
         {/* Advertisement Container */}
         <div className="grid grid-cols-3 gap-2 md:gap-4 mb-8 md:mb-10">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="w-full bg-gray-200 dark:bg-gray-800 rounded-xl h-16 md:h-24 flex items-center justify-center border border-gray-300 dark:border-gray-700">
-              <p className="text-[8px] md:text-sm text-gray-500 dark:text-gray-400 font-medium uppercase tracking-widest text-center px-1">Ad {i}</p>
+            <div key={i} className="w-full bg-gray-200 dark:bg-gray-800 rounded-xl h-12 md:h-16 flex items-center justify-center border border-gray-300 dark:border-gray-700">
+              <p className="text-[8px] md:text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-widest text-center px-1">Ad {i}</p>
             </div>
           ))}
         </div>
