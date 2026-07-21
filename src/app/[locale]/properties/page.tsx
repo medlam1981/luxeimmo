@@ -150,3 +150,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+
+
+export const experimental_ppr = true;
+

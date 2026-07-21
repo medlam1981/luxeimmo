@@ -1,3 +1,4 @@
+import { routing } from '@/i18n/routing';
 import prisma from '@/lib/prisma';
 import { PropertyCard } from '@/components/storefront/PropertyCard';
 import { Metadata } from 'next';
@@ -99,3 +100,13 @@ export default async function SearchPage({ params, searchParams }: { searchParam
     </Suspense>
   );
 }
+
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+
+
+export const experimental_ppr = true;
+
