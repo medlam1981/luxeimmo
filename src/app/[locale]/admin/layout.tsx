@@ -14,7 +14,8 @@ async function AdminLayoutContent({ children, locale }: { children: React.ReactN
   const translations = {
     overview: t('overview'),
     manageProperties: t('manageProperties'),
-    logout: t('logout')
+    logout: t('logout'),
+    adminLabel: t('adminLabel')
   };
 
   return <AdminLayoutClient translations={translations} isAdmin={!!isAdmin}>{children}</AdminLayoutClient>;

@@ -175,7 +175,8 @@
     "reject": "رفض",
     "premium": "⭐ مميّز",
     "upgradePremium": "ترقية مميّزة",
-    "reviewDetails": "مراجعة التفاصيل"
+    "reviewDetails": "مراجعة التفاصيل",
+    "adminLabel": "المسؤول"
   },
   "Landing": {
     "buyNow": "اشترِ الآن",

@@ -33,7 +33,7 @@ export default function AdminLayoutClient({ children, translations, isAdmin }: {
       )}
 
       {/* Sidebar */}
-      <aside className={`fixed inset-y-0 left-0 bg-white dark:bg-gray-900 w-64 border-r border-gray-200 dark:border-gray-800 z-50 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <aside className={`fixed inset-y-0 start-0 bg-white dark:bg-gray-900 w-64 border-e border-gray-200 dark:border-gray-800 z-50 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static ${isSidebarOpen ? 'translate-x-0' : 'ltr:-translate-x-full rtl:translate-x-full'}`}>
         <div className="h-full flex flex-col">
           <div className="h-16 flex items-center justify-between px-6 border-b border-gray-200 dark:border-gray-800">
             <Link href="/admin" className="font-bold text-xl text-blue-600 dark:text-blue-400">
@@ -96,11 +96,11 @@ export default function AdminLayoutClient({ children, translations, isAdmin }: {
         <header className="lg:hidden h-16 flex items-center px-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
           <button
             onClick={() => setSidebarOpen(true)}
-            className="p-2 -ml-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg"
+            className="flex items-center gap-2 p-2 -ms-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg"
           >
-            <Menu className="w-6 h-6" />
+            <span className="font-bold text-lg">{translations.adminLabel}</span>
+            <Menu className="w-6 h-6 text-gray-600 dark:text-gray-400" />
           </button>
-          <span className="ml-2 font-bold text-lg text-gray-900 dark:text-white">Admin</span>
         </header>
 
         {/* Page Content */}

@@ -175,7 +175,8 @@
     "reject": "Rechazar",
     "premium": "⭐ Premium",
     "upgradePremium": "Pasar a Premium",
-    "reviewDetails": "Ver detalles"
+    "reviewDetails": "Ver detalles",
+    "adminLabel": "Admin"
   },
   "Landing": {
     "buyNow": "Comprar Ahora",
