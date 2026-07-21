@@ -145,33 +145,32 @@ export function PostForm({ initialData }: { initialData?: any }) {
             />
           </div>
 
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              id="published"
-              checked={formData.published}
-              onChange={(e) => setFormData({ ...formData, published: e.target.checked })}
-              className="w-5 h-5 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500 dark:focus:ring-indigo-400 dark:ring-offset-gray-900 dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
-            />
-            <label htmlFor="published" className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer">
-              Publish this post immediately
-            </label>
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mt-2 w-full p-4 bg-gray-50 dark:bg-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-800">
+            <div className="flex items-center justify-between w-full md:w-auto gap-4">
+              <label htmlFor="publish-checkbox" className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer select-none">
+                Publish immediately
+              </label>
+              <input
+                type="checkbox"
+                id="publish-checkbox"
+                checked={formData.published}
+                onChange={(e) => setFormData({ ...formData, published: e.target.checked })}
+                className="w-5 h-5 text-indigo-600 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 rounded focus:ring-indigo-500 dark:focus:ring-indigo-400 cursor-pointer"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full md:w-auto inline-flex items-center justify-center px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-all font-semibold shadow-sm disabled:opacity-50 min-w-[140px]"
+            >
+              {loading ? 'Saving...' : (
+                <>
+                  <Save className="w-5 h-5 mr-2" />
+                  Save Post
+                </>
+              )}
+            </button>
           </div>
-        </div>
-
-        <div className="flex justify-end pt-4">
-          <button
-            type="submit"
-            disabled={loading}
-            className="inline-flex items-center justify-center px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-all font-semibold shadow-sm disabled:opacity-50 min-w-[140px]"
-          >
-            {loading ? 'Saving...' : (
-              <>
-                <Save className="w-5 h-5 mr-2" />
-                Save Post
-              </>
-            )}
-          </button>
         </div>
       </form>
     </div>
