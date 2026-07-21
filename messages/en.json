@@ -176,7 +176,14 @@
     "premium": "⭐ Premium",
     "upgradePremium": "Upgrade to Premium",
     "reviewDetails": "Review Details",
-    "adminLabel": "Admin"
+    "adminLabel": "Admin",
+    "quick_actions": "Quick Actions",
+    "add_property": "Add New Property",
+    "add_post": "Write New Post",
+    "content_summary": "Content Summary",
+    "total_active_properties": "Total Active Properties",
+    "total_published_posts": "Total Published Posts",
+    "pending_reviews": "Pending Reviews"
   },
   "Landing": {
     "buyNow": "Buy Now",

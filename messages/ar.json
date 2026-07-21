@@ -176,7 +176,14 @@
     "premium": "⭐ مميّز",
     "upgradePremium": "ترقية مميّزة",
     "reviewDetails": "مراجعة التفاصيل",
-    "adminLabel": "المسؤول"
+    "adminLabel": "المسؤول",
+    "quick_actions": "إجراءات سريعة",
+    "add_property": "إضافة عقار جديد",
+    "add_post": "كتابة مقال جديد",
+    "content_summary": "ملخص المحتوى",
+    "total_active_properties": "عقارات نشطة",
+    "total_published_posts": "مقالات منشورة",
+    "pending_reviews": "مراجعات معلقة"
   },
   "Landing": {
     "buyNow": "اشترِ الآن",

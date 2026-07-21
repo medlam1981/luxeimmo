@@ -1,48 +1,64 @@
 import { Suspense } from 'react';
-import { Building, Key, Home } from 'lucide-react';
+import { Building, PlusCircle, PenTool, Clock, FileText } from 'lucide-react';
 import prisma from '@/lib/prisma';
 import { getTranslations } from 'next-intl/server';
+import { Link } from '@/i18n/routing';
 
 async function AdminDashboardContent() {
-
   const t = await getTranslations('Admin');
 
-  const [totalProperties, propertiesForRent, propertiesForSale] = await Promise.all([
-    prisma.property.count(),
-    prisma.property.count({ where: { propertyType: 'RENT' } }),
-    prisma.property.count({ where: { propertyType: 'SALE' } })
+  const [totalActiveProperties, totalPublishedPosts, pendingReviews] = await Promise.all([
+    prisma.property.count({ where: { status: 'APPROVED' } }),
+    prisma.post.count({ where: { published: true } }),
+    prisma.property.count({ where: { status: 'PENDING' } })
   ]);
 
-  const kpis = [
-    { title: t('totalProperties'), value: totalProperties, icon: Building, color: 'text-blue-600', bg: 'bg-blue-100' },
-    { title: t('propertiesForRent'), value: propertiesForRent, icon: Key, color: 'text-orange-600', bg: 'bg-orange-100' },
-    { title: t('propertiesForSale'), value: propertiesForSale, icon: Home, color: 'text-green-600', bg: 'bg-green-100' },
+  const metrics = [
+    { title: t('total_active_properties'), value: totalActiveProperties, icon: Building, color: 'text-blue-600', bg: 'bg-blue-100 dark:bg-blue-900/30' },
+    { title: t('total_published_posts'), value: totalPublishedPosts, icon: FileText, color: 'text-green-600', bg: 'bg-green-100 dark:bg-green-900/30' },
+    { title: t('pending_reviews'), value: pendingReviews, icon: Clock, color: 'text-orange-600', bg: 'bg-orange-100 dark:bg-orange-900/30' },
   ];
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white font-sans">{t('overview')}</h1>
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {kpis.map((kpi, index) => {
-          const Icon = kpi.icon;
-          return (
-            <div key={index} className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-800 flex items-center transition-colors duration-300">
-              <div className={`p-4 rounded-xl ${kpi.bg} me-4`}>
-                <Icon className={`w-8 h-8 ${kpi.color}`} />
+    <div className="flex flex-col gap-8 w-full p-4 lg:p-8">
+      {/* Quick Actions */}
+      <section>
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('quick_actions')}</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <Link href="/admin/properties/new" className="flex flex-col items-center justify-center p-6 bg-blue-600 text-white rounded-2xl shadow-sm hover:bg-blue-700 transition-colors">
+            <PlusCircle className="w-8 h-8 mb-3" />
+            <span className="font-semibold text-center">{t('add_property')}</span>
+          </Link>
+          <Link href="/admin/posts/new" className="flex flex-col items-center justify-center p-6 bg-gray-900 dark:bg-gray-800 text-white rounded-2xl shadow-sm hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors">
+            <PenTool className="w-8 h-8 mb-3" />
+            <span className="font-semibold text-center">{t('add_post')}</span>
+          </Link>
+        </div>
+      </section>
+
+      {/* Content Summary */}
+      <section className="mt-2">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('content_summary')}</h2>
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-4">
+          {metrics.map((metric, index) => {
+            const Icon = metric.icon;
+            return (
+              <div key={index} className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-sm border border-gray-200 dark:border-gray-800 flex items-center transition-colors duration-300">
+                <div className={`p-4 rounded-xl ${metric.bg} me-4`}>
+                  <Icon className={`w-8 h-8 ${metric.color}`} />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{metric.title}</p>
+                  <p className="text-3xl font-bold text-gray-900 dark:text-white">{metric.value}</p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{kpi.title}</p>
-                <p className="text-3xl font-bold text-gray-900 dark:text-white">{kpi.value}</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      </section>
     </div>
   );
 }
-
 
 export default async function AdminDashboard() {
   return (

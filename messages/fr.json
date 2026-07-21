@@ -176,7 +176,14 @@
     "premium": "⭐ Premium",
     "upgradePremium": "Passer Premium",
     "reviewDetails": "Voir les détails",
-    "adminLabel": "Admin"
+    "adminLabel": "Admin",
+    "quick_actions": "Actions Rapides",
+    "add_property": "Ajouter une Propriété",
+    "add_post": "Écrire un Nouvel Article",
+    "content_summary": "Résumé du Contenu",
+    "total_active_properties": "Propriétés Actives Totales",
+    "total_published_posts": "Articles Publiés Totaux",
+    "pending_reviews": "Avis en Attente"
   },
   "Landing": {
     "buyNow": "Acheter",
