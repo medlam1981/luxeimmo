@@ -233,7 +233,9 @@
     "rights": "All rights reserved.",
     "location": "Casablanca, Morocco",
     "address": "Casablanca, Morocco",
-    "privacyPolicy": "Privacy Policy"
+    "privacyPolicy": "Privacy Policy",
+    "emailUs": "Email Us",
+    "callUs": "Call Us"
   },
   "PropertiesPage": {
     "title": "Real Estate Properties",

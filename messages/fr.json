@@ -233,7 +233,9 @@
     "rights": "Tous droits réservés.",
     "location": "Casablanca, Maroc",
     "address": "Casablanca, Maroc",
-    "privacyPolicy": "politique de confidentialité"
+    "privacyPolicy": "politique de confidentialité",
+    "emailUs": "Envoyez-nous un email",
+    "callUs": "Appelez-nous"
   },
   "PropertiesPage": {
     "title": "Propriétés immobilières",

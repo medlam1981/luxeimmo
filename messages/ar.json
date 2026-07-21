@@ -233,7 +233,9 @@
     "rights": "جميع الحقوق محفوظة.",
     "location": "الدار البيضاء، المغرب",
     "address": "الدار البيضاء، المغرب",
-    "privacyPolicy": "سياسة الخصوصية"
+    "privacyPolicy": "سياسة الخصوصية",
+    "emailUs": "راسلنا عبر البريد",
+    "callUs": "اتصل بنا"
   },
   "PropertiesPage": {
     "title": "العقارات",

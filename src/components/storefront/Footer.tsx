@@ -1,6 +1,7 @@
 import { Link } from '@/i18n/routing';
 import { getTranslations } from 'next-intl/server';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { MapPin } from 'lucide-react';
+import { SecureContactButton } from './SecureContactButton';
 import { getSettings } from '@/lib/settings';
 
 import { Suspense } from 'react';
@@ -36,20 +37,18 @@ async function FooterContent({ locale }: { locale: string }) {
             <h4 className="text-gray-900 dark:text-white font-bold mb-4">{t('contactUs')}</h4>
             <div className="flex flex-col gap-4">
               {settings.storeEmail && (
-                <a href={`mailto:${settings.storeEmail}`} className="flex items-center gap-3 text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
-                  <div className="h-10 w-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full flex items-center justify-center shadow-sm">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <span className="text-sm truncate">{settings.storeEmail}</span>
-                </a>
+                <SecureContactButton 
+                  type="email" 
+                  value={settings.storeEmail} 
+                  label={t('emailUs')} 
+                />
               )}
               {settings.storePhone && (
-                <a href={`tel:${settings.storePhone}`} className="flex items-center gap-3 text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
-                  <div className="h-10 w-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full flex items-center justify-center shadow-sm">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <span className="text-sm">{settings.storePhone}</span>
-                </a>
+                <SecureContactButton 
+                  type="phone" 
+                  value={settings.storePhone} 
+                  label={t('callUs')} 
+                />
               )}
               {settings.storeLocation && (
                 <div className="flex items-center gap-3 text-gray-500 dark:text-gray-400">
