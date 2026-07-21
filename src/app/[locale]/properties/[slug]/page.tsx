@@ -38,9 +38,6 @@ const getCachedProperty = unstable_cache(
   { tags: ['property'], revalidate: 86400 }
 );
 
-export const revalidate = 86400;
-
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, locale } = await params;
   const property = await getCachedProperty(slug);
