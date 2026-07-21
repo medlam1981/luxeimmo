@@ -19,3 +19,7 @@ export default async function FavoritesPage({ params }: { params: Promise<{ loca
     </div>
   );
 }
+export async function generateStaticParams() {
+  const { routing } = await import('@/i18n/routing');
+  return routing.locales.map((locale) => ({ locale }));
+}

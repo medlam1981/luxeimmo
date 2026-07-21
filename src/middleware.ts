@@ -56,6 +56,14 @@ export default async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(`${localePrefix}/`, request.url));
   }
 
+  // To achieve maximum Vercel Edge Caching, we must NOT allow intlMiddleware to modify 
+  // request headers (like x-next-intl-locale) for paths that already have a valid locale.
+  // Modifying request headers causes Vercel to bypass the Edge Cache.
+  const hasValidLocale = /^\/(en|ar|fr|es)(\/|$)/.test(pathname);
+  if (hasValidLocale) {
+    return NextResponse.next();
+  }
+
   return intlMiddleware(request);
 }
 
