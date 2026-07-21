@@ -81,7 +81,7 @@ async function HomeCategories({ locale }: { locale: string }) {
     <div id="categories" className="w-full bg-gray-50 dark:bg-gray-900 pt-20 pb-4 md:pt-0 md:pb-0 md:min-h-[calc(100vh-80px)] md:flex md:flex-col md:justify-center md:items-center md:mt-[80px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Advertisement Container */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mt-4 md:mt-0 mb-8 md:mb-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mt-4 md:mt-8 mb-4 md:mb-10">
           {[1, 2, 3].map((i) => (
             <div key={i} className={`w-full bg-gray-200 dark:bg-gray-800 rounded-xl h-12 md:h-16 items-center justify-center border border-gray-300 dark:border-gray-700 ${i === 3 ? 'hidden md:flex' : 'flex'}`}>
               <p className="text-[8px] md:text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-widest text-center px-1">Ad {i}</p>
@@ -89,7 +89,7 @@ async function HomeCategories({ locale }: { locale: string }) {
           ))}
         </div>
 
-        <div className="mb-10 md:mb-12">
+        <div className="mb-4 md:mb-12">
           <Hero />
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8">
@@ -97,7 +97,7 @@ async function HomeCategories({ locale }: { locale: string }) {
             <Link 
               key={category.slug} 
               href={`/properties?category=${category.slug}`}
-              className="group relative h-40 md:h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+              className="group relative h-40 md:h-64 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
             >
               <div className="absolute inset-0">
                 <Image
