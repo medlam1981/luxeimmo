@@ -53,6 +53,8 @@ const getCachedPosts = (page: number, limit: number, locale: string) => unstable
   { tags: ['post'] }
 )();
 
+export const revalidate = 60;
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   setRequestLocale(locale);

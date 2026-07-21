@@ -9,7 +9,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { unstable_cache } from 'next/cache';
 
 const getCachedProperties = unstable_cache(
-  async (category?: string, type?: string, city?: string) => {
+  async (category?: string, type?: string, city?: string, page: number = 1) => {
     const where: any = { status: 'APPROVED' };
     if (category) {
       const uppercaseCat = category.toUpperCase();
@@ -29,29 +29,49 @@ const getCachedProperties = unstable_cache(
 
     const dbProperties = await prisma.property.findMany({
       where,
-      take: 8,
-      orderBy: { createdAt: 'desc' }
+      take: 12,
+      skip: (page - 1) * 12,
+      orderBy: { createdAt: 'desc' },
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        price: true,
+        propertyType: true,
+        rentalPeriod: true,
+        category: true,
+        city: true,
+        bedrooms: true,
+        bathrooms: true,
+        areaSqm: true,
+        images: true,
+        isFeatured: true,
+        ownerPhone: true,
+      }
     });
 
     return dbProperties.map((p: any) => ({
       id: p.id,
       title: p.title,
       slug: p.slug,
-      description: p.description,
       price: Number(p.price),
       propertyType: p.propertyType,
+      rentalPeriod: p.rentalPeriod,
       category: p.category,
       city: p.city,
       bedrooms: p.bedrooms,
       bathrooms: p.bathrooms,
       areaSqm: p.areaSqm,
       images: p.images.length > 0 ? p.images : ['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80'],
-      isFeatured: p.isFeatured
+      isFeatured: p.isFeatured,
+      ownerPhone: p.ownerPhone
     })) as Property[];
   },
   ['properties-search-cache'],
   { tags: ['property'], revalidate: 3600 }
 );
+export const revalidate = 60;
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -69,15 +89,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-async function PropertiesPageContent({ params, searchParams }: { params: Promise<{ locale: string }>, searchParams: Promise<{ category?: string, type?: string, city?: string }> }) {
+async function PropertiesPageContent({ params, searchParams }: { params: Promise<{ locale: string }>, searchParams: Promise<{ category?: string, type?: string, city?: string, page?: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const { category, type, city } = await searchParams;
+  const { category, type, city, page } = await searchParams;
+  const currentPage = page ? parseInt(page, 10) : 1;
   const t = await getTranslations({ locale, namespace: 'PropertiesPage' });
 
   let properties: Property[] = [];
   try {
-      properties = await getCachedProperties(category, type, city);
+      properties = await getCachedProperties(category, type, city, currentPage);
   } catch (error) {
       console.log('Database error when fetching properties.');
   }
@@ -115,7 +136,7 @@ async function PropertiesPageContent({ params, searchParams }: { params: Promise
 }
 
 
-export default async function PropertiesPage({ params, searchParams }: { params: Promise<{ locale: string }>, searchParams: Promise<{ category?: string, type?: string, city?: string }> }) {
+export default async function PropertiesPage({ params, searchParams }: { params: Promise<{ locale: string }>, searchParams: Promise<{ category?: string, type?: string, city?: string, page?: string }> }) {
   return (
     <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
       <PropertiesPageContent params={params} searchParams={searchParams} />
