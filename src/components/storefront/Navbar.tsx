@@ -69,7 +69,7 @@ export function Navbar() {
           <nav className="hidden md:flex gap-8">
             <Link href="/" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors">{t('home')}</Link>
             <Link href="/properties" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors">{t('properties')}</Link>
-            <Link href="/categories" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors">{t('categories')}</Link>
+            <Link href="/#categories" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors">{t('categories')}</Link>
             <Link href="/blog" prefetch={true} className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors">{t('blog')}</Link>
           </nav>
 
@@ -197,7 +197,7 @@ export function Navbar() {
             <div className={`px-4 pt-2 pb-4 space-y-1 shadow-lg dark:shadow-none bg-white dark:bg-gray-950 ${locale === 'ar' ? 'text-right' : 'text-left'}`}>
               <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('home')}</Link>
               <Link href="/properties" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('properties')}</Link>
-              <Link href="/categories" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('categories')}</Link>
+              <Link href="/#categories" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('categories')}</Link>
               <Link href="/blog" prefetch={true} onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('blog')}</Link>
               {status === 'unauthenticated' && (
                 <button

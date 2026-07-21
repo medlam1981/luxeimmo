@@ -28,7 +28,7 @@ async function FooterContent({ locale }: { locale: string }) {
             <h4 className="text-gray-900 dark:text-white font-bold mb-4">{t('aboutUs')}</h4>
             <ul className="space-y-3">
               <li><Link href="/properties" className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">{t('shop')}</Link></li>
-              <li><Link href="/categories" className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">{t('categories')}</Link></li>
+              <li><Link href="/#categories" className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">{t('categories')}</Link></li>
               <li><Link href="/privacy-policy" className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">{t('privacyPolicy')}</Link></li>
             </ul>
           </div>

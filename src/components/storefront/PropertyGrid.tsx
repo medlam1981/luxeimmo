@@ -35,14 +35,14 @@ export function PropertyGrid({ properties }: PropertyGridProps) {
   }
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-900 py-16 transition-colors duration-300">
+    <section className="bg-gray-50 dark:bg-gray-900 py-8 md:py-16 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-end mb-10">
+        <div className="flex justify-between items-end mb-6 md:mb-10">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white font-sans tracking-tight mb-2">
+            <h2 className="text-xl md:text-3xl font-bold text-gray-900 dark:text-white font-sans tracking-tight mb-1 md:mb-2">
               {t('title')}
             </h2>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-sm md:text-base text-gray-600 dark:text-gray-400">
               {t('subtitle')}
             </p>
           </div>

@@ -34,12 +34,12 @@ export function Hero() {
       <div className="absolute inset-0 bg-black/30 z-10" />
 
       {/* Content Wrapper */}
-      <div className="relative z-20 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full drop-shadow-2xl">
-        <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6 font-sans drop-shadow-lg animate-fade-in-up">
+      <div className="relative z-20 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full drop-shadow-2xl mt-10 md:mt-0">
+        <h1 className="text-3xl md:text-7xl font-extrabold text-white tracking-tight mb-4 md:mb-6 font-sans drop-shadow-lg animate-fade-in-up">
           {t('title')}
         </h1>
         
-        <div className="mt-4 text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10 drop-shadow-md animate-fade-in-up animation-delay-200">
+        <div className="mt-2 md:mt-4 text-sm md:text-2xl text-gray-200 max-w-3xl mx-auto mb-6 md:mb-10 drop-shadow-md animate-fade-in-up animation-delay-200">
           {t('subtitle')}
         </div>
         
