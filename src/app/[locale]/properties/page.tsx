@@ -6,7 +6,52 @@ import { PropertyCard } from '@/components/storefront/PropertyCard';
 import prisma from '@/lib/prisma';
 import { Property } from '@/types';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { unstable_cache } from 'next/cache';
 
+const getCachedProperties = unstable_cache(
+  async (category?: string, type?: string, city?: string) => {
+    const where: any = { status: 'APPROVED' };
+    if (category) {
+      const uppercaseCat = category.toUpperCase();
+      if (['APARTMENT', 'VILLA', 'COMMERCIAL', 'LAND'].includes(uppercaseCat)) {
+          where.category = uppercaseCat;
+      }
+    }
+    if (type) {
+      const uppercaseType = type.toUpperCase();
+      if (['RENT', 'SALE'].includes(uppercaseType)) {
+          where.propertyType = uppercaseType;
+      }
+    }
+    if (city) {
+      where.city = { contains: city, mode: 'insensitive' };
+    }
+
+    const dbProperties = await prisma.property.findMany({
+      where,
+      take: 8,
+      orderBy: { createdAt: 'desc' }
+    });
+
+    return dbProperties.map((p: any) => ({
+      id: p.id,
+      title: p.title,
+      slug: p.slug,
+      description: p.description,
+      price: Number(p.price),
+      propertyType: p.propertyType,
+      category: p.category,
+      city: p.city,
+      bedrooms: p.bedrooms,
+      bathrooms: p.bathrooms,
+      areaSqm: p.areaSqm,
+      images: p.images.length > 0 ? p.images : ['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80'],
+      isFeatured: p.isFeatured
+    })) as Property[];
+  },
+  ['properties-search-cache'],
+  { tags: ['property'], revalidate: 3600 }
+);
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -30,47 +75,9 @@ async function PropertiesPageContent({ params, searchParams }: { params: Promise
   const { category, type, city } = await searchParams;
   const t = await getTranslations({ locale, namespace: 'PropertiesPage' });
 
-  const where: any = { status: 'APPROVED' };
-  if (category) {
-    // Upper case the category string to match enum
-    const uppercaseCat = category.toUpperCase();
-    if (['APARTMENT', 'VILLA', 'COMMERCIAL', 'LAND'].includes(uppercaseCat)) {
-        where.category = uppercaseCat;
-    }
-  }
-  if (type) {
-    const uppercaseType = type.toUpperCase();
-    if (['RENT', 'SALE'].includes(uppercaseType)) {
-        where.propertyType = uppercaseType;
-    }
-  }
-  if (city) {
-    where.city = { contains: city, mode: 'insensitive' };
-  }
-
   let properties: Property[] = [];
   try {
-      const dbProperties = await prisma.property.findMany({
-        where,
-        take: 8,
-        orderBy: { createdAt: 'desc' }
-      });
-
-      properties = dbProperties.map((p: any) => ({
-        id: p.id,
-        title: p.title,
-        slug: p.slug,
-        description: p.description,
-        price: Number(p.price),
-        propertyType: p.propertyType,
-        category: p.category,
-        city: p.city,
-        bedrooms: p.bedrooms,
-        bathrooms: p.bathrooms,
-        areaSqm: p.areaSqm,
-        images: p.images.length > 0 ? p.images : ['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80'],
-        isFeatured: p.isFeatured
-      })) as Property[];
+      properties = await getCachedProperties(category, type, city);
   } catch (error) {
       console.log('Database error when fetching properties.');
   }

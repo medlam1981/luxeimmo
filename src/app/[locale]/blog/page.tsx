@@ -54,7 +54,6 @@ const getCachedPosts = (page: number, limit: number, locale: string) => unstable
 )();
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  await connection();
   const { locale } = await params;
   setRequestLocale(locale);
   return {
@@ -80,7 +79,6 @@ export default async function BlogIndexPage({
   params: Promise<{ locale: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  await connection();
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'BlogIndex' });

@@ -39,7 +39,6 @@ const getCachedPost = unstable_cache(
 );
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string, locale: string }> }): Promise<Metadata> {
-  await connection();
   const { slug, locale } = await params;
   setRequestLocale(locale);
   
@@ -101,7 +100,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string, locale: string }> }) {
-  await connection();
   const { slug, locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'Blog' });
