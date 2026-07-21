@@ -4,7 +4,6 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { Suspense } from 'react';
 
-export const dynamic = 'force-dynamic';
 
 async function AdminLayoutContent({ children, locale }: { children: React.ReactNode, locale: string }) {
   const t = await getTranslations({ locale, namespace: 'Admin' });

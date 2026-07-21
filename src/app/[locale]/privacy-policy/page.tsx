@@ -1,3 +1,4 @@
+import { routing } from '@/i18n/routing';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Metadata } from 'next';
 import { SecureContactButton } from '@/components/storefront/SecureContactButton';
@@ -96,3 +97,9 @@ export default async function PrivacyPolicyPage({ params }: { params: Promise<{ 
     </div>
   );
 }
+
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+

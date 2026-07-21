@@ -71,7 +71,6 @@ const getCachedProperties = unstable_cache(
   ['properties-search-cache'],
   { tags: ['property'], revalidate: 3600 }
 );
-export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -151,6 +150,4 @@ export function generateStaticParams() {
 }
 
 
-
-export const experimental_ppr = true;
 

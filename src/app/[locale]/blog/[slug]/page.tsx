@@ -38,7 +38,6 @@ const getCachedPost = unstable_cache(
   ['blog-post-metadata'],
   { tags: ['post'] }
 );
-export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string, locale: string }> }): Promise<Metadata> {
   const { slug, locale } = await params;

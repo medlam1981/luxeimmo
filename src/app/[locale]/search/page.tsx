@@ -108,5 +108,3 @@ export function generateStaticParams() {
 
 
 
-export const experimental_ppr = true;
-
