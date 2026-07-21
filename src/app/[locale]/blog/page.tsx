@@ -52,7 +52,7 @@ const getCachedPosts = (page: number, limit: number, locale: string) => unstable
     return optimizedPosts;
   },
   [`blog-posts-index-${locale}-${page}-${limit}`],
-  { tags: ['post'] }
+  { tags: ['post'], revalidate: 86400 }
 )();
 
 

@@ -35,8 +35,10 @@ const getCachedProperty = unstable_cache(
     return property ? JSON.parse(JSON.stringify(property)) : null;
   },
   ['property-metadata'],
-  { tags: ['property'] }
+  { tags: ['property'], revalidate: 86400 }
 );
+
+export const revalidate = 86400;
 
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
