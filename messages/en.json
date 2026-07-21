@@ -184,7 +184,18 @@
     "total_active_properties": "Total Active Properties",
     "total_published_posts": "Total Published Posts",
     "pending_reviews": "Pending Reviews",
-    "platform_management": "Platform Management"
+    "platform_management": "Platform Management",
+    "createPost": "Create New Post",
+    "editPost": "Edit Post",
+    "postTitleLabel": "Title",
+    "postTitlePlaceholder": "Enter post title",
+    "postSlugLabel": "Slug (URL)",
+    "postSlugPlaceholder": "e.g. legal-guide-morocco",
+    "postCoverImage": "Cover Image",
+    "postContent": "Content",
+    "publishImmediately": "Publish immediately",
+    "savePost": "Save Post",
+    "savingPost": "Saving..."
   },
   "Landing": {
     "buyNow": "Buy Now",

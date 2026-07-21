@@ -184,7 +184,18 @@
     "total_active_properties": "Propriétés Actives Totales",
     "total_published_posts": "Articles Publiés Totaux",
     "pending_reviews": "Avis en Attente",
-    "platform_management": "Gestion de la Plateforme"
+    "platform_management": "Gestion de la Plateforme",
+    "createPost": "Créer un Nouvel Article",
+    "editPost": "Modifier l'Article",
+    "postTitleLabel": "Titre",
+    "postTitlePlaceholder": "Entrez le titre de l'article",
+    "postSlugLabel": "Slug (URL)",
+    "postSlugPlaceholder": "ex. guide-juridique-maroc",
+    "postCoverImage": "Image de Couverture",
+    "postContent": "Contenu",
+    "publishImmediately": "Publier immédiatement",
+    "savePost": "Enregistrer l'Article",
+    "savingPost": "Enregistrement..."
   },
   "Landing": {
     "buyNow": "Acheter",

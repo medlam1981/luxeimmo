@@ -184,7 +184,18 @@
     "total_active_properties": "عقارات نشطة",
     "total_published_posts": "مقالات منشورة",
     "pending_reviews": "مراجعات معلقة",
-    "platform_management": "إدارة المنصة"
+    "platform_management": "إدارة المنصة",
+    "createPost": "إنشاء مقال جديد",
+    "editPost": "تعديل المقال",
+    "postTitleLabel": "العنوان",
+    "postTitlePlaceholder": "أدخل عنوان المقال",
+    "postSlugLabel": "الرابط المختصر (Slug)",
+    "postSlugPlaceholder": "مثال: legal-guide-morocco",
+    "postCoverImage": "صورة الغلاف",
+    "postContent": "المحتوى",
+    "publishImmediately": "نشر فوراً",
+    "savePost": "حفظ المقال",
+    "savingPost": "جاري الحفظ..."
   },
   "Landing": {
     "buyNow": "اشترِ الآن",

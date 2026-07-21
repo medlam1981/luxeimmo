@@ -6,9 +6,11 @@ import { createPost, updatePost } from '@/app/actions/postActions';
 import { RichTextEditor } from '@/components/admin/RichTextEditor';
 import { Save, ArrowLeft } from 'lucide-react';
 import { Link } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
 
 export function PostForm({ initialData }: { initialData?: any }) {
   const router = useRouter();
+  const t = useTranslations('Admin');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -80,11 +82,11 @@ export function PostForm({ initialData }: { initialData?: any }) {
   return (
     <div className="max-w-4xl mx-auto p-2 md:p-6 w-full">
       <div className="flex items-center mb-4 md:mb-6">
-        <Link href="/admin/posts" className="p-2 mr-4 text-gray-500 hover:text-gray-900 dark:hover:text-white bg-gray-100 dark:bg-gray-800 rounded-full transition-colors">
-          <ArrowLeft className="w-5 h-5" />
+        <Link href="/admin/posts" className="p-2 me-4 text-gray-500 hover:text-gray-900 dark:hover:text-white bg-gray-100 dark:bg-gray-800 rounded-full transition-colors">
+          <ArrowLeft className="w-5 h-5 rtl:rotate-180" />
         </Link>
         <h1 className="text-lg md:text-2xl font-bold text-gray-900 dark:text-white">
-          {initialData ? 'Edit Post' : 'Create New Post'}
+          {initialData ? t('editPost') : t('createPost')}
         </h1>
       </div>
 
@@ -98,36 +100,36 @@ export function PostForm({ initialData }: { initialData?: any }) {
         <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-3 md:p-6 space-y-4 md:space-y-6 w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Title</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('postTitleLabel')}</label>
               <input
                 type="text"
                 required
                 value={formData.title}
                 onChange={handleTitleChange}
-                className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
-                placeholder="Enter post title"
+                className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white text-start"
+                placeholder={t('postTitlePlaceholder')}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Slug (URL)</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('postSlugLabel')}</label>
               <input
                 type="text"
                 required
                 value={formData.slug}
                 onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
-                placeholder="e.g. legal-guide-morocco"
+                className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white text-start"
+                placeholder={t('postSlugPlaceholder')}
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cover Image {initialData?.coverImage ? '(Upload new to replace)' : ''}</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('postCoverImage')} {initialData?.coverImage ? '(Upload new to replace)' : ''}</label>
             <input
               type="file"
               accept="image/jpeg, image/png, image/webp, image/avif"
               onChange={handleImageUpload}
-              className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
+              className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white text-start"
             />
             {formData.coverImage && (
               <div className="mt-4">
@@ -138,7 +140,7 @@ export function PostForm({ initialData }: { initialData?: any }) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Content</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('postContent')}</label>
             <RichTextEditor
               content={formData.content}
               onChange={(html) => setFormData({ ...formData, content: html })}
@@ -146,10 +148,7 @@ export function PostForm({ initialData }: { initialData?: any }) {
           </div>
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mt-2 w-full p-4 bg-gray-50 dark:bg-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-800">
-            <div className="flex items-center justify-between w-full md:w-auto gap-4">
-              <label htmlFor="publish-checkbox" className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer select-none">
-                Publish immediately
-              </label>
+            <div className="flex items-center w-full md:w-auto gap-3">
               <input
                 type="checkbox"
                 id="publish-checkbox"
@@ -157,16 +156,19 @@ export function PostForm({ initialData }: { initialData?: any }) {
                 onChange={(e) => setFormData({ ...formData, published: e.target.checked })}
                 className="w-5 h-5 text-indigo-600 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 rounded focus:ring-indigo-500 dark:focus:ring-indigo-400 cursor-pointer"
               />
+              <label htmlFor="publish-checkbox" className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer select-none">
+                {t('publishImmediately')}
+              </label>
             </div>
             <button
               type="submit"
               disabled={loading}
               className="w-full md:w-auto inline-flex items-center justify-center px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-all font-semibold shadow-sm disabled:opacity-50 min-w-[140px]"
             >
-              {loading ? 'Saving...' : (
+              {loading ? t('savingPost') : (
                 <>
-                  <Save className="w-5 h-5 mr-2" />
-                  Save Post
+                  <Save className="w-5 h-5 me-2" />
+                  {t('savePost')}
                 </>
               )}
             </button>

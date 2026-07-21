@@ -184,7 +184,18 @@
     "total_active_properties": "Total de Propiedades Activas",
     "total_published_posts": "Total de Publicaciones",
     "pending_reviews": "Revisiones Pendientes",
-    "platform_management": "Gestión de la Plataforma"
+    "platform_management": "Gestión de la Plataforma",
+    "createPost": "Crear Nueva Publicación",
+    "editPost": "Editar Publicación",
+    "postTitleLabel": "Título",
+    "postTitlePlaceholder": "Ingrese el título",
+    "postSlugLabel": "Slug (URL)",
+    "postSlugPlaceholder": "ej. guia-legal-marruecos",
+    "postCoverImage": "Imagen de Portada",
+    "postContent": "Contenido",
+    "publishImmediately": "Publicar inmediatamente",
+    "savePost": "Guardar Publicación",
+    "savingPost": "Guardando..."
   },
   "Landing": {
     "buyNow": "Comprar Ahora",
