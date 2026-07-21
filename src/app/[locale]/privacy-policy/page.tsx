@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Metadata } from 'next';
+import { SecureContactButton } from '@/components/storefront/SecureContactButton';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -25,6 +26,7 @@ export default async function PrivacyPolicyPage({ params }: { params: Promise<{ 
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'PrivacyPolicy' });
+  const tFooter = await getTranslations({ locale, namespace: 'Footer' });
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 pt-32 pb-24">
@@ -77,7 +79,14 @@ export default async function PrivacyPolicyPage({ params }: { params: Promise<{ 
 
               <section className="mt-10 bg-gray-50 dark:bg-gray-800/50 p-8 rounded-2xl">
                 <h2 className="text-2xl mt-0">{t('section6Title')}</h2>
-                <p className="mb-0">{t('section6Text')}</p>
+                <p className="mb-6">{t('section6Text')}</p>
+                <div className="flex justify-start">
+                  <SecureContactButton 
+                    type="email" 
+                    value="medlam1981@gmail.com" 
+                    label={tFooter('emailUs')} 
+                  />
+                </div>
               </section>
 
             </div>
