@@ -68,12 +68,12 @@ export function PropertyCard({ property }: PropertyCardProps) {
       whileHover={{ y: -5 }}
       className="group relative bg-white dark:bg-gray-950 rounded-2xl shadow-sm hover:shadow-xl dark:shadow-none dark:hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-800 flex flex-col"
     >
-      <Link href={`/properties/${property.slug}`} className="block relative aspect-h-3 aspect-w-4 overflow-hidden bg-gray-200 dark:bg-gray-900 h-56 lg:h-64">
-        <div className="absolute top-3 left-3 z-20 flex gap-2">
-          <span className="px-3 py-1 bg-black text-white text-xs font-bold rounded-full uppercase tracking-wider">
+      <Link href={`/properties/${property.slug}`} className="block relative aspect-h-3 aspect-w-4 overflow-hidden bg-gray-200 dark:bg-gray-900 h-40 md:h-56 lg:h-64">
+        <div className="absolute top-2 md:top-3 left-2 md:left-3 z-20 flex gap-1.5 md:gap-2">
+          <span className="px-2 py-0.5 md:px-3 md:py-1 bg-black text-white text-[10px] md:text-xs font-bold rounded-full uppercase tracking-wider">
             {badgeType}
           </span>
-          <span className="px-3 py-1 bg-white text-black text-xs font-bold rounded-full uppercase tracking-wider">
+          <span className="px-2 py-0.5 md:px-3 md:py-1 bg-white text-black text-[10px] md:text-xs font-bold rounded-full uppercase tracking-wider">
             {badgeCategory}
           </span>
         </div>
@@ -101,47 +101,47 @@ export function PropertyCard({ property }: PropertyCardProps) {
           </motion.div>
         </AnimatePresence>
       </Link>
-      <div className="p-5 flex flex-col flex-grow">
-        <div className="flex justify-between items-start mb-2 gap-4">
-          <Link href={`/properties/${property.slug}`} className="hover:underline flex-1">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white line-clamp-1">
+      <div className="p-3 md:p-5 flex flex-col flex-grow">
+        <div className="flex justify-between items-start mb-1 md:mb-2 gap-2 md:gap-4 flex-col sm:flex-row sm:items-center">
+          <Link href={`/properties/${property.slug}`} className="hover:underline flex-1 w-full">
+            <h3 className="text-sm md:text-lg font-bold text-gray-900 dark:text-white line-clamp-1">
               {displayTitle}
             </h3>
           </Link>
-          <p className="text-xl font-bold text-black dark:text-white shrink-0">
+          <p className="text-sm md:text-xl font-bold text-black dark:text-white shrink-0">
             {priceDisplay}
           </p>
         </div>
         
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 flex items-center">
-          <MapPin className="w-4 h-4 mr-1" /> {property.city}
+        <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400 mb-3 md:mb-4 flex items-center">
+          <MapPin className="w-3 h-3 md:w-4 md:h-4 mr-1" /> {property.city}
         </p>
 
-        <div className="flex items-center gap-4 text-sm text-gray-700 dark:text-gray-300 mb-6 border-t border-gray-100 dark:border-gray-800 pt-4">
+        <div className="flex flex-wrap items-center gap-2 md:gap-4 text-xs md:text-sm text-gray-700 dark:text-gray-300 mb-4 md:mb-6 border-t border-gray-100 dark:border-gray-800 pt-3 md:pt-4">
           {property.bedrooms != null && (
             <div className="flex items-center gap-1">
-              <Bed className="w-4 h-4 text-gray-400" />
-              <span>{property.bedrooms} Beds</span>
+              <Bed className="w-3 h-3 md:w-4 md:h-4 text-gray-400" />
+              <span>{property.bedrooms}</span>
             </div>
           )}
           {property.bathrooms != null && (
             <div className="flex items-center gap-1">
-              <Bath className="w-4 h-4 text-gray-400" />
-              <span>{property.bathrooms} Baths</span>
+              <Bath className="w-3 h-3 md:w-4 md:h-4 text-gray-400" />
+              <span>{property.bathrooms}</span>
             </div>
           )}
           <div className="flex items-center gap-1">
-            <Maximize className="w-4 h-4 text-gray-400" />
-            <span>{property.areaSqm} m²</span>
+            <Maximize className="w-3 h-3 md:w-4 md:h-4 text-gray-400" />
+            <span>{property.areaSqm}m²</span>
           </div>
         </div>
 
         <div className="mt-auto">
           <button
             onClick={handleWhatsApp}
-            className="w-full flex items-center justify-center bg-[#25D366] hover:bg-[#128C7E] text-white px-4 py-3 rounded-xl transition-colors duration-300 font-medium"
+            className="w-full flex items-center justify-center bg-[#25D366] hover:bg-[#128C7E] text-white px-3 py-2 md:px-4 md:py-3 rounded-xl transition-colors duration-300 text-xs md:text-sm font-medium"
           >
-            <MessageCircle className="w-5 h-5 mr-2" />
+            <MessageCircle className="w-4 h-4 md:w-5 md:h-5 mr-1.5 md:mr-2" />
             {t('contactAgent')}
           </button>
         </div>

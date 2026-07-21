@@ -79,8 +79,10 @@ async function SearchPageContent({ params, searchParams }: { searchParams: Promi
                  <p className="text-gray-500 dark:text-gray-400">{t('adjustFilters')}</p>
                </div>
              ) : (
-               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6">
-                 {properties.map((p: any) => <PropertyCard key={p.id} property={p} />)}
+               <div className="grid grid-cols-2 xl:grid-cols-2 gap-3 md:gap-6">
+                 {properties.map((property) => (
+                   <PropertyCard key={property.id} property={property as any} />
+                 ))}
                </div>
              )}
           </div>
