@@ -30,7 +30,7 @@ export function Hero({ heroProperty }: HeroProps) {
           className="object-cover"
           priority={true}
           sizes="100vw"
-          quality={85}
+          quality={60}
         />
       </div>
       
@@ -39,30 +39,15 @@ export function Hero({ heroProperty }: HeroProps) {
 
       {/* Content Wrapper */}
       <div className="relative z-20 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full drop-shadow-2xl">
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6 font-sans drop-shadow-lg"
-        >
+        <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6 font-sans drop-shadow-lg animate-fade-in-up">
           {t('title')}
-        </motion.h1>
+        </h1>
         
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-4 text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10 drop-shadow-md"
-        >
+        <div className="mt-4 text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10 drop-shadow-md animate-fade-in-up animation-delay-200">
           {t('subtitle')}
-        </motion.div>
+        </div>
         
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="bg-white dark:bg-gray-900 p-3 sm:p-4 rounded-2xl shadow-2xl flex flex-col sm:flex-row gap-3 w-full max-w-3xl mx-auto items-stretch border border-gray-200 dark:border-gray-700"
-        >
+        <div className="bg-white dark:bg-gray-900 p-3 sm:p-4 rounded-2xl shadow-2xl flex flex-col sm:flex-row gap-3 w-full max-w-3xl mx-auto items-stretch border border-gray-200 dark:border-gray-700 animate-fade-in-up animation-delay-400">
           {/* City Search Input */}
           <div className="w-full sm:flex-1 sm:min-w-0">
             <input 
@@ -125,7 +110,7 @@ export function Hero({ heroProperty }: HeroProps) {
             <Search className="w-5 h-5 mr-2" />
             {t('search')}
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
