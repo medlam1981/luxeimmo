@@ -105,11 +105,11 @@ async function PropertiesPageContent({ params, searchParams }: { params: Promise
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-10">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4 tracking-tight font-sans">
+          <div className="text-center mb-16 overflow-hidden">
+            <h1 className="text-2xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-2 md:mb-4 tracking-tight font-sans">
               {t('title')}
             </h1>
-            <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="text-[11px] md:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto whitespace-nowrap md:whitespace-normal tracking-tighter md:tracking-normal w-full overflow-hidden text-ellipsis">
               {t('subtitle')}
             </p>
           </div>

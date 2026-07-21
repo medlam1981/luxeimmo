@@ -60,9 +60,9 @@ async function SearchPageContent({ params, searchParams }: { searchParams: Promi
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-950">
       <Navbar />
       <main className="flex-1 pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <div className="mb-8">
-          <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">{t('searchResults')}</h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-2 text-lg">{t('foundProperties', { count: properties.length })}</p>
+        <div className="mb-8 overflow-hidden">
+          <h1 className="text-2xl md:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">{t('searchResults')}</h1>
+          <p className="text-gray-500 dark:text-gray-400 mt-1 md:mt-2 text-[11px] md:text-lg whitespace-nowrap md:whitespace-normal tracking-tighter md:tracking-normal w-full overflow-hidden text-ellipsis">{t('foundProperties', { count: properties.length })}</p>
         </div>
         
         <div className="flex flex-col lg:flex-row gap-8">
