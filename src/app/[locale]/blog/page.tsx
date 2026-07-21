@@ -135,7 +135,7 @@ async function BlogList({ searchParams, locale }: { searchParams: Promise<{ [key
             return (
               <article key={post.id} className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md transition-shadow group flex flex-col">
                 {post.coverImage ? (
-                  <div className="aspect-[16/9] overflow-hidden bg-gray-100 dark:bg-gray-800 relative">
+                  <div className="aspect-[4/3] md:aspect-[16/9] overflow-hidden bg-gray-100 dark:bg-gray-800 relative">
                     <Image
                       src={post.coverImage}
                       alt={post.title}
@@ -146,32 +146,32 @@ async function BlogList({ searchParams, locale }: { searchParams: Promise<{ [key
                     />
                   </div>
                 ) : (
-                  <div className="aspect-[16/9] bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center border-b border-gray-200 dark:border-gray-800">
+                  <div className="aspect-[4/3] md:aspect-[16/9] bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center border-b border-gray-200 dark:border-gray-800">
                     <span className="text-xl md:text-4xl text-indigo-200 dark:text-gray-700 font-serif">LuxeImmo</span>
                   </div>
                 )}
                 
-                <div className="p-3 md:p-6 flex flex-col flex-grow">
-                  <div className="text-[10px] md:text-sm text-gray-500 dark:text-gray-400 mb-2 md:mb-3 flex items-center justify-between">
+                <div className="p-2 md:p-6 flex flex-col flex-grow">
+                  <div className="text-[10px] md:text-sm text-gray-500 dark:text-gray-400 mb-1 md:mb-3 flex items-center justify-between">
                     <span>{new Date(post.createdAt).toLocaleDateString(locale)}</span>
                     <span className="hidden sm:inline">{locale === 'ar' ? 'بواسطة لوكس إيمو' : 'By LuxeImmo'}</span>
                   </div>
-                  <h2 dir="auto" className="text-sm md:text-xl font-bold text-gray-900 dark:text-white mb-2 md:mb-3 line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                  <h2 dir="auto" className="text-xs md:text-xl font-semibold md:font-bold text-gray-900 dark:text-white mb-1 md:mb-3 line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                     <Link prefetch={true} href={`/blog/${post.slug}`}>
                       {post.title}
                     </Link>
                   </h2>
                   <div 
                     dir="auto"
-                    className="text-gray-600 dark:text-gray-400 line-clamp-2 md:line-clamp-3 mb-4 md:mb-6 text-xs md:text-sm"
+                    className="text-gray-600 dark:text-gray-400 line-clamp-2 md:line-clamp-3 mb-2 md:mb-6 text-[10px] sm:text-xs md:text-sm"
                     dangerouslySetInnerHTML={{ __html: post.content }}
                   />
                   
-                  <div className="mt-auto pt-3 md:pt-4 border-t border-gray-100 dark:border-gray-800">
+                  <div className="mt-auto pt-2 md:pt-4 border-t border-gray-100 dark:border-gray-800">
                     <Link 
                       href={`/blog/${post.slug}`}
                       prefetch={true}
-                      className="text-indigo-600 dark:text-indigo-400 font-semibold text-xs md:text-sm hover:underline"
+                      className="text-indigo-600 dark:text-indigo-400 font-semibold text-[10px] sm:text-xs md:text-sm hover:underline"
                       dangerouslySetInnerHTML={{ __html: t('readMore') }}
                     />
                   </div>

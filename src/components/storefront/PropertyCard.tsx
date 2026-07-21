@@ -68,7 +68,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
       whileHover={{ y: -5 }}
       className="group relative bg-white dark:bg-gray-950 rounded-2xl shadow-sm hover:shadow-xl dark:shadow-none dark:hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-800 flex flex-col"
     >
-      <Link href={`/properties/${property.slug}`} className="block relative aspect-h-3 aspect-w-4 overflow-hidden bg-gray-200 dark:bg-gray-900 h-40 md:h-56 lg:h-64">
+      <Link href={`/properties/${property.slug}`} className="block relative aspect-[4/3] md:aspect-[16/9] overflow-hidden bg-gray-200 dark:bg-gray-900 w-full">
         <div className="absolute top-2 md:top-3 left-2 md:left-3 z-20 flex gap-1.5 md:gap-2">
           <span className="px-2 py-0.5 md:px-3 md:py-1 bg-black text-white text-[10px] md:text-xs font-bold rounded-full uppercase tracking-wider">
             {badgeType}
@@ -101,10 +101,10 @@ export function PropertyCard({ property }: PropertyCardProps) {
           </motion.div>
         </AnimatePresence>
       </Link>
-      <div className="p-3 md:p-5 flex flex-col flex-grow">
+      <div className="p-2 md:p-5 flex flex-col flex-grow">
         <div className="flex justify-between items-start mb-1 md:mb-2 gap-2 md:gap-4 flex-col sm:flex-row sm:items-center">
           <Link href={`/properties/${property.slug}`} className="hover:underline flex-1 w-full">
-            <h3 className="text-sm md:text-lg font-bold text-gray-900 dark:text-white line-clamp-1">
+            <h3 className="text-xs md:text-lg font-semibold md:font-bold text-gray-900 dark:text-white line-clamp-2">
               {displayTitle}
             </h3>
           </Link>
