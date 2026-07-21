@@ -78,12 +78,12 @@ export function PostForm({ initialData }: { initialData?: any }) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6">
-      <div className="flex items-center mb-6">
+    <div className="max-w-4xl mx-auto p-2 md:p-6 w-full">
+      <div className="flex items-center mb-4 md:mb-6">
         <Link href="/admin/posts" className="p-2 mr-4 text-gray-500 hover:text-gray-900 dark:hover:text-white bg-gray-100 dark:bg-gray-800 rounded-full transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </Link>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+        <h1 className="text-lg md:text-2xl font-bold text-gray-900 dark:text-white">
           {initialData ? 'Edit Post' : 'Create New Post'}
         </h1>
       </div>
@@ -94,9 +94,9 @@ export function PostForm({ initialData }: { initialData?: any }) {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-6 space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-3 md:p-6 space-y-4 md:space-y-6 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Title</label>
               <input

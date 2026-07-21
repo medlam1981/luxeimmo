@@ -38,13 +38,13 @@ async function AdminDashboardContent() {
       <section>
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('quick_actions')}</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Link href="/admin/properties/new" className="flex flex-col items-center justify-center p-6 bg-blue-600 text-white rounded-2xl shadow-sm hover:bg-blue-700 transition-colors">
-            <PlusCircle className="w-8 h-8 mb-3" />
-            <span className="font-semibold text-center">{t('add_property')}</span>
+          <Link href="/admin/properties/new" className="flex flex-col items-center justify-center p-3 md:p-6 bg-blue-600 text-white rounded-2xl shadow-sm hover:bg-blue-700 transition-colors">
+            <PlusCircle className="w-5 h-5 md:w-8 md:h-8 mb-2 md:mb-3" />
+            <span className="font-semibold text-center text-sm md:text-base">{t('add_property')}</span>
           </Link>
-          <Link href="/admin/posts/new" className="flex flex-col items-center justify-center p-6 bg-gray-900 dark:bg-gray-800 text-white rounded-2xl shadow-sm hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors">
-            <PenTool className="w-8 h-8 mb-3" />
-            <span className="font-semibold text-center">{t('add_post')}</span>
+          <Link href="/admin/posts/new" className="flex flex-col items-center justify-center p-3 md:p-6 bg-gray-900 dark:bg-gray-800 text-white rounded-2xl shadow-sm hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors">
+            <PenTool className="w-5 h-5 md:w-8 md:h-8 mb-2 md:mb-3" />
+            <span className="font-semibold text-center text-sm md:text-base">{t('add_post')}</span>
           </Link>
         </div>
       </section>

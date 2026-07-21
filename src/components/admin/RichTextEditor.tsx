@@ -155,7 +155,7 @@ export function RichTextEditor({ content, onChange }: { content: string, onChang
     content,
     editorProps: {
       attributes: {
-        class: 'prose dark:prose-invert max-w-none p-4 min-h-[300px] focus:outline-none focus:ring-0',
+        class: 'prose dark:prose-invert max-w-none p-2 md:p-4 min-h-[300px] focus:outline-none focus:ring-0 w-full',
       },
     },
     onUpdate: ({ editor }) => {

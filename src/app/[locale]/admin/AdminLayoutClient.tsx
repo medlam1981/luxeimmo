@@ -7,10 +7,10 @@ import { logoutAdmin } from '@/app/actions/authActions';
 export default function AdminLayoutClient({ children, translations, isAdmin }: { children: React.ReactNode, translations: any, isAdmin: boolean }) {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col transition-colors duration-300">
-      <header className="flex w-full items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 sticky top-0 z-50">
-        <div className="text-xl font-bold text-gray-900 dark:text-white">{translations.adminLabel || 'Admin'}</div>
+      <header className="flex w-full items-center justify-between p-3 md:p-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 sticky top-0 z-50">
+        <div className="text-lg md:text-xl font-bold text-gray-900 dark:text-white">{translations.adminLabel || 'Admin'}</div>
         
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 md:gap-4 text-sm">
           <ThemeToggle />
           <LanguageSwitcher />
           <button
