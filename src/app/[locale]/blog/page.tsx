@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import prisma from '@/lib/prisma';
 import { Navbar } from '@/components/storefront/Navbar';
 import { Footer } from '@/components/storefront/Footer';
@@ -85,12 +86,6 @@ export default async function BlogIndexPage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'BlogIndex' });
 
-  const resolvedSearchParams = await searchParams;
-  const page = typeof resolvedSearchParams.page === 'string' ? parseInt(resolvedSearchParams.page, 10) : 1;
-  const validPage = isNaN(page) || page < 1 ? 1 : page;
-
-  const posts = await getCachedPosts(validPage, 12, locale);
-
   return (
     <main className="min-h-screen flex flex-col bg-white dark:bg-gray-950 pt-20">
       <Navbar />
@@ -115,6 +110,26 @@ export default async function BlogIndexPage({
           </div>
         </div>
 
+        <Suspense fallback={<div className="flex items-center justify-center min-h-[50vh]"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+          <BlogList searchParams={searchParams} locale={locale} />
+        </Suspense>
+      </div>
+
+      <Footer locale={locale} />
+    </main>
+  );
+}
+
+async function BlogList({ searchParams, locale }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }>, locale: string }) {
+  const resolvedSearchParams = await searchParams;
+  const page = typeof resolvedSearchParams.page === 'string' ? parseInt(resolvedSearchParams.page, 10) : 1;
+  const validPage = isNaN(page) || page < 1 ? 1 : page;
+
+  const posts = await getCachedPosts(validPage, 12, locale);
+  const t = await getTranslations({ locale, namespace: 'BlogIndex' });
+
+  return (
+    <>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post: any, index: number) => {
             return (
@@ -171,9 +186,6 @@ export default async function BlogIndexPage({
             <p className="text-gray-500 dark:text-gray-400 text-lg">{t('empty')}</p>
           </div>
         )}
-      </div>
-
-      <Footer locale={locale} />
-    </main>
+    </>
   );
 }

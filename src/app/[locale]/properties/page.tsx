@@ -104,10 +104,7 @@ async function PropertiesPageContent({ params, searchParams }: { params: Promise
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
-      <Navbar />
-      <main className="flex-1 w-full pt-24 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-10">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-10">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4 tracking-tight font-sans">
               {t('title')}
@@ -129,17 +126,20 @@ async function PropertiesPageContent({ params, searchParams }: { params: Promise
             </div>
           )}
         </div>
-      </main>
-      <Footer locale={locale} />
-    </div>
   );
 }
 
-
 export default async function PropertiesPage({ params, searchParams }: { params: Promise<{ locale: string }>, searchParams: Promise<{ category?: string, type?: string, city?: string, page?: string }> }) {
+  const { locale } = await params;
   return (
-    <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
-      <PropertiesPageContent params={params} searchParams={searchParams} />
-    </Suspense>
+    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
+      <Navbar />
+      <main className="flex-1 w-full pt-24 pb-12">
+        <Suspense fallback={<div className="flex items-center justify-center min-h-[50vh]"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+          <PropertiesPageContent params={params} searchParams={searchParams} />
+        </Suspense>
+      </main>
+      <Footer locale={locale} />
+    </div>
   );
 }
