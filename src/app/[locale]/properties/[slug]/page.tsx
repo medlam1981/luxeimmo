@@ -289,6 +289,9 @@ export default async function PropertyPage({ params }: Props) {
 
 export async function generateStaticParams() {
   const properties = await prisma.property.findMany({ select: { slug: true } });
+  if (properties.length === 0) {
+    return routing.locales.map(locale => ({ locale, slug: 'dummy-property' }));
+  }
   return routing.locales.flatMap(locale => 
     properties.map(p => ({ locale, slug: p.slug }))
   );

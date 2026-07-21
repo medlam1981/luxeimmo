@@ -232,6 +232,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
 export async function generateStaticParams() {
   const posts = await prisma.post.findMany({ select: { slug: true } });
+  if (posts.length === 0) {
+    return routing.locales.map(locale => ({ locale, slug: 'dummy-post' }));
+  }
   return routing.locales.flatMap(locale => 
     posts.map(p => {
       // Handle localized slugs in DB
