@@ -1,3 +1,4 @@
+import { routing } from '@/i18n/routing';
 import { Navbar } from '@/components/storefront/Navbar';
 import { Footer } from '@/components/storefront/Footer';
 import { Link } from '@/i18n/routing';
@@ -66,3 +67,9 @@ export default async function CategoriesPage({ params }: { params: Promise<{ loc
     </div>
   );
 }
+
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+

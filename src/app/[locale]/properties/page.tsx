@@ -1,3 +1,4 @@
+import { routing } from '@/i18n/routing';
 import { Suspense } from 'react';
 import { Metadata } from 'next';
 import { Navbar } from '@/components/storefront/Navbar';
@@ -143,3 +144,9 @@ export default async function PropertiesPage({ params, searchParams }: { params:
     </div>
   );
 }
+
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+

@@ -1,3 +1,4 @@
+import { routing } from '@/i18n/routing';
 import prisma from '@/lib/prisma';
 import { Navbar } from '@/components/storefront/Navbar';
 import { Footer } from '@/components/storefront/Footer';
@@ -228,3 +229,20 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     </main>
   );
 }
+
+
+export async function generateStaticParams() {
+  const posts = await prisma.post.findMany({ select: { slug: true } });
+  return routing.locales.flatMap(locale => 
+    posts.map(p => {
+      // Handle localized slugs in DB
+      let slug = p.slug;
+      try {
+        const parsed = JSON.parse(slug);
+        slug = parsed[locale] || parsed.en || Object.values(parsed)[0];
+      } catch (e) {}
+      return { locale, slug };
+    })
+  );
+}
+

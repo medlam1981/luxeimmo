@@ -1,3 +1,4 @@
+import { routing } from '@/i18n/routing';
 import { Metadata } from 'next';
 import { Navbar } from '@/components/storefront/Navbar';
 import { Hero } from '@/components/storefront/Hero';
@@ -80,3 +81,9 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     </main>
   );
 }
+
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+

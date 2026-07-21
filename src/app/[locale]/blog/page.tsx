@@ -1,3 +1,4 @@
+import { routing } from '@/i18n/routing';
 import { Suspense } from 'react';
 import prisma from '@/lib/prisma';
 import { Navbar } from '@/components/storefront/Navbar';
@@ -189,3 +190,9 @@ async function BlogList({ searchParams, locale }: { searchParams: Promise<{ [key
     </>
   );
 }
+
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+

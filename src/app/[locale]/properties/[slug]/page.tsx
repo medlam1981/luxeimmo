@@ -1,3 +1,4 @@
+import { routing } from '@/i18n/routing';
 import { Suspense } from 'react';
 import { Metadata } from 'next';
 import prisma from '@/lib/prisma';
@@ -285,3 +286,12 @@ export default async function PropertyPage({ params }: Props) {
     </Suspense>
   );
 }
+
+
+export async function generateStaticParams() {
+  const properties = await prisma.property.findMany({ select: { slug: true } });
+  return routing.locales.flatMap(locale => 
+    properties.map(p => ({ locale, slug: p.slug }))
+  );
+}
+
