@@ -30,9 +30,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 import { Suspense } from 'react';
 
-async function HomeContent({ locale }: { locale: string }) {
+async function HomeProperties() {
   let properties: Property[] = [];
-  let heroProperty: Property | null = null;
   
   try {
     const dbProperties = await prisma.property.findMany({
@@ -58,40 +57,11 @@ async function HomeContent({ locale }: { locale: string }) {
       isFeatured: p.isFeatured
     })) as Property[];
 
-    const dbHeroProperty = await prisma.property.findFirst({
-      where: { isFeatured: true, status: 'APPROVED' }
-    }) || dbProperties[0];
-
-    if (dbHeroProperty) {
-      heroProperty = {
-        id: dbHeroProperty.id,
-        title: dbHeroProperty.title,
-        slug: dbHeroProperty.slug,
-        description: dbHeroProperty.description,
-        price: Number(dbHeroProperty.price),
-        propertyType: dbHeroProperty.propertyType,
-        ownerPhone: dbHeroProperty.ownerPhone,
-        category: dbHeroProperty.category,
-        city: dbHeroProperty.city,
-        bedrooms: dbHeroProperty.bedrooms,
-        bathrooms: dbHeroProperty.bathrooms,
-        areaSqm: dbHeroProperty.areaSqm,
-        images: dbHeroProperty.images.length > 0 ? dbHeroProperty.images : ['https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80'],
-        isFeatured: dbHeroProperty.isFeatured
-      } as Property;
-    }
-
   } catch (error) {
     console.log('Database connection failed.');
   }
 
-  return (
-    <>
-      <Hero heroProperty={heroProperty} />
-      <Features />
-      <PropertyGrid properties={properties} />
-    </>
-  );
+  return <PropertyGrid properties={properties} />;
 }
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
@@ -101,8 +71,10 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   return (
     <main className="min-h-screen flex flex-col bg-white dark:bg-gray-950 transition-colors duration-300">
       <Navbar />
-      <Suspense fallback={<div className="h-screen flex items-center justify-center"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
-        <HomeContent locale={locale} />
+      <Hero />
+      <Features />
+      <Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        <HomeProperties />
       </Suspense>
       <Footer locale={locale} />
     </main>

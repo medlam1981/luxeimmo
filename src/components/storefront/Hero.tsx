@@ -8,11 +8,7 @@ import { Search, ChevronDown } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
-interface HeroProps {
-  heroProperty: Property | null;
-}
-
-export function Hero({ heroProperty }: HeroProps) {
+export function Hero() {
   const [city, setCity] = useState('');
   const [propertyType, setPropertyType] = useState('SALE');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
