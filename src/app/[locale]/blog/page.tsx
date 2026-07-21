@@ -90,14 +90,14 @@ export default async function BlogIndexPage({
     <main className="min-h-screen flex flex-col bg-white dark:bg-gray-950 pt-20">
       <Navbar />
       
-      <div className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
-        <div className="flex flex-col lg:flex-row justify-between items-start w-full gap-8 mb-12">
+      <div className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-12 w-full">
+        <div className="flex flex-col lg:flex-row justify-between items-start w-full gap-4 md:gap-8 mb-6 md:mb-12">
           {/* Dynamic Title Area: Aligns Right in AR, Left in EN/FR/ES */}
-          <div className="flex flex-col items-start text-start w-full lg:w-1/2 overflow-hidden">
-            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white tracking-tight text-balance">
+          <div className="flex flex-col items-start text-start w-full lg:w-1/2">
+            <h1 className="text-xl md:text-4xl font-bold text-gray-900 dark:text-white tracking-tight text-balance">
               {t('title')}
             </h1>
-            <p className="mt-2 md:mt-4 text-[11px] md:text-lg text-gray-600 dark:text-gray-400 whitespace-nowrap md:whitespace-normal tracking-tighter md:tracking-normal w-full overflow-hidden text-ellipsis">
+            <p className="mt-2 md:mt-4 text-xs md:text-lg text-gray-600 dark:text-gray-400">
               {t('subtitle')}
             </p>
           </div>
