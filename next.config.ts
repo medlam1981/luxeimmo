@@ -70,7 +70,7 @@ const nextConfig: NextConfig = {
   },
 
   experimental: {
-    ppr: 'incremental',
+    cacheComponents: true,
     serverActions: {
       bodySizeLimit: '10mb',
     },
