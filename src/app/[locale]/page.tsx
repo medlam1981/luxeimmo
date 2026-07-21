@@ -81,17 +81,25 @@ async function HomeCategories({ locale }: { locale: string }) {
     <div id="categories" className="w-full bg-gray-50 dark:bg-gray-900 pt-20 pb-4 md:pt-0 md:pb-0 md:min-h-[calc(100vh-80px)] md:flex md:flex-col md:justify-center md:items-center md:mt-[80px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Advertisement Container */}
-        <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-xl mb-4 md:mb-12 h-16 md:h-24 flex items-center justify-center border border-gray-300 dark:border-gray-700">
-          <p className="text-[10px] md:text-sm text-gray-500 dark:text-gray-400 font-medium uppercase tracking-widest">Advertisement Space</p>
+        <div className="grid grid-cols-3 gap-2 md:gap-4 mb-4 md:mb-12">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="w-full bg-gray-200 dark:bg-gray-800 rounded-xl h-16 md:h-24 flex items-center justify-center border border-gray-300 dark:border-gray-700">
+              <p className="text-[8px] md:text-sm text-gray-500 dark:text-gray-400 font-medium uppercase tracking-widest text-center px-1">Ad {i}</p>
+            </div>
+          ))}
         </div>
 
-        <div className="text-center mb-4 md:mb-16">
-          <h2 className="text-lg md:text-5xl font-extrabold text-gray-900 dark:text-white mb-1 md:mb-4 tracking-tight font-sans">
+        <div className="text-center mb-4 md:mb-8">
+          <h2 className="text-lg md:text-3xl font-extrabold text-gray-900 dark:text-white mb-1 md:mb-3 tracking-tight font-sans">
             {t('title', { defaultMessage: 'Browse by Category' })}
           </h2>
-          <p className="text-xs md:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
             {t('subtitle', { defaultMessage: 'Explore our curated real estate categories.' })}
           </p>
+        </div>
+
+        <div className="mb-8 md:mb-12">
+          <Hero />
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8">
           {categories.map((category) => (
@@ -133,7 +141,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     <main className="min-h-screen flex flex-col bg-white dark:bg-gray-950 transition-colors duration-300">
       <Navbar />
       <HomeCategories locale={locale} />
-      <Hero />
       <Features />
       <Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
         <HomeProperties />

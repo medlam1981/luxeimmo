@@ -15,8 +15,8 @@ export function Hero() {
   const t = useTranslations('Hero');
 
   return (
-    <div className="w-full bg-white dark:bg-gray-950 px-2 sm:px-6 lg:px-8 py-2 md:py-8">
-      <div className="bg-gray-50 dark:bg-gray-900 p-2 sm:p-4 rounded-2xl shadow-lg flex flex-row gap-2 sm:gap-3 w-full max-w-4xl mx-auto items-stretch border border-gray-200 dark:border-gray-800">
+    <div className="w-full pb-2 md:pb-4">
+      <div className="bg-white dark:bg-gray-800 p-2 sm:p-4 rounded-2xl shadow-lg flex flex-row gap-2 sm:gap-3 w-full max-w-4xl mx-auto items-stretch border border-gray-200 dark:border-gray-700">
         {/* City Search Input */}
         <div className="flex-1 min-w-0">
           <input 
