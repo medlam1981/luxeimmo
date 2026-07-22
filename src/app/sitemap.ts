@@ -13,8 +13,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     orderBy: { updatedAt: 'desc' },
   });
 
+  // Fetch all published blog posts
+  const posts = await prisma.post.findMany({
+    where: { published: true },
+    select: { slug: true, updatedAt: true },
+    orderBy: { updatedAt: 'desc' },
+  });
+
   // Static pages common to every locale
-  const staticPaths = ['', '/properties', '/search'];
+  const staticPaths = ['', '/properties', '/search', '/blog'];
 
   const staticEntries: MetadataRoute.Sitemap = LOCALES.flatMap((locale) =>
     staticPaths.map((path) => ({
@@ -35,5 +42,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   );
 
-  return [...staticEntries, ...propertyEntries];
+  // One entry per post × locale
+  const postEntries: MetadataRoute.Sitemap = LOCALES.flatMap((locale) =>
+    posts.map((p: any) => {
+      let slugToUse = p.slug;
+      try {
+        const parsedSlugs = JSON.parse(p.slug);
+        slugToUse = parsedSlugs[locale] || parsedSlugs.en || Object.values(parsedSlugs)[0] || p.slug;
+      } catch (e) {
+        // Fallback to raw slug
+      }
+      return {
+        url: `${BASE_URL}/${locale}/blog/${slugToUse}`,
+        lastModified: p.updatedAt,
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+      };
+    })
+  );
+
+  return [...staticEntries, ...propertyEntries, ...postEntries];
 }
