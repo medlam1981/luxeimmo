@@ -5,7 +5,7 @@ import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
   // useEffect only runs on the client, so now we can safely show the UI
@@ -18,7 +18,9 @@ export function ThemeToggle() {
   }
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    // When the user toggles, we explicitly set 'light' or 'dark', which saves to localStorage
+    // This explicitly overrides the 'system' default from their OS
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   };
 
   return (
@@ -27,7 +29,7 @@ export function ThemeToggle() {
       className="p-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
       aria-label="Toggle theme"
     >
-      {theme === 'dark' ? (
+      {resolvedTheme === 'dark' ? (
         <Sun className="w-5 h-5" />
       ) : (
         <Moon className="w-5 h-5" />
