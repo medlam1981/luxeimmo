@@ -97,7 +97,7 @@ async function HomeCategories({ locale }: { locale: string }) {
             <Link 
               key={category.slug} 
               href={`/properties?category=${category.slug}`}
-              className="group relative h-40 md:h-64 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+              className="group relative h-40 md:h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-xl dark:shadow-blue-500/20 dark:hover:shadow-blue-500/40 transition-all duration-300 hover:-translate-y-1"
             >
               <div className="absolute inset-0">
                 <Image
