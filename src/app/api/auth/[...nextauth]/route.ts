@@ -18,6 +18,14 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
       allowDangerousEmailAccountLinking: true,
+      style: {
+        logo: '/google.svg',
+        logoDark: '/google.svg',
+        bgDark: '#fff',
+        bg: '#fff',
+        text: '#000',
+        textDark: '#000',
+      }
     }),
   ],
   session: {

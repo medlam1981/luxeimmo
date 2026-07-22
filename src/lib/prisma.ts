@@ -5,17 +5,14 @@ import { Pool } from 'pg';
 const prismaClientSingleton = () => {
   const connectionString = process.env.DATABASE_URL || '';
   
-  // Use WHATWG URL to parse the database URL to avoid Node.js url.parse() deprecation warnings from pg
-  let poolConfig = {};
-  if (connectionString) {
-    const parsedUrl = new URL(connectionString);
-    poolConfig = {
-      user: parsedUrl.username,
-      password: parsedUrl.password,
-      host: parsedUrl.hostname,
-      port: parsedUrl.port ? parseInt(parsedUrl.port, 10) : 5432,
-      database: parsedUrl.pathname.slice(1),
-      ssl: parsedUrl.searchParams.get('sslmode') !== 'disable' ? true : undefined,
+  const poolConfig: any = {
+    connectionString,
+  };
+
+  // Vercel Postgres/Supabase requires SSL in production
+  if (process.env.NODE_ENV === 'production') {
+    poolConfig.ssl = {
+      rejectUnauthorized: false,
     };
   }
 
