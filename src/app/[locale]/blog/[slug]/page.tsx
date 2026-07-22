@@ -233,20 +233,25 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
 
 export async function generateStaticParams() {
-  const posts = await prisma.post.findMany({ select: { slug: true } });
-  if (posts.length === 0) {
-    return routing.locales.map(locale => ({ locale, slug: 'dummy-post' }));
+  try {
+    const posts = await prisma.post.findMany({ select: { slug: true } });
+    if (posts.length === 0) {
+      return routing.locales.map(locale => ({ locale, slug: 'dummy-post' }));
+    }
+    return routing.locales.flatMap(locale => 
+      posts.map(p => {
+        // Handle localized slugs in DB
+        let slug = p.slug;
+        try {
+          const parsed = JSON.parse(slug);
+          slug = parsed[locale] || parsed.en || Object.values(parsed)[0];
+        } catch (e) {}
+        return { locale, slug };
+      })
+    );
+  } catch (error) {
+    console.error("Database unreachable during generateStaticParams for blog. Falling back to dynamic rendering.");
+    return [];
   }
-  return routing.locales.flatMap(locale => 
-    posts.map(p => {
-      // Handle localized slugs in DB
-      let slug = p.slug;
-      try {
-        const parsed = JSON.parse(slug);
-        slug = parsed[locale] || parsed.en || Object.values(parsed)[0];
-      } catch (e) {}
-      return { locale, slug };
-    })
-  );
 }
 

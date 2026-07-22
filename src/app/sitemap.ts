@@ -6,19 +6,26 @@ const LOCALES = ['en', 'fr', 'ar', 'es'];
 
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Fetch all property slugs
-  const properties = await prisma.property.findMany({
-    where: { status: 'APPROVED' },
-    select: { slug: true, updatedAt: true },
-    orderBy: { updatedAt: 'desc' },
-  });
+  let properties: any[] = [];
+  let posts: any[] = [];
 
-  // Fetch all published blog posts
-  const posts = await prisma.post.findMany({
-    where: { published: true },
-    select: { slug: true, updatedAt: true },
-    orderBy: { updatedAt: 'desc' },
-  });
+  try {
+    // Fetch all property slugs
+    properties = await prisma.property.findMany({
+      where: { status: 'APPROVED' },
+      select: { slug: true, updatedAt: true },
+      orderBy: { updatedAt: 'desc' },
+    });
+
+    // Fetch all published blog posts
+    posts = await prisma.post.findMany({
+      where: { published: true },
+      select: { slug: true, updatedAt: true },
+      orderBy: { updatedAt: 'desc' },
+    });
+  } catch (error) {
+    console.error("Database connection failed during sitemap generation. Generating static sitemap only.");
+  }
 
   // Static pages common to every locale
   const staticPaths = ['', '/properties', '/search', '/blog'];
