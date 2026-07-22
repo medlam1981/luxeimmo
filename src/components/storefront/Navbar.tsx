@@ -52,7 +52,7 @@ export function Navbar() {
 
   return (
     <header dir="ltr" className="fixed top-0 w-full z-50 transition-all duration-300 bg-white/90 dark:bg-gray-950/90 backdrop-blur-md shadow-sm border-b border-gray-100 dark:border-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo — suppressHydrationWarning allows theme attr to differ between SSR and client */}
           <div className="flex-shrink-0 flex items-center" suppressHydrationWarning>

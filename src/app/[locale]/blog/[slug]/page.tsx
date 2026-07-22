@@ -144,7 +144,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <article className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full text-start">
+      <article className="flex-grow max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-12 w-full text-start">
         <div className="mb-8">
           <Link 
             href="/blog" 

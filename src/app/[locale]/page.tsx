@@ -79,9 +79,9 @@ async function HomeCategories({ locale }: { locale: string }) {
 
   return (
     <div id="categories" className="w-full bg-gray-50 dark:bg-gray-900 pt-24 pb-8 md:pt-24 md:pb-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 w-full">
         {/* Advertisement Container */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mt-4 mb-4 md:mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5 sm:gap-3 md:gap-4 mt-4 mb-4 md:mb-6">
           {[1, 2, 3].map((i) => (
             <div key={i} className={`w-full bg-gray-200 dark:bg-gray-800 rounded-xl h-12 md:h-16 items-center justify-center border border-gray-300 dark:border-gray-700 premium-card ${i === 3 ? 'hidden md:flex' : 'flex'}`}>
               <p className="text-[8px] md:text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-widest text-center px-1">Ad {i}</p>
@@ -92,7 +92,7 @@ async function HomeCategories({ locale }: { locale: string }) {
         <div className="mb-4 md:mb-6">
           <Hero />
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-1.5 sm:gap-3 md:gap-8">
           {categories.map((category) => (
             <Link 
               key={category.slug} 

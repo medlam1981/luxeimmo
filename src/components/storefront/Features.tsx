@@ -40,7 +40,7 @@ export function Features() {
 
   return (
     <section className="bg-white dark:bg-gray-950 py-8 md:py-16 border-t border-gray-100 dark:border-gray-900 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="text-center mb-6 md:mb-12">
           <h2 className="text-xl md:text-3xl font-bold text-gray-900 dark:text-white font-sans tracking-tight">
             {t.has('title') ? t('title') : 'Why Choose LuxeImmo'}

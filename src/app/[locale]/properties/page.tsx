@@ -104,7 +104,7 @@ async function PropertiesPageContent({ params, searchParams }: { params: Promise
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-6 md:mt-10">
+    <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 w-full mt-6 md:mt-10">
           <div className="text-center mb-8 md:mb-16">
             <h1 className="text-xl md:text-3xl font-extrabold text-gray-900 dark:text-white mb-2 md:mb-4 tracking-tight font-sans">
               {t('title')}

@@ -36,7 +36,7 @@ export function PropertyGrid({ properties }: PropertyGridProps) {
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900 py-8 md:py-16 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="flex justify-between items-end mb-6 md:mb-10">
           <div>
             <h2 className="text-xl md:text-3xl font-bold text-gray-900 dark:text-white font-sans tracking-tight mb-1 md:mb-2">

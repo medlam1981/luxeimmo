@@ -16,7 +16,7 @@ export function Hero() {
 
   return (
     <div className="w-full pb-2 md:pb-4">
-      <div className="bg-white dark:bg-gray-800 p-2 rounded-2xl shadow-lg flex flex-row gap-2 w-full max-w-4xl mx-auto items-stretch border border-gray-200 dark:border-blue-500/40 dark:shadow-[0_0_15px_rgba(59,130,246,0.2)] focus-within:border-blue-400 focus-within:shadow-xl dark:focus-within:border-blue-400 dark:focus-within:shadow-[0_0_25px_rgba(59,130,246,0.4)] transition-all duration-300">
+      <div className="bg-white dark:bg-gray-800 p-1 sm:p-2 rounded-2xl shadow-lg flex flex-row gap-1 sm:gap-2 w-full max-w-4xl mx-auto items-stretch border border-gray-200 dark:border-blue-500/40 dark:shadow-[0_0_15px_rgba(59,130,246,0.2)] focus-within:border-blue-400 focus-within:shadow-xl dark:focus-within:border-blue-400 dark:focus-within:shadow-[0_0_25px_rgba(59,130,246,0.4)] transition-all duration-300">
         {/* City Search Input */}
         <div className="flex-1 min-w-0">
           <input 
