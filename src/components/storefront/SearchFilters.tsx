@@ -46,7 +46,7 @@ export function SearchFilters({ initialFilters }: FiltersProps) {
   };
 
   return (
-    <form onSubmit={handleSearch} className="bg-white dark:bg-gray-900 p-6 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 space-y-6 sticky top-24">
+    <form onSubmit={handleSearch} className="bg-white dark:bg-gray-900 p-6 rounded-3xl border border-gray-100 dark:border-gray-800 space-y-6 sticky top-24 premium-card">
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('location')}</label>
         <input 

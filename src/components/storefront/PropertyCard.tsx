@@ -65,8 +65,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
 
   return (
     <motion.div
-      whileHover={{ y: -5 }}
-      className="group relative bg-white dark:bg-gray-950 rounded-2xl shadow-sm hover:shadow-xl dark:shadow-none dark:hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-800 flex flex-col"
+      className="group relative bg-white dark:bg-gray-950 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-800 flex flex-col premium-card premium-interactive"
     >
       <Link href={`/properties/${property.slug}`} className="block relative aspect-[4/3] md:aspect-[16/9] overflow-hidden bg-gray-200 dark:bg-gray-900 w-full">
         <div className="absolute top-2 md:top-3 left-2 md:left-3 z-20 flex gap-1.5 md:gap-2">

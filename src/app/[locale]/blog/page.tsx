@@ -133,7 +133,7 @@ async function BlogList({ searchParams, locale }: { searchParams: Promise<{ [key
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
           {posts.map((post: any, index: number) => {
             return (
-              <article key={post.id} className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md transition-shadow group flex flex-col">
+              <article key={post.id} className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden group flex flex-col premium-card premium-interactive">
                 {post.coverImage ? (
                   <div className="aspect-[4/3] md:aspect-[16/9] overflow-hidden bg-gray-100 dark:bg-gray-800 relative">
                     <Image

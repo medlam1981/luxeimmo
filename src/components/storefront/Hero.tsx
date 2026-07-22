@@ -46,7 +46,7 @@ export function Hero() {
                 animate={{ opacity: 1, y: 0, scaleY: 1 }}
                 exit={{ opacity: 0, y: -10, scaleY: 0.95 }}
                 transition={{ duration: 0.2 }}
-                className="absolute top-full left-0 w-full mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-indigo-500/30 rounded-xl shadow-xl z-50 overflow-hidden origin-top"
+                className="absolute top-full left-0 w-full mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-indigo-500/30 rounded-xl z-50 overflow-hidden origin-top premium-card"
               >
                 <li>
                   <button

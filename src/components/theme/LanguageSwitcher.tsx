@@ -55,7 +55,7 @@ export function LanguageSwitcher({ dropup = false, align = 'end' }: { dropup?: b
       </button>
 
       {isOpen && (
-        <div className={`absolute ${dropup ? 'bottom-full mb-2' : 'top-full mt-2'} ${alignClass} w-40 bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-100 dark:border-gray-800 py-2 z-50`} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+        <div className={`absolute ${dropup ? 'bottom-full mb-2' : 'top-full mt-2'} ${alignClass} w-40 bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 py-2 z-50 premium-card`} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
           {languages.map((lang) => (
             <button
               key={lang.code}

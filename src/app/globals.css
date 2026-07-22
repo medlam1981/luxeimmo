@@ -63,6 +63,12 @@ h1, h2, h3, h4, h5, h6, .font-sans {
   .animation-delay-400 {
     animation-delay: 0.4s;
   }
+  .premium-card {
+    @apply shadow-md dark:shadow-blue-500/20 transition-all duration-300;
+  }
+  .premium-interactive {
+    @apply hover:shadow-xl dark:hover:shadow-blue-500/40 hover:-translate-y-1;
+  }
 }
 
 @keyframes fadeInUp {

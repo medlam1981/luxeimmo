@@ -83,7 +83,7 @@ async function HomeCategories({ locale }: { locale: string }) {
         {/* Advertisement Container */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mt-4 mb-4 md:mb-6">
           {[1, 2, 3].map((i) => (
-            <div key={i} className={`w-full bg-gray-200 dark:bg-gray-800 rounded-xl h-12 md:h-16 items-center justify-center border border-gray-300 dark:border-gray-700 ${i === 3 ? 'hidden md:flex' : 'flex'}`}>
+            <div key={i} className={`w-full bg-gray-200 dark:bg-gray-800 rounded-xl h-12 md:h-16 items-center justify-center border border-gray-300 dark:border-gray-700 premium-card ${i === 3 ? 'hidden md:flex' : 'flex'}`}>
               <p className="text-[8px] md:text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-widest text-center px-1">Ad {i}</p>
             </div>
           ))}
@@ -97,7 +97,7 @@ async function HomeCategories({ locale }: { locale: string }) {
             <Link 
               key={category.slug} 
               href={`/properties?category=${category.slug}`}
-              className="group relative h-40 md:h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-xl dark:shadow-blue-500/20 dark:hover:shadow-blue-500/40 transition-all duration-300 hover:-translate-y-1"
+              className="group relative h-40 md:h-64 rounded-2xl overflow-hidden premium-card premium-interactive"
             >
               <div className="absolute inset-0">
                 <Image
