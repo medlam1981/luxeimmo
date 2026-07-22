@@ -1,6 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { PrismaAdapter } from "@auth/prisma-adapter";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 import { Adapter } from "next-auth/adapters";
 import { rateLimit } from "@/app/api/rate-limit";
@@ -8,11 +8,18 @@ import { NextRequest, NextResponse } from "next/server";
 
 if (process.env.VERCEL_ENV === "preview" && process.env.VERCEL_URL) {
   process.env.NEXTAUTH_URL = `https://${process.env.VERCEL_URL}`;
+} else if (process.env.URL) {
+  // Netlify production URL
+  process.env.NEXTAUTH_URL = process.env.URL;
+} else if (process.env.DEPLOY_PRIME_URL) {
+  // Netlify deploy preview URL
+  process.env.NEXTAUTH_URL = process.env.DEPLOY_PRIME_URL;
 }
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   adapter: PrismaAdapter(prisma) as Adapter,
+  debug: true,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
