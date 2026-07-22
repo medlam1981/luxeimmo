@@ -74,7 +74,7 @@ export function Hero() {
         {/* Search Button */}
         <Link 
           href={`/search?city=${city}&type=${propertyType}`}
-          className="w-10 h-10 sm:w-auto sm:h-12 shrink-0 inline-flex items-center justify-center px-0 sm:px-6 font-semibold text-white bg-black hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md text-base"
+          className="w-10 h-10 sm:w-auto sm:h-12 shrink-0 inline-flex items-center justify-center px-0 sm:px-6 font-semibold bg-transparent text-slate-800 dark:text-slate-200 hover:bg-blue-500/10 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 dark:hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] rounded-xl transition-all duration-300 text-base focus:outline-none focus:bg-blue-500/10 dark:focus:bg-blue-900/20 dark:focus:shadow-[0_0_15px_rgba(59,130,246,0.3)]"
         >
           <Search className="w-4 h-4 sm:w-5 sm:h-5 sm:rtl:ml-2 sm:ltr:mr-2" />
           <span className="hidden sm:inline">{t('search')}</span>
