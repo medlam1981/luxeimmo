@@ -71,6 +71,11 @@ export function Navbar() {
             <Link href="/properties" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors">{t('properties')}</Link>
             <Link href="/#categories" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors">{t('categories')}</Link>
             <Link href="/blog" prefetch={true} className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors">{t('blog')}</Link>
+            {status === 'authenticated' && session?.user && ((session.user as any).role === 'SELLER' || (session.user as any).role === 'ADMIN') && (
+              <Link href="/admin" className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-bold transition-colors">
+                {t.has('sellerDashboard') ? t('sellerDashboard') : "لوحة تحكم البائع"}
+              </Link>
+            )}
           </nav>
 
           {/* Right-side icons — use fixed gap to avoid SSR/client class mismatch */}
@@ -104,11 +109,7 @@ export function Navbar() {
                         <span className="text-xs text-gray-500 truncate">{session.user.email}</span>
                       </div>
                       <div className={`flex flex-col p-2 space-y-1 ${locale === 'ar' ? 'text-right' : 'text-left'}`}>
-                        {(session.user as any).role === 'SELLER' || (session.user as any).role === 'ADMIN' ? (
-                          <Link className="px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors text-gray-700 dark:text-gray-300 block" href="/admin" onClick={() => setShowProfileMenu(false)}>
-                            {t.has('sellerDashboard') ? t('sellerDashboard') : "لوحة تحكم البائع"}
-                          </Link>
-                        ) : (
+                        {(!session.user || ((session.user as any).role !== 'SELLER' && (session.user as any).role !== 'ADMIN')) && (
                           <Link className="px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors text-gray-700 dark:text-gray-300 block" href="/onboarding" onClick={() => setShowProfileMenu(false)}>
                             {t.has('upgradeAccount') ? t('upgradeAccount') : "أضف عقارك (ترقية حساب)"}
                           </Link>
@@ -199,6 +200,11 @@ export function Navbar() {
               <Link href="/properties" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('properties')}</Link>
               <Link href="/#categories" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('categories')}</Link>
               <Link href="/blog" prefetch={true} onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('blog')}</Link>
+              {status === 'authenticated' && session?.user && ((session.user as any).role === 'SELLER' || (session.user as any).role === 'ADMIN') && (
+                <Link href="/admin" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">
+                  {t.has('sellerDashboard') ? t('sellerDashboard') : "لوحة تحكم البائع"}
+                </Link>
+              )}
               {status === 'unauthenticated' && (
                 <button
                   onClick={() => signIn('google', { callbackUrl: '/' })}
