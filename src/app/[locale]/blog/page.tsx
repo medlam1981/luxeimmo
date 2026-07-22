@@ -103,7 +103,7 @@ export default async function BlogIndexPage({
           </div>
 
           {/* Advertisement Placeholder */}
-          <div className="w-full lg:w-1/2 min-h-[120px] bg-gray-100 dark:bg-gray-900/40 flex items-center justify-center rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700">
+          <div className="w-full lg:w-1/2 min-h-[120px] bg-gray-100 dark:bg-gray-900/40 flex items-center justify-center rounded-xl border border-gray-300 dark:border-gray-700 premium-card">
             <span className="text-gray-500 dark:text-gray-400 font-medium tracking-widest uppercase text-center px-4">
               Advertisement Space
             </span>

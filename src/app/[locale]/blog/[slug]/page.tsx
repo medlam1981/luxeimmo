@@ -177,7 +177,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
 
           {/* Header Advertisement */}
-          <div className="w-full lg:w-[40%] min-h-[120px] bg-gray-100 dark:bg-gray-900/40 flex items-center justify-center rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700">
+          <div className="w-full lg:w-[40%] min-h-[120px] bg-gray-100 dark:bg-gray-900/40 flex items-center justify-center rounded-xl border border-gray-300 dark:border-gray-700 premium-card">
             <span className="text-gray-500 dark:text-gray-400 font-medium tracking-widest uppercase text-center px-4">
               Advertisement Space
             </span>
@@ -207,7 +207,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             />
             
             {/* Mobile Horizontal Ad (Hidden on Desktop) */}
-            <div className="w-full h-[90px] my-8 bg-gray-100 dark:bg-gray-900/40 flex lg:hidden items-center justify-center rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700">
+            <div className="w-full h-[90px] my-8 bg-gray-100 dark:bg-gray-900/40 flex lg:hidden items-center justify-center rounded-xl border border-gray-300 dark:border-gray-700 premium-card">
               <span className="text-gray-500 dark:text-gray-400 font-medium tracking-widest uppercase text-center px-4">
                 Advertisement Space
               </span>
@@ -217,7 +217,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
 
           <aside className="hidden lg:block lg:w-[30%]">
-            <div className="sticky top-24 w-full min-h-[600px] bg-gray-100 dark:bg-gray-900/40 flex items-center justify-center rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700">
+            <div className="sticky top-24 w-full min-h-[600px] bg-gray-100 dark:bg-gray-900/40 flex items-center justify-center rounded-xl border border-gray-300 dark:border-gray-700 premium-card">
               <span className="text-gray-500 dark:text-gray-400 font-medium tracking-widest uppercase text-center px-4">
                 Advertisement Space
               </span>
