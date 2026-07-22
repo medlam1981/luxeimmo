@@ -76,6 +76,7 @@ const nextConfig: NextConfig = {
     },
   },
 
+  // @ts-ignore - NextConfig type might be missing this in some versions
   eslint: {
     ignoreDuringBuilds: true,
   },
