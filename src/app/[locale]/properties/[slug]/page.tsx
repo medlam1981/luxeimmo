@@ -305,7 +305,7 @@ export async function generateStaticParams() {
     );
   } catch (error) {
     console.error("Database unreachable during generateStaticParams for properties. Falling back to dynamic rendering.");
-    return [];
+    return routing.locales.map(locale => ({ locale, slug: 'dummy-property' }));
   }
 }
 
