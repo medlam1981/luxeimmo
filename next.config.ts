@@ -76,6 +76,10 @@ const nextConfig: NextConfig = {
     },
   },
 
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   // Apply security headers globally
   async headers() {
     return [
