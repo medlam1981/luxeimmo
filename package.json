@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "rm -rf .next && prisma generate && prisma db push --accept-data-loss && next build",
+    "build": "rm -rf .next && prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
     "postinstall": "prisma generate",
@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
-    "@prisma/adapter-pg": "^7.8.0",
-    "@prisma/client": "^7.8.0",
+    "@prisma/adapter-pg": "^5.22.0",
+    "@prisma/client": "^5.22.0",
     "@tailwindcss/typography": "^0.5.20",
     "@tiptap/extension-text-align": "^3.28.0",
     "@tiptap/react": "^3.28.0",
@@ -49,7 +49,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
-    "prisma": "^7.8.0",
+    "prisma": "^5.22.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
