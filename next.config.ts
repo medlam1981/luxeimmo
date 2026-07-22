@@ -69,17 +69,13 @@ const nextConfig: NextConfig = {
     unoptimized: process.env.NODE_ENV === 'development',
   },
 
+  cacheComponents: true,
   experimental: {
-    cacheComponents: true,
     serverActions: {
       bodySizeLimit: '10mb',
     },
   },
 
-  // @ts-ignore - NextConfig type might be missing this in some versions
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
 
   // Apply security headers globally
   async headers() {
