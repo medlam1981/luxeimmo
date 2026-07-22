@@ -131,7 +131,7 @@ async function PropertyPageContent({ params }: Props) {
     '@type': 'RealEstateListing',
     name: displayTitle,
     description: displayDesc,
-    image: property.images,
+    image: property.images.map((img: string) => img.startsWith('http') ? img : `${BASE_URL}${img}`),
     numberOfRooms: property.bedrooms,
     floorSize: {
       '@type': 'QuantitativeValue',
@@ -143,6 +143,7 @@ async function PropertyPageContent({ params }: Props) {
       price: property.price.toString(),
       priceCurrency: 'MAD',
       url: `${BASE_URL}/${locale}/properties/${property.slug}`,
+      availability: 'https://schema.org/InStock'
     },
     address: {
       '@type': 'PostalAddress',

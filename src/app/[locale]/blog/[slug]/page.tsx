@@ -114,17 +114,19 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const displayTitle = parseLocalized(post.title, locale);
   const displayContent = parseLocalized(post.content, locale);
 
+  const BASE_URL = process.env.NEXTAUTH_URL || 'https://luxeimmo.com';
+
   // Schema.org Article JSON-LD
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: displayTitle,
-    image: post.coverImage ? [post.coverImage] : [],
+    image: post.coverImage ? [post.coverImage.startsWith('http') ? post.coverImage : `${BASE_URL}${post.coverImage}`] : [],
     datePublished: new Date(post.createdAt).toISOString(),
     dateModified: new Date(post.updatedAt).toISOString(),
     author: [{
       '@type': 'Organization',
-      name: 'LuxeImmo',
+      name: 'Luxe Immo',
     }]
   };
 
