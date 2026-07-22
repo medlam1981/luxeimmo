@@ -25,14 +25,21 @@ const getCachedPost = unstable_cache(
   async (slug: string) => {
     // Because slug is stored as a JSON string for new posts, we use contains.
     // For older posts, the slug is just a raw string. We use OR to check both.
-    const post = await prisma.post.findFirst({
-      where: {
-        OR: [
-          { slug: slug },
-          { slug: { contains: `"${slug}"` } }
-        ]
-      },
-    });
+    let post = null;
+    try {
+      post = await prisma.post.findFirst({
+        where: {
+          OR: [
+            { slug: slug },
+            { slug: { contains: `"${slug}"` } }
+          ]
+        },
+      });
+    } catch (error) {
+      console.log('Database connection failed in blog post cache.');
+      const { unstable_noStore } = await import('next/cache');
+      unstable_noStore();
+    }
     return post ? JSON.parse(JSON.stringify(post)) : null;
   },
   ['blog-post-metadata'],

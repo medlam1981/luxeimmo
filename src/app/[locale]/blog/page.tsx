@@ -21,19 +21,26 @@ const parseLocalized = (str: string, locale: string) => {
 
 const getCachedPosts = (page: number, limit: number, locale: string) => unstable_cache(
   async () => {
-    const posts = await prisma.post.findMany({
-      where: { published: true },
-      orderBy: { createdAt: 'desc' },
-      skip: (page - 1) * limit,
-      take: limit,
-      select: {
-        id: true,
-        slug: true,
-        title: true,
-        coverImage: true,
-        createdAt: true,
-      }
-    });
+    let posts: any[] = [];
+    try {
+      posts = await prisma.post.findMany({
+        where: { published: true },
+        orderBy: { createdAt: 'desc' },
+        skip: (page - 1) * limit,
+        take: limit,
+        select: {
+          id: true,
+          slug: true,
+          title: true,
+          coverImage: true,
+          createdAt: true,
+        }
+      });
+    } catch (error) {
+      console.log('Database connection failed in blog cache.');
+      const { unstable_noStore } = await import('next/cache');
+      unstable_noStore();
+    }
 
     const optimizedPosts = posts.map(post => {
       const displayTitle = parseLocalized(post.title, locale);
@@ -43,7 +50,6 @@ const getCachedPosts = (page: number, limit: number, locale: string) => unstable
         id: post.id,
         slug: displaySlug,
         title: displayTitle,
-        content: "", // Content is completely dropped from DB fetch as requested
         coverImage: post.coverImage,
         createdAt: post.createdAt,
       };

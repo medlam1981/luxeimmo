@@ -28,28 +28,35 @@ const getCachedProperties = unstable_cache(
       where.city = { contains: city, mode: 'insensitive' };
     }
 
-    const dbProperties = await prisma.property.findMany({
-      where,
-      take: 12,
-      skip: (page - 1) * 12,
-      orderBy: { createdAt: 'desc' },
-      select: {
-        id: true,
-        title: true,
-        slug: true,
-        price: true,
-        propertyType: true,
-        rentalPeriod: true,
-        category: true,
-        city: true,
-        bedrooms: true,
-        bathrooms: true,
-        areaSqm: true,
-        images: true,
-        isFeatured: true,
-        ownerPhone: true,
-      }
-    });
+    let dbProperties: any[] = [];
+    try {
+      dbProperties = await prisma.property.findMany({
+        where,
+        take: 12,
+        skip: (page - 1) * 12,
+        orderBy: { createdAt: 'desc' },
+        select: {
+          id: true,
+          title: true,
+          slug: true,
+          price: true,
+          propertyType: true,
+          rentalPeriod: true,
+          category: true,
+          city: true,
+          bedrooms: true,
+          bathrooms: true,
+          areaSqm: true,
+          images: true,
+          isFeatured: true,
+          ownerPhone: true,
+        }
+      });
+    } catch (error) {
+      console.log('Database connection failed in properties fetch.');
+      const { unstable_noStore } = await import('next/cache');
+      unstable_noStore();
+    }
 
     return dbProperties.map((p: any) => ({
       id: p.id,

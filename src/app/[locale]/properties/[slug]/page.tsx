@@ -31,7 +31,14 @@ import { unstable_cache } from 'next/cache';
 
 const getCachedProperty = unstable_cache(
   async (slug: string) => {
-    const property = await prisma.property.findUnique({ where: { slug } });
+    let property = null;
+    try {
+      property = await prisma.property.findUnique({ where: { slug } });
+    } catch (error) {
+      console.log('Database connection failed in property cache.');
+      const { unstable_noStore } = await import('next/cache');
+      unstable_noStore();
+    }
     return property ? JSON.parse(JSON.stringify(property)) : null;
   },
   ['property-metadata'],
@@ -101,7 +108,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 async function PropertyPageContent({ params }: Props) {
   const { slug, locale } = await params;
-  const property = await prisma.property.findUnique({ where: { slug } });
+  const property = await getCachedProperty(slug);
 
   if (!property) {
     notFound();

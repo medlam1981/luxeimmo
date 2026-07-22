@@ -54,7 +54,14 @@ async function SearchPageContent({ params, searchParams }: { searchParams: Promi
     if (maxPrice) where.price.lte = maxPrice;
   }
 
-  const properties = await prisma.property.findMany({ where, orderBy: [{ isPremium: 'desc' }, { createdAt: 'desc' }] });
+  let properties: any[] = [];
+  try {
+    properties = await prisma.property.findMany({ where, orderBy: [{ isPremium: 'desc' }, { createdAt: 'desc' }] });
+  } catch (error) {
+    console.log('Database connection failed in search page.');
+    const { unstable_noStore } = await import('next/cache');
+    unstable_noStore();
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-950">
