@@ -71,6 +71,12 @@ export function Navbar() {
             <Link href="/properties" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors">{t('properties')}</Link>
             <Link href="/#categories" className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors">{t('categories')}</Link>
             <Link href="/blog" prefetch={true} className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors">{t('blog')}</Link>
+            <Link 
+              href={status === 'authenticated' && session?.user && ((session.user as any).role === 'SELLER' || (session.user as any).role === 'ADMIN') ? '/admin/properties/new' : '/onboarding'} 
+              className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-bold transition-colors"
+            >
+              {t.has('addProperty') ? t('addProperty') : "أضف عقارك"}
+            </Link>
             {status === 'authenticated' && session?.user && ((session.user as any).role === 'SELLER' || (session.user as any).role === 'ADMIN') && (
               <Link href="/admin" className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-bold transition-colors">
                 {t.has('sellerDashboard') ? t('sellerDashboard') : "لوحة تحكم البائع"}
@@ -195,6 +201,13 @@ export function Navbar() {
               <Link href="/properties" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('properties')}</Link>
               <Link href="/#categories" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('categories')}</Link>
               <Link href="/blog" prefetch={true} onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">{t('blog')}</Link>
+              <Link 
+                href={status === 'authenticated' && session?.user && ((session.user as any).role === 'SELLER' || (session.user as any).role === 'ADMIN') ? '/admin/properties/new' : '/onboarding'} 
+                onClick={() => setIsMobileMenuOpen(false)} 
+                className="block px-3 py-3 text-base font-bold text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-md"
+              >
+                {t.has('addProperty') ? t('addProperty') : "أضف عقارك"}
+              </Link>
               {status === 'authenticated' && session?.user && ((session.user as any).role === 'SELLER' || (session.user as any).role === 'ADMIN') && (
                 <Link href="/admin" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-md">
                   {t.has('sellerDashboard') ? t('sellerDashboard') : "لوحة تحكم البائع"}
