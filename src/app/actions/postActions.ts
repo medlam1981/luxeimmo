@@ -50,8 +50,9 @@ function generateSlug(title: string) {
 
 export async function createPost(data: any) {
   const session = await getServerSession(authOptions);
-  if (!(session?.user as any)?.id) {
-    return { success: false, error: 'Unauthorized' };
+  const isEditor = session?.user?.email === 'medlam1981@gmail.com' || (process.env.AUTHORIZED_EDITORS && process.env.AUTHORIZED_EDITORS.includes(session?.user?.email as string));
+  if (!isEditor) {
+    return { success: false, error: 'Unauthorized: You are not authorized to create posts.' };
   }
 
   try {
@@ -90,8 +91,9 @@ export async function createPost(data: any) {
 
 export async function updatePost(id: string, data: any) {
   const session = await getServerSession(authOptions);
-  if (!(session?.user as any)?.id) {
-    return { success: false, error: 'Unauthorized' };
+  const isEditor = session?.user?.email === 'medlam1981@gmail.com' || (process.env.AUTHORIZED_EDITORS && process.env.AUTHORIZED_EDITORS.includes(session?.user?.email as string));
+  if (!isEditor) {
+    return { success: false, error: 'Unauthorized: You are not authorized to edit posts.' };
   }
 
   try {
@@ -147,8 +149,9 @@ export async function updatePost(id: string, data: any) {
 
 export async function deletePost(id: string) {
   const session = await getServerSession(authOptions);
-  if (!(session?.user as any)?.id) {
-    return { success: false, error: 'Unauthorized' };
+  const isEditor = session?.user?.email === 'medlam1981@gmail.com' || (process.env.AUTHORIZED_EDITORS && process.env.AUTHORIZED_EDITORS.includes(session?.user?.email as string));
+  if (!isEditor) {
+    return { success: false, error: 'Unauthorized: You are not authorized to delete posts.' };
   }
 
   try {

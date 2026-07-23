@@ -31,7 +31,7 @@ export async function getPropertiesByIds(ids: string[]) {
 
 export async function approveProperty(propertyId: string) {
   const session = await getServerSession(authOptions);
-  if ((session?.user as any)?.role !== 'ADMIN') throw new Error("Unauthorized");
+  if (session?.user?.email !== 'medlam1981@gmail.com') throw new Error("Unauthorized: Only Main Admin can approve properties");
 
   await prisma.property.update({
     where: { id: propertyId },
@@ -44,7 +44,7 @@ export async function approveProperty(propertyId: string) {
 
 export async function rejectProperty(propertyId: string) {
   const session = await getServerSession(authOptions);
-  if ((session?.user as any)?.role !== 'ADMIN') throw new Error("Unauthorized");
+  if (session?.user?.email !== 'medlam1981@gmail.com') throw new Error("Unauthorized: Only Main Admin can reject properties");
 
   await prisma.property.update({
     where: { id: propertyId },
@@ -57,7 +57,7 @@ export async function rejectProperty(propertyId: string) {
 
 export async function togglePremium(propertyId: string, currentValue: boolean) {
   const session = await getServerSession(authOptions);
-  if ((session?.user as any)?.role !== 'ADMIN') throw new Error("Unauthorized");
+  if (session?.user?.email !== 'medlam1981@gmail.com') throw new Error("Unauthorized: Only Main Admin can toggle premium");
 
   await prisma.property.update({
     where: { id: propertyId },

@@ -11,7 +11,7 @@ async function AdminReviewPageContent() {
 
   const session = await getServerSession(authOptions);
   
-  if (!session || !session.user || (session.user as any).role !== 'ADMIN') {
+  if (!session || !session.user || session.user.email !== 'medlam1981@gmail.com') {
     redirect('/');
   }
 

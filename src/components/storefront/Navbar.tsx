@@ -109,11 +109,6 @@ export function Navbar() {
                         <span className="text-xs text-gray-500 truncate">{session.user.email}</span>
                       </div>
                       <div className={`flex flex-col p-2 space-y-1 ${locale === 'ar' ? 'text-right' : 'text-left'}`}>
-                        {(!session.user || ((session.user as any).role !== 'SELLER' && (session.user as any).role !== 'ADMIN')) && (
-                          <Link className="px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors text-gray-700 dark:text-gray-300 block" href="/onboarding" onClick={() => setShowProfileMenu(false)}>
-                            {t.has('upgradeAccount') ? t('upgradeAccount') : "أضف عقارك (ترقية حساب)"}
-                          </Link>
-                        )}
                         <button
                           onClick={() => signOut({ callbackUrl: '/' })}
                           className={`px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md transition-colors w-full ${locale === 'ar' ? 'text-right' : 'text-left'}`}
