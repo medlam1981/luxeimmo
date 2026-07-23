@@ -78,18 +78,18 @@ async function HomeCategories({ locale }: { locale: string }) {
   ];
 
   return (
-    <div id="categories" className="w-full bg-gray-50 dark:bg-gray-900 pt-24 pb-8 md:pt-24 md:pb-12">
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 w-full">
+    <div id="categories" className="w-full bg-gray-50 dark:bg-gray-900 pt-[84px] md:pt-24 pb-2 md:pb-12">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 w-full flex flex-col justify-center min-h-[calc(100dvh-200px)] md:min-h-0">
         {/* Advertisement Container */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5 sm:gap-3 md:gap-4 mt-4 mb-4 md:mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5 sm:gap-3 md:gap-4 mt-1 mb-2 md:mt-4 md:mb-6">
           {[1, 2, 3].map((i) => (
-            <div key={i} className={`w-full bg-gray-200 dark:bg-gray-800 rounded-xl h-12 md:h-16 items-center justify-center border border-gray-300 dark:border-gray-700 premium-card ${i === 3 ? 'hidden md:flex' : 'flex'}`}>
+            <div key={i} className={`w-full bg-gray-200 dark:bg-gray-800 rounded-xl h-8 md:h-16 items-center justify-center border border-gray-300 dark:border-gray-700 premium-card ${i === 3 ? 'hidden md:flex' : 'flex'}`}>
               <p className="text-[8px] md:text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-widest text-center px-1">Ad {i}</p>
             </div>
           ))}
         </div>
 
-        <div className="mb-4 md:mb-6">
+        <div className="mb-2 md:mb-6">
           <Hero />
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-1.5 sm:gap-3 md:gap-8">
@@ -97,7 +97,7 @@ async function HomeCategories({ locale }: { locale: string }) {
             <Link 
               key={category.slug} 
               href={`/properties?category=${category.slug}`}
-              className="group relative h-40 md:h-64 rounded-2xl overflow-hidden premium-card premium-interactive"
+              className="group relative h-28 sm:h-40 md:h-64 rounded-2xl overflow-hidden premium-card premium-interactive"
             >
               <div className="absolute inset-0">
                 <Image
@@ -110,8 +110,8 @@ async function HomeCategories({ locale }: { locale: string }) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
               </div>
               
-              <div className="absolute inset-0 p-3 md:p-8 flex flex-col justify-end text-start">
-                <h3 className="text-sm md:text-3xl font-bold text-white mb-1 md:mb-2">{category.name}</h3>
+              <div className="absolute inset-0 p-2 md:p-8 flex flex-col justify-end text-start">
+                <h3 className="text-xs md:text-3xl font-bold text-white mb-0 md:mb-2">{category.name}</h3>
                 <p className="text-[10px] md:text-lg text-gray-200 opacity-100 md:opacity-0 transform md:translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 line-clamp-2 md:line-clamp-none">
                   {category.desc}
                 </p>
