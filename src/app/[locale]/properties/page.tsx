@@ -53,9 +53,7 @@ const getCachedProperties = unstable_cache(
         }
       });
     } catch (error) {
-      console.log('Database connection failed in properties fetch.');
-      const { unstable_noStore } = await import('next/cache');
-      unstable_noStore();
+      console.error('Database connection failed in properties fetch.', error);
     }
 
     return dbProperties.map((p: any) => ({

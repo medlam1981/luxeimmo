@@ -58,9 +58,7 @@ async function HomeProperties() {
     })) as Property[];
 
   } catch (error) {
-    console.log('Database connection failed.');
-    const { unstable_noStore } = await import('next/cache');
-    unstable_noStore();
+    console.error('Database connection failed.', error);
   }
 
   return <PropertyGrid properties={properties} />;
