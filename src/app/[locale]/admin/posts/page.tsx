@@ -35,7 +35,7 @@ export default async function AdminPostsPage({ params }: { params: Promise<{ loc
     <div className="p-4 sm:p-6 lg:p-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Blog Posts</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">Blog Posts</h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Manage your articles and guides.</p>
         </div>
         <Link
@@ -72,7 +72,7 @@ export default async function AdminPostsPage({ params }: { params: Promise<{ loc
                   return (
                   <tr key={post.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
                     <td className="px-6 py-4">
-                      <div className="font-medium text-gray-900 dark:text-white mb-1 line-clamp-1">{displayTitle}</div>
+                      <div className="text-sm font-medium text-gray-900 dark:text-white mb-1 line-clamp-1">{displayTitle}</div>
                       <div className="text-xs text-gray-500 dark:text-gray-400 font-mono">{displaySlug}</div>
                     </td>
                     <td className="px-6 py-4">

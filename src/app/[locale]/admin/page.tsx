@@ -36,7 +36,7 @@ async function AdminDashboardContent() {
     <div className="flex flex-col gap-8 w-full p-4 lg:p-8">
       {/* Quick Actions */}
       <section>
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('quick_actions')}</h2>
+        <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">{t('quick_actions')}</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <Link href="/admin/properties/new" className="flex flex-col items-center justify-center p-3 md:p-6 bg-blue-600 text-white rounded-2xl shadow-sm hover:bg-blue-700 transition-colors">
             <PlusCircle className="w-5 h-5 md:w-8 md:h-8 mb-2 md:mb-3" />
@@ -51,7 +51,7 @@ async function AdminDashboardContent() {
 
       {/* Content Summary */}
       <section className="mt-2">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('content_summary')}</h2>
+        <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">{t('content_summary')}</h2>
         <div className="flex flex-col md:grid md:grid-cols-3 gap-4">
           {metrics.map((metric, index) => {
             const Icon = metric.icon;
@@ -62,7 +62,7 @@ async function AdminDashboardContent() {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{metric.title}</p>
-                  <p className="text-3xl font-bold text-gray-900 dark:text-white">{metric.value}</p>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white">{metric.value}</p>
                 </div>
               </div>
             );
@@ -71,7 +71,7 @@ async function AdminDashboardContent() {
       </section>
       {/* Platform Management */}
       <section className="mt-2">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('platform_management')}</h2>
+        <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">{t('platform_management')}</h2>
         <div className="flex flex-col gap-3">
           {navItems.map((item, index) => {
             const Icon = item.icon;
@@ -81,7 +81,7 @@ async function AdminDashboardContent() {
                   <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-xl group-hover:bg-blue-50 dark:group-hover:bg-blue-900/30 transition-colors">
                     <Icon className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
                   </div>
-                  <span className="font-semibold text-gray-900 dark:text-white text-lg">{item.label}</span>
+                  <span className="font-semibold text-gray-900 dark:text-white text-base">{item.label}</span>
                 </div>
                 <ChevronRight className="w-5 h-5 text-gray-400 rtl:rotate-180 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
               </Link>

@@ -35,7 +35,7 @@ async function AdminPropertiesPageContent() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white font-sans">{t('manageProperties')}</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white font-sans">{t('manageProperties')}</h1>
         <Link 
           href="/admin/properties/new" 
           className="inline-flex items-center px-4 py-2 bg-black hover:bg-gray-800 text-white dark:bg-white dark:text-black dark:hover:bg-gray-200 text-sm font-medium rounded-xl transition-colors"
@@ -83,7 +83,7 @@ async function AdminPropertiesPageContent() {
                   return (
                     <tr key={property.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
                       <td className="px-6 py-4">
-                        <div className="font-medium text-gray-900 dark:text-white line-clamp-2">
+                        <div className="text-sm font-medium text-gray-900 dark:text-white line-clamp-2">
                           {displayTitle}
                         </div>
                         <div className="text-xs text-gray-500 mt-1">{property.city}</div>
@@ -98,7 +98,7 @@ async function AdminPropertiesPageContent() {
                           {badgeType}
                         </span>
                       </td>
-                      <td className="px-6 py-4 font-bold text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 text-sm font-bold text-gray-900 dark:text-white">
                         {priceDisplay}
                       </td>
                       <td className="px-6 py-4">

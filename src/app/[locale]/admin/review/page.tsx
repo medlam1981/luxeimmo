@@ -36,7 +36,7 @@ async function AdminReviewPageContent() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white font-sans">Property Approvals</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white font-sans">Property Approvals</h1>
       </div>
 
       <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
@@ -69,7 +69,7 @@ async function AdminReviewPageContent() {
                   return (
                     <tr key={property.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
                       <td className="px-6 py-4">
-                        <div className="font-medium text-gray-900 dark:text-white line-clamp-2">
+                        <div className="text-sm font-medium text-gray-900 dark:text-white line-clamp-2">
                           {displayTitle}
                         </div>
                         <div className="text-xs text-gray-500 mt-1">{property.city} • {te(`category.${property.category}` as any)}</div>

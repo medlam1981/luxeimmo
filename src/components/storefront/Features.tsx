@@ -50,12 +50,12 @@ export function Features() {
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <div key={index} className="flex flex-col items-center p-2 md:p-6 bg-gray-50 dark:bg-gray-900 rounded-xl md:rounded-2xl shadow-sm border border-transparent dark:border-gray-800 transition-colors duration-300 hover:shadow-md">
-                <div className="h-6 w-6 sm:h-8 sm:w-8 md:h-14 md:w-14 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center mb-2 md:mb-4 shrink-0">
-                  <Icon className="w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6" />
+              <div key={index} className="flex flex-col items-center p-3 md:p-6 bg-gray-50 dark:bg-gray-900 rounded-xl md:rounded-2xl shadow-sm border border-transparent dark:border-gray-800 transition-colors duration-300 hover:shadow-md">
+                <div className="h-8 w-8 sm:h-10 sm:w-10 md:h-14 md:w-14 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center mb-3 md:mb-4 shrink-0">
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
                 </div>
-                <h3 className="text-[10px] sm:text-xs md:text-xl font-bold text-gray-900 dark:text-white mb-1 md:mb-2 leading-tight">{feature.title}</h3>
-                <p className="text-[8px] sm:text-[10px] md:text-base text-gray-500 dark:text-gray-400 leading-tight md:leading-normal">{feature.description}</p>
+                <h3 className="text-xs sm:text-sm md:text-xl font-bold text-gray-900 dark:text-white mb-2 leading-tight">{feature.title}</h3>
+                <p className="text-[10px] sm:text-xs md:text-base text-gray-500 dark:text-gray-400 leading-tight md:leading-normal">{feature.description}</p>
               </div>
             );
           })}
