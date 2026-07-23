@@ -40,9 +40,9 @@ export function Features() {
 
   return (
     <section className="bg-white dark:bg-gray-950 py-3 md:py-16 border-t border-gray-100 dark:border-gray-900 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex flex-col justify-end min-h-[120px] md:min-h-0">
-        <div className="text-center mb-2 md:mb-12">
-          <h2 className="text-base md:text-3xl font-bold text-gray-900 dark:text-white font-sans tracking-tight">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex flex-col md:min-h-0">
+        <div className="text-center mb-2 md:mb-12 mt-2">
+          <h2 className="text-lg md:text-3xl font-bold text-gray-900 dark:text-white font-sans tracking-tight">
             {t.has('title') ? t('title') : 'Why Choose LuxeImmo'}
           </h2>
         </div>
@@ -54,8 +54,8 @@ export function Features() {
                 <div className="h-6 w-6 sm:h-10 sm:w-10 md:h-14 md:w-14 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center mb-1 sm:mb-3 md:mb-4 shrink-0">
                   <Icon className="w-3 h-3 sm:w-5 sm:h-5 md:w-6 md:h-6" />
                 </div>
-                <h3 className="text-[10px] sm:text-sm md:text-xl font-bold text-gray-900 dark:text-white mb-0.5 sm:mb-2 leading-tight">{feature.title}</h3>
-                <p className="text-[8px] sm:text-xs md:text-base text-gray-500 dark:text-gray-400 leading-tight md:leading-normal">{feature.description}</p>
+                <h3 className="text-[11px] sm:text-sm md:text-xl font-bold text-gray-900 dark:text-white mb-0.5 sm:mb-2 leading-tight">{feature.title}</h3>
+                <p className="text-[9px] sm:text-xs md:text-base text-gray-500 dark:text-gray-400 leading-tight md:leading-normal">{feature.description}</p>
               </div>
             );
           })}
