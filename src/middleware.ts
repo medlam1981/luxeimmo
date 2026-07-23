@@ -72,5 +72,7 @@ export const config = {
   // - … if they contain a dot, e.g. `favicon.ico`
   // - … if they start with `_next`
   // - … if they start with `api`
-  matcher: ['/((?!api|_next|.*\\..*).*)']
+  matcher: ['/((?!api|_next|.*\\..*).*)'],
 };
+
+export const runtime = 'edge';
