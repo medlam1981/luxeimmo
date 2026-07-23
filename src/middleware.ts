@@ -75,4 +75,4 @@ export const config = {
   matcher: ['/((?!api|_next|.*\\..*).*)'],
 };
 
-export const runtime = 'edge';
+
