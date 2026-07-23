@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { CheckCircle, Users, MapPin } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 
 export function Features() {
   const [isMounted, setIsMounted] = useState(false);
@@ -12,6 +13,7 @@ export function Features() {
   }, []);
 
   const t = useTranslations('Features');
+  const tFooter = useTranslations('Footer');
   const features = [
     {
       icon: CheckCircle,
@@ -39,9 +41,9 @@ export function Features() {
   }
 
   return (
-    <section className="bg-white dark:bg-gray-950 py-3 md:py-16 border-t border-gray-100 dark:border-gray-900 transition-colors duration-300 flex-1 flex flex-col justify-end">
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex flex-col w-full md:min-h-0 mb-2 md:mb-0">
-        <div className="text-center mb-2 md:mb-12 mt-2">
+    <section className="bg-white dark:bg-gray-950 pt-1 pb-2 md:py-16 border-t border-gray-100 dark:border-gray-900 transition-colors duration-300 flex-1 flex flex-col justify-end">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex flex-col w-full md:min-h-0 mb-1 md:mb-0">
+        <div className="text-center mb-1 md:mb-12 mt-1 md:mt-2">
           <h2 className="text-lg md:text-3xl font-bold text-gray-900 dark:text-white font-sans tracking-tight">
             {t.has('title') ? t('title') : 'Why Choose LuxeImmo'}
           </h2>
@@ -59,6 +61,11 @@ export function Features() {
               </div>
             );
           })}
+        </div>
+        <div className="grid grid-cols-3 gap-2 md:hidden text-center mt-3 border-t border-gray-100 dark:border-gray-800 pt-2">
+          <Link href="/about" className="text-[10px] font-medium text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">{tFooter.has('aboutUs') ? tFooter('aboutUs') : 'About Us'}</Link>
+          <Link href="/privacy" className="text-[10px] font-medium text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">{tFooter.has('privacyPolicy') ? tFooter('privacyPolicy') : 'Privacy Policy'}</Link>
+          <Link href="/contact" className="text-[10px] font-medium text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">{tFooter.has('contactUs') ? tFooter('contactUs') : 'Contact Us'}</Link>
         </div>
       </div>
     </section>
