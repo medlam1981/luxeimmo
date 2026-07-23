@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import "../globals.css";
 
 import { NextIntlClientProvider } from 'next-intl';
@@ -67,6 +65,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       description: t('description'),
       images: ['https://luxeimmo.com/images/hero/slide-1.jpg'],
     },
+    icons: {
+      icon: '/icon.jpg',
+    },
   };
 }
 
@@ -98,8 +99,6 @@ export default async function RootLayout({
             </ThemeProvider>
           </AuthProvider>
         </NextIntlClientProvider>
-        <Analytics />
-        <SpeedInsights />
       </body>
     </html>
   );
