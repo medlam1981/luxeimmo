@@ -97,7 +97,7 @@ async function HomeCategories({ locale }: { locale: string }) {
             <Link 
               key={category.slug} 
               href={`/properties?category=${category.slug}`}
-              className="group relative h-28 sm:h-40 md:h-64 rounded-2xl overflow-hidden premium-card premium-interactive"
+              className="group relative h-[140px] sm:h-[180px] md:h-64 rounded-2xl overflow-hidden premium-card premium-interactive"
             >
               <div className="absolute inset-0">
                 <Image
@@ -110,9 +110,9 @@ async function HomeCategories({ locale }: { locale: string }) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
               </div>
               
-              <div className="absolute inset-0 p-2 md:p-8 flex flex-col justify-end text-start">
-                <h3 className="text-xs md:text-3xl font-bold text-white mb-0 md:mb-2">{category.name}</h3>
-                <p className="text-[10px] md:text-lg text-gray-200 opacity-100 md:opacity-0 transform md:translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 line-clamp-2 md:line-clamp-none">
+              <div className="absolute inset-0 p-3 md:p-8 flex flex-col justify-end text-start">
+                <h3 className="text-sm md:text-3xl font-bold text-white mb-0.5 md:mb-2">{category.name}</h3>
+                <p className="text-[11px] sm:text-xs md:text-lg text-gray-200 opacity-100 md:opacity-0 transform md:translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 line-clamp-2 md:line-clamp-none">
                   {category.desc}
                 </p>
               </div>

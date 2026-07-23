@@ -27,11 +27,7 @@ export function PropertyGrid({ properties }: PropertyGridProps) {
   }
 
   if (properties.length === 0) {
-    return (
-      <div className="w-full py-20 text-center">
-        <p className="text-gray-500 dark:text-gray-400">No properties found.</p>
-      </div>
-    );
+    return null;
   }
 
   return (
