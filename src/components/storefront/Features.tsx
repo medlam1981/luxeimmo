@@ -39,8 +39,8 @@ export function Features() {
   }
 
   return (
-    <section className="bg-white dark:bg-gray-950 py-3 md:py-16 border-t border-gray-100 dark:border-gray-900 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex flex-col md:min-h-0">
+    <section className="bg-white dark:bg-gray-950 py-3 md:py-16 border-t border-gray-100 dark:border-gray-900 transition-colors duration-300 flex-1 flex flex-col justify-end">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex flex-col w-full md:min-h-0 mb-2 md:mb-0">
         <div className="text-center mb-2 md:mb-12 mt-2">
           <h2 className="text-lg md:text-3xl font-bold text-gray-900 dark:text-white font-sans tracking-tight">
             {t.has('title') ? t('title') : 'Why Choose LuxeImmo'}
@@ -50,7 +50,7 @@ export function Features() {
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <div key={index} className="flex flex-col items-center justify-center h-28 sm:h-32 md:h-48 px-2 sm:px-3 md:px-6 bg-gray-50 dark:bg-gray-900 rounded-xl md:rounded-2xl shadow-sm border border-transparent dark:border-gray-800 transition-colors duration-300 hover:shadow-md mt-1 sm:mt-2 md:mt-4">
+              <div key={index} className="flex flex-col items-center justify-center h-[120px] sm:h-36 md:h-48 px-2 sm:px-3 md:px-6 bg-gray-50 dark:bg-gray-900 rounded-lg md:rounded-xl shadow-sm border border-transparent dark:border-gray-800 transition-colors duration-300 hover:shadow-md mt-1 sm:mt-2 md:mt-4">
                 <div className="h-6 w-6 sm:h-10 sm:w-10 md:h-14 md:w-14 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center mb-1.5 sm:mb-3 md:mb-4 shrink-0">
                   <Icon className="w-3 h-3 sm:w-5 sm:h-5 md:w-6 md:h-6" />
                 </div>

@@ -83,7 +83,7 @@ async function HomeCategories({ locale }: { locale: string }) {
         {/* Advertisement Container */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5 sm:gap-3 md:gap-4 mt-0 mb-3 md:mt-4 md:mb-6">
           {[1, 2, 3].map((i) => (
-            <div key={i} className={`w-full bg-gray-200 dark:bg-gray-800 rounded-xl h-8 md:h-16 flex items-center justify-center border border-gray-300 dark:border-gray-700 premium-card ${i === 3 ? 'hidden md:flex' : 'flex'}`}>
+            <div key={i} className={`w-full bg-gray-200 dark:bg-gray-800 rounded-lg md:rounded-xl h-8 md:h-16 flex items-center justify-center border border-gray-300 dark:border-gray-700 premium-card ${i === 3 ? 'hidden md:flex' : 'flex'}`}>
               <p className="text-[8px] md:text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-widest text-center px-1">Ad {i}</p>
             </div>
           ))}
@@ -97,7 +97,7 @@ async function HomeCategories({ locale }: { locale: string }) {
             <Link 
               key={category.slug} 
               href={`/properties?category=${category.slug}`}
-              className="group relative h-[140px] sm:h-[180px] md:h-64 rounded-xl overflow-hidden premium-card premium-interactive"
+              className="group relative h-[140px] sm:h-[180px] md:h-64 rounded-lg md:rounded-xl overflow-hidden premium-card premium-interactive"
             >
               <div className="absolute inset-0">
                 <Image
@@ -129,14 +129,16 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   setRequestLocale(locale);
 
   return (
-    <main className="min-h-screen flex flex-col bg-white dark:bg-gray-950 transition-colors duration-300">
+    <main className="h-[100dvh] md:h-auto md:min-h-screen overflow-hidden md:overflow-visible flex flex-col bg-white dark:bg-gray-950 transition-colors duration-300">
       <Navbar />
       <HomeCategories locale={locale} />
       <Features />
-      <Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
-        <HomeProperties />
-      </Suspense>
-      <Footer locale={locale} />
+      <div className="hidden md:block">
+        <Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+          <HomeProperties />
+        </Suspense>
+        <Footer locale={locale} />
+      </div>
     </main>
   );
 }
