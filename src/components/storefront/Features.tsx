@@ -50,8 +50,8 @@ export function Features() {
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <div key={index} className="flex flex-col items-center p-2 sm:p-3 md:p-6 bg-gray-50 dark:bg-gray-900 rounded-xl md:rounded-2xl shadow-sm border border-transparent dark:border-gray-800 transition-colors duration-300 hover:shadow-md">
-                <div className="h-6 w-6 sm:h-10 sm:w-10 md:h-14 md:w-14 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center mb-1 sm:mb-3 md:mb-4 shrink-0">
+              <div key={index} className="flex flex-col items-center justify-center h-28 sm:h-32 md:h-48 px-2 sm:px-3 md:px-6 bg-gray-50 dark:bg-gray-900 rounded-xl md:rounded-2xl shadow-sm border border-transparent dark:border-gray-800 transition-colors duration-300 hover:shadow-md mt-1 sm:mt-2 md:mt-4">
+                <div className="h-6 w-6 sm:h-10 sm:w-10 md:h-14 md:w-14 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center mb-1.5 sm:mb-3 md:mb-4 shrink-0">
                   <Icon className="w-3 h-3 sm:w-5 sm:h-5 md:w-6 md:h-6" />
                 </div>
                 <h3 className="text-[11px] sm:text-sm md:text-xl font-bold text-gray-900 dark:text-white mb-0.5 sm:mb-2 leading-tight">{feature.title}</h3>
