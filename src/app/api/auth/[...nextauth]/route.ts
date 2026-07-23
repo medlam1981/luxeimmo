@@ -6,20 +6,62 @@ import { Adapter } from "next-auth/adapters";
 import { rateLimit } from "@/app/api/rate-limit";
 import { NextRequest, NextResponse } from "next/server";
 
-if (process.env.VERCEL_ENV === "preview" && process.env.VERCEL_URL) {
-  process.env.NEXTAUTH_URL = `https://${process.env.VERCEL_URL}`;
-} else if (process.env.URL) {
-  // Netlify production URL
-  process.env.NEXTAUTH_URL = process.env.URL;
-} else if (process.env.DEPLOY_PRIME_URL) {
-  // Netlify deploy preview URL
-  process.env.NEXTAUTH_URL = process.env.DEPLOY_PRIME_URL;
+if (!process.env.NEXTAUTH_URL) {
+  if (process.env.VERCEL_ENV === "preview" && process.env.VERCEL_URL) {
+    process.env.NEXTAUTH_URL = `https://${process.env.VERCEL_URL}`;
+  } else if (process.env.URL) {
+    process.env.NEXTAUTH_URL = process.env.URL.replace(/\/$/, "");
+  } else if (process.env.DEPLOY_PRIME_URL) {
+    process.env.NEXTAUTH_URL = process.env.DEPLOY_PRIME_URL.replace(/\/$/, "");
+  }
 }
+
+const useSecureCookies = process.env.NEXTAUTH_URL?.startsWith('https://') || process.env.NODE_ENV === 'production';
+const cookiePrefix = useSecureCookies ? "__Secure-" : "";
+const hostPrefix = useSecureCookies ? "__Host-" : "";
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   adapter: PrismaAdapter(prisma) as Adapter,
   debug: true,
+  useSecureCookies,
+  cookies: {
+    csrfToken: {
+      name: `${hostPrefix}next-auth.csrf-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "none",
+        path: "/",
+        secure: useSecureCookies,
+      },
+    },
+    pkceCodeVerifier: {
+      name: `${cookiePrefix}next-auth.pkce.code_verifier`,
+      options: {
+        httpOnly: true,
+        sameSite: "none",
+        path: "/",
+        secure: useSecureCookies,
+      },
+    },
+    state: {
+      name: `${cookiePrefix}next-auth.state`,
+      options: {
+        httpOnly: true,
+        sameSite: "none",
+        path: "/",
+        secure: useSecureCookies,
+      },
+    },
+    callbackUrl: {
+      name: `${useSecureCookies ? "__Secure-" : ""}next-auth.callback-url`,
+      options: {
+        sameSite: "none",
+        path: "/",
+        secure: useSecureCookies,
+      },
+    },
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
